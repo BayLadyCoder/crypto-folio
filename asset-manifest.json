@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/crypto-folio/static/css/main.82078840.chunk.css",
+    "main.js": "/crypto-folio/static/js/main.99fdd42b.chunk.js",
+    "main.js.map": "/crypto-folio/static/js/main.99fdd42b.chunk.js.map",
+    "runtime-main.js": "/crypto-folio/static/js/runtime-main.cb77a476.js",
+    "runtime-main.js.map": "/crypto-folio/static/js/runtime-main.cb77a476.js.map",
+    "static/js/2.17ee013a.chunk.js": "/crypto-folio/static/js/2.17ee013a.chunk.js",
+    "static/js/2.17ee013a.chunk.js.map": "/crypto-folio/static/js/2.17ee013a.chunk.js.map",
+    "static/js/3.06872e2f.chunk.js": "/crypto-folio/static/js/3.06872e2f.chunk.js",
+    "static/js/3.06872e2f.chunk.js.map": "/crypto-folio/static/js/3.06872e2f.chunk.js.map",
+    "index.html": "/crypto-folio/index.html",
+    "static/css/main.82078840.chunk.css.map": "/crypto-folio/static/css/main.82078840.chunk.css.map",
+    "static/js/2.17ee013a.chunk.js.LICENSE.txt": "/crypto-folio/static/js/2.17ee013a.chunk.js.LICENSE.txt",
+    "static/media/logo.8eb4d0f4.png": "/crypto-folio/static/media/logo.8eb4d0f4.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cb77a476.js",
+    "static/js/2.17ee013a.chunk.js",
+    "static/css/main.82078840.chunk.css",
+    "static/js/main.99fdd42b.chunk.js"
+  ]
+}
