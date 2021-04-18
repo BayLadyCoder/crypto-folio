@@ -2,10 +2,12 @@ import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 * {
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family: "Hammersmith One", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    /* font-family: "Hammersmith One", sans-serif; */
+    font-family: 'Roboto', sans-serif;
 }
 `;
 

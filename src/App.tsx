@@ -1,13 +1,12 @@
-import logo from "./images/logo.png";
-import { AppContainer, AppHeader, Logo, AppName } from "./App.styled";
-import { Container } from "./styles/globalStyles";
+import { AppContainer } from "./App.styled";
+import NavBar from "./components/NavBar";
+import GlobalStyle from "./styles/globalStyles";
+
 const App: React.FC = () => {
   return (
     <AppContainer>
-      <AppHeader>
-        <Logo src={logo} alt="img" />
-        <AppName>Crypto Folio</AppName>
-      </AppHeader>
+      <GlobalStyle />
+      <NavBar />
     </AppContainer>
   );
 };
