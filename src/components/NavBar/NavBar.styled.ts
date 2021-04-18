@@ -1,14 +1,20 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
+export const NavBarBigContainer = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid #466e64;
+`;
 export const NavBarContainer = styled.header`
+  max-width: 1300px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 60px;
-  border-bottom: 1px solid #466e64;
-  padding: 0 30px;
 `;
 
 export const Wrapper = styled.div`
@@ -21,7 +27,7 @@ export const Wrapper = styled.div`
 export const Logo = styled.img`
   width: 40px;
   height: 40px;
-  margin-right: 5px;
+  margin-right: 10px;
 `;
 
 export const AppName = styled.h1`
