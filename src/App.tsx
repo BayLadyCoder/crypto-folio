@@ -1,14 +1,14 @@
 import { AppContainer } from "./App.styled";
 import NavBar from "./components/NavBar";
 import GlobalStyle from "./styles/globalStyles";
-import SearchBar from "./components/SearchBar";
+import Home from "./pages/Home/Home";
 
 const App: React.FC = () => {
   return (
     <AppContainer>
       <GlobalStyle />
       <NavBar />
-      <SearchBar />
+      <Home />
     </AppContainer>
   );
 };

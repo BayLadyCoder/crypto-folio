@@ -1,4 +1,3 @@
-import { Container } from "../../styles/globalStyles";
 import {
   Wrapper,
   SearchInput,
@@ -8,14 +7,12 @@ import {
 
 const SearchBar: React.FC = () => {
   return (
-    <Container>
-      <Wrapper>
-        <SearchInput placeholder="Search" type="text" />{" "}
-        <SearchBtn>
-          <SearchIcon />
-        </SearchBtn>
-      </Wrapper>
-    </Container>
+    <Wrapper>
+      <SearchInput placeholder="Search" type="text" />{" "}
+      <SearchBtn>
+        <SearchIcon />
+      </SearchBtn>
+    </Wrapper>
   );
 };
 

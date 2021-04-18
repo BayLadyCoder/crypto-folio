@@ -10,15 +10,12 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     outline-color: #4a4a4a;
-
 }
 `;
 
 export const Container = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1300px;
-  padding-right: 50px;
-  padding-left: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
