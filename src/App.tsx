@@ -1,19 +1,15 @@
-import "./App.css";
 import logo from "./images/logo.png";
-
-function App() {
+import { AppContainer, AppHeader, Logo, AppName } from "./App.styled";
+import { Container } from "./styles/globalStyles";
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img
-          src={logo}
-          alt="img"
-          style={{ width: "70px", height: "70px", marginRight: "20px" }}
-        />
-        <h1>Crypto Folio</h1>
-      </header>
-    </div>
+    <AppContainer>
+      <AppHeader>
+        <Logo src={logo} alt="img" />
+        <AppName>Crypto Folio</AppName>
+      </AppHeader>
+    </AppContainer>
   );
-}
+};
 
 export default App;
