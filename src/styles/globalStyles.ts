@@ -6,9 +6,11 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: ${theme.color.primary};
     /* font-family: "Hammersmith One", sans-serif; */
     font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    outline-color: #4a4a4a;
+
 }
 `;
 
@@ -17,6 +19,9 @@ export const Container = styled.div`
   max-width: 1300px;
   padding-right: 50px;
   padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media screen and (max-width: 960px) {
     padding-right: 30px;
@@ -38,6 +43,7 @@ export const Button = styled.button<ButtonProps>`
   color: #000;
   font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
   border: none;
+  white-space: nowrap;
   cursor: pointer;
   font-weight: bold;
 
