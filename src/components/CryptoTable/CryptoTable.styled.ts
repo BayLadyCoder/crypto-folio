@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import theme from "../../styles/theme";
 
 interface TableHeadDataProps {
   align: string;
@@ -13,7 +12,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 30px;
 `;
 
 export const Table = styled.table`

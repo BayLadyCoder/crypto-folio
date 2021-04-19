@@ -1,9 +1,11 @@
-import { Container, PageTitle } from "../../styles/globalStyles";
+import { Container, HeaderWrapper, PageTitle } from "../../styles/globalStyles";
 
 const Home = () => {
   return (
     <Container>
-      <PageTitle>Portfolio</PageTitle>
+      <HeaderWrapper>
+        <PageTitle>Portfolio</PageTitle>
+      </HeaderWrapper>
     </Container>
   );
 };

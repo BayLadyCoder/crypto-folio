@@ -25,10 +25,10 @@ const NavBar: React.FC = () => {
           <MenuBtn to="/crypto-folio/portfolio">Portfolio</MenuBtn>
         </Wrapper>
         <Wrapper>
-          <MenuBtn to="/crypto-folio/login" primary>
+          <MenuBtn to="/crypto-folio/login" primary="true">
             Log In
           </MenuBtn>
-          <Button to="/crypto-folio/sign-up" primary>
+          <Button to="/crypto-folio/sign-up" primary="true">
             Sign Up
           </Button>
         </Wrapper>

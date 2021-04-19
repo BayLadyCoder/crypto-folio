@@ -14,14 +14,23 @@ export const NavBarContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
   height: 60px;
+
+  @media screen and (max-width: 1200px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    padding: 0 10px;
+  }
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0px;
   cursor: pointer;
 `;
 
@@ -39,7 +48,7 @@ export const AppName = styled.h1`
 `;
 
 interface MenuBtnProps {
-  primary?: boolean;
+  primary?: string;
 }
 
 export const MenuBtn = styled(Link)<MenuBtnProps>`
@@ -52,12 +61,14 @@ export const MenuBtn = styled(Link)<MenuBtnProps>`
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  color: ${({ primary }) => (primary ? theme.color.primary : "#fff")};
+  color: ${({ primary }) =>
+    primary === "true" ? theme.color.primary : "#fff"};
 
   &:hover {
     transition: all 0.3s ease-out;
     background-color: ${({ primary }) =>
-      primary ? "#3d3d3d" : theme.color.secondary};
-    color: ${({ primary }) => (primary ? theme.color.primary_bright : "#fff")};
+      primary === "true" ? "#3d3d3d" : theme.color.secondary};
+    color: ${({ primary }) =>
+      primary === "true" ? theme.color.primary_bright : "#fff"};
   }
 `;

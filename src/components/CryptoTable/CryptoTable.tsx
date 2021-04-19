@@ -12,19 +12,21 @@ import {
   CoinNameWrapper,
   Loading,
 } from "./CryptoTable.styled";
-import { PageTitle } from "../../styles/globalStyles";
+import { HeaderWrapper, PageTitle } from "../../styles/globalStyles";
 
 const CryptoTable = () => {
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
   useEffect(() => {
     fetchMarketCoins();
-  }, []);
+  }, [fetchMarketCoins]);
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
 
   return (
     <Wrapper>
-      <PageTitle>Crypto Market Monitor</PageTitle>
+      <HeaderWrapper>
+        <PageTitle>Crypto Market Monitor</PageTitle>
+      </HeaderWrapper>
       <Table>
         <thead>
           <TableHeadRow>

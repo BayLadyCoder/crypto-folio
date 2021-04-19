@@ -6,8 +6,8 @@ import Watchlist from "./pages/Watchlist";
 import Portfolio from "./pages/Portfolio";
 import getMarketCoinsContext from "./context/createMarketCoinsContext";
 // import getNameCoinsContext from "./Context/createNameCoinsContext";
-import { MarketCoinsContext, NameCoinsContext } from "./context/context";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { MarketCoinsContext } from "./context/context";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 const App: React.FC = () => {
   const marketCoinsContextValues = getMarketCoinsContext();
   // const nameCoinsContextValues = getNameCoinsContext();
