@@ -5,8 +5,6 @@ import { MarketCoinsContextData, NameCoinsContextData } from "../Types/context";
 const marketCoinsDefaultValues = {
   marketCoins: [],
   setMarketCoins: () => null,
-  marketCoins100: [],
-  setMarketCoins100: () => null,
   fetchMarketCoins: () => null,
   isLoading: true,
 };

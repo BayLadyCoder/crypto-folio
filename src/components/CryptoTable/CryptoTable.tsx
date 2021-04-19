@@ -15,12 +15,12 @@ import {
 import { PageTitle } from "../../styles/globalStyles";
 
 const CryptoTable = () => {
-  const { marketCoins100, fetchMarketCoins } = useContext(MarketCoinsContext);
+  const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
   useEffect(() => {
     fetchMarketCoins();
   }, []);
 
-  if (marketCoins100.length === 0) return <Loading>Loading...</Loading>;
+  if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
 
   return (
     <Wrapper>
@@ -37,7 +37,7 @@ const CryptoTable = () => {
           </TableHeadRow>
         </thead>
         <tbody>
-          {marketCoins100.map((coin, index) => (
+          {marketCoins.map((coin, index) => (
             <TableBodyRow key={coin.id}>
               <TableBodyData align="center">{index + 1}</TableBodyData>
               <TableBodyData align="left">
