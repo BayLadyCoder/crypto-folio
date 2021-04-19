@@ -1,5 +1,5 @@
 import { Container } from "../../styles/globalStyles";
-import { AddNewWatchlistBtn } from "./Watchlist.styled";
+import { AddNewWatchListBtn } from "./Watchlist.styled";
 import { PageTitle } from "../../styles/globalStyles";
 
 const Home = () => {

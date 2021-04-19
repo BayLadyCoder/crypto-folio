@@ -21,8 +21,8 @@ const App: React.FC = () => {
           <NavBar />
           <Switch>
             <Route path="/crypto-folio" exact component={Home} />
-            <Route path="/watchlist" exact component={Watchlist} />
-            <Route path="/portfolio" exact component={Portfolio} />
+            <Route path="/crypto-folio/watchlist" exact component={Watchlist} />
+            <Route path="/crypto-folio/portfolio" exact component={Portfolio} />
           </Switch>
         </AppContainer>
         {/* </NameCoinsContext.Provider> */}

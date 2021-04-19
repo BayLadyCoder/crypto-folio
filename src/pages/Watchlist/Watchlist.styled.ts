@@ -1,3 +1,3 @@
 import styled from "styled-components";
 
-export const AddNewWatchlistBtn = styled.button``;
+export const AddNewWatchListBtn = styled.button``;
