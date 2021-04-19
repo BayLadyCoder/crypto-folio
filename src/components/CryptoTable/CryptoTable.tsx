@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
+import { useEffect, useContext } from "react";
+import { MarketContext } from "../../Context/context";
 import {
   Wrapper,
   HeaderText,
@@ -14,20 +13,12 @@ import {
   CoinNameWrapper,
   Loading,
 } from "./CryptoTable.styled";
-import { MarketCoin } from "../../Types/coins";
 
 const CryptoTable = () => {
-  const [marketCoins, setMarketCoins] = useState<MarketCoin[]>([]);
+  const { marketCoins, fetchMarketCoins } = useContext(MarketContext);
 
   useEffect(() => {
-    const fetchMarket = async () => {
-      const res = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-      );
-
-      setMarketCoins(res.data);
-    };
-    fetchMarket();
+    fetchMarketCoins();
   }, []);
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
