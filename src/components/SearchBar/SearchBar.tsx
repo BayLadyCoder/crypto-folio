@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Wrapper, SearchInput } from "./SearchBar.styled";
-import { MarketCoinsContext } from "../../Context/context";
+import { MarketCoinsContext } from "../../context/context";
 
 const SearchBar: React.FC = () => {
   const { marketCoins } = useContext(MarketCoinsContext);

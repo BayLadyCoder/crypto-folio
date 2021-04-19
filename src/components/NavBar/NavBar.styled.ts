@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import { Link } from "react-router-dom";
 
 export const NavBarBigContainer = styled.header`
   display: flex;
@@ -41,7 +42,7 @@ interface MenuBtnProps {
   primary?: boolean;
 }
 
-export const MenuBtn = styled.button<MenuBtnProps>`
+export const MenuBtn = styled(Link)<MenuBtnProps>`
   background: transparent;
   border: none;
   text-decoration: none;

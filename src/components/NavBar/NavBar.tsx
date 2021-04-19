@@ -19,14 +19,18 @@ const NavBar: React.FC = () => {
           <AppName>Crypto Folio</AppName>
         </Wrapper>
         <Wrapper>
-          <MenuBtn>Market</MenuBtn>
+          <MenuBtn to="/">Market</MenuBtn>
           {/* <MenuBtn>Trending</MenuBtn> */}
-          <MenuBtn>Watchlist</MenuBtn>
-          <MenuBtn>Portfolio</MenuBtn>
+          <MenuBtn to="/watchlist">Watchlist</MenuBtn>
+          <MenuBtn to="/portfolio">Portfolio</MenuBtn>
         </Wrapper>
         <Wrapper>
-          <MenuBtn primary>Log In</MenuBtn>
-          <Button primary>Sign Up</Button>
+          <MenuBtn to="/login" primary>
+            Log In
+          </MenuBtn>
+          <Button to="/sign-up" primary>
+            Sign Up
+          </Button>
         </Wrapper>
       </NavBarContainer>
     </NavBarBigContainer>

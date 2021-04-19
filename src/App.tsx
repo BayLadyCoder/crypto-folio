@@ -1,25 +1,33 @@
 import { AppContainer } from "./App.styled";
 import NavBar from "./components/NavBar";
 import GlobalStyle from "./styles/globalStyles";
-import Home from "./pages/Home/Home";
-import getMarketCoinsContext from "./Context/createMarketCoinsContext";
-import getNameCoinsContext from "./Context/createNameCoinsContext";
-import { MarketCoinsContext, NameCoinsContext } from "./Context/context";
-
+import Home from "./pages/Home";
+import Watchlist from "./pages/Watchlist";
+import Portfolio from "./pages/Portfolio";
+import getMarketCoinsContext from "./context/createMarketCoinsContext";
+// import getNameCoinsContext from "./Context/createNameCoinsContext";
+import { MarketCoinsContext, NameCoinsContext } from "./context/context";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const App: React.FC = () => {
   const marketCoinsContextValues = getMarketCoinsContext();
-  const nameCoinsContextValues = getNameCoinsContext();
+  // const nameCoinsContextValues = getNameCoinsContext();
 
   return (
-    <MarketCoinsContext.Provider value={marketCoinsContextValues}>
-      <NameCoinsContext.Provider value={nameCoinsContextValues}>
+    <Router>
+      <MarketCoinsContext.Provider value={marketCoinsContextValues}>
+        {/* <NameCoinsContext.Provider value={nameCoinsContextValues}> */}
         <AppContainer>
           <GlobalStyle />
           <NavBar />
-          <Home />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/watchlist" exact component={Watchlist} />
+            <Route path="/portfolio" exact component={Portfolio} />
+          </Switch>
         </AppContainer>
-      </NameCoinsContext.Provider>
-    </MarketCoinsContext.Provider>
+        {/* </NameCoinsContext.Provider> */}
+      </MarketCoinsContext.Provider>
+    </Router>
   );
 };
 

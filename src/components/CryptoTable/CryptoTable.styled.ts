@@ -16,11 +16,6 @@ export const Wrapper = styled.div`
   margin-top: 30px;
 `;
 
-export const HeaderText = styled.h2`
-  font-size: 30px;
-  color: #fff;
-`;
-
 export const Table = styled.table`
   border-collapse: collapse;
   margin: 25px 0;
