@@ -1,13 +1,7 @@
-import { createContext, useState } from "react";
-import { MarketCoin } from "../Types/coins";
+import { createContext } from "react";
+import { MarketCoinsContextData, NameCoinsContextData } from "../Types/context";
 
-export interface marketCoinsContextData {
-  marketCoins: MarketCoin[];
-  setMarketCoins: (coins: MarketCoin[]) => void;
-  fetchMarketCoins: () => void;
-  isLoading: boolean;
-}
-
+// MarketCoins Context
 const marketCoinsDefaultValues = {
   marketCoins: [],
   setMarketCoins: () => null,
@@ -15,6 +9,18 @@ const marketCoinsDefaultValues = {
   isLoading: true,
 };
 
-export const MarketContext = createContext<marketCoinsContextData>(
+export const MarketCoinsContext = createContext<MarketCoinsContextData>(
   marketCoinsDefaultValues
+);
+
+// NameCoins Context
+const nameCoinsDefaultValues = {
+  nameCoins: [],
+  setNameCoins: () => null,
+  fetchNameCoins: () => null,
+  isLoading: true,
+};
+
+export const NameCoinsContext = createContext<NameCoinsContextData>(
+  nameCoinsDefaultValues
 );

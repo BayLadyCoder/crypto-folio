@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { MarketContext } from "../../Context/context";
+import { MarketCoinsContext } from "../../Context/context";
 import {
   Wrapper,
   HeaderText,
@@ -15,7 +15,7 @@ import {
 } from "./CryptoTable.styled";
 
 const CryptoTable = () => {
-  const { marketCoins, fetchMarketCoins } = useContext(MarketContext);
+  const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
 
   useEffect(() => {
     fetchMarketCoins();
