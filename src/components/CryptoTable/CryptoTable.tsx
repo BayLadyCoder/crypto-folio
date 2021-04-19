@@ -7,6 +7,7 @@ import {
   Table,
   TableHeadRow,
   TableHeadData,
+  TableBodyRow,
   TableBodyData,
   Ticker,
   CoinImg,
@@ -46,7 +47,7 @@ const CryptoTable = () => {
         </thead>
         <tbody>
           {marketCoins.map((coin, index) => (
-            <tr key={coin.id}>
+            <TableBodyRow key={coin.id}>
               <TableBodyData align="center">{index + 1}</TableBodyData>
               <TableBodyData align="left">
                 <CoinNameWrapper>
@@ -75,7 +76,7 @@ const CryptoTable = () => {
               <TableBodyData align="right">
                 ${coin.total_volume.toLocaleString()}
               </TableBodyData>
-            </tr>
+            </TableBodyRow>
           ))}
         </tbody>
       </Table>

@@ -40,7 +40,11 @@ export const TableHeadData = styled.th<TableHeadDataProps>`
   padding: 15px 30px;
 `;
 
-export const TableBody = styled.tbody``;
+export const TableBodyRow = styled.tr`
+  &:hover {
+    background-color: #222;
+  }
+`;
 
 export const CoinNameWrapper = styled.span`
   display: flex;
@@ -57,12 +61,14 @@ export const TableBodyData = styled.td<TableBodyDataProps>`
       : change === "negative"
       ? "#ff7a7a"
       : "#fff"};
+  cursor: pointer;
 `;
 
 export const Ticker = styled.span`
   color: #aaa;
   font-size: 14px;
   margin-left: 5px;
+  text-transform: uppercase;
 `;
 
 export const CoinImg = styled.img`
