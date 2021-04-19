@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 export const HeaderText = styled.h2`
@@ -42,6 +42,11 @@ export const TableHeadData = styled.th<TableHeadDataProps>`
 
 export const TableBody = styled.tbody``;
 
+export const CoinNameWrapper = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
 export const TableBodyData = styled.td<TableBodyDataProps>`
   text-align: ${({ align }) => align};
   padding: 25px 30px;
@@ -58,4 +63,15 @@ export const Ticker = styled.span`
   color: #aaa;
   font-size: 14px;
   margin-left: 5px;
+`;
+
+export const CoinImg = styled.img`
+  width: 25px;
+  margin-right: 15px;
+`;
+
+export const Loading = styled.p`
+  color: #fff;
+  font-size: 25px;
+  margin-top: 50px;
 `;
