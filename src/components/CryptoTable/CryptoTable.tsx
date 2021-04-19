@@ -32,7 +32,7 @@ const CryptoTable = () => {
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
   return (
     <Wrapper>
-      <HeaderText>Now Trending</HeaderText>
+      <HeaderText>Crypto Market Monitor</HeaderText>
       <Table>
         <thead>
           <TableHeadRow>
