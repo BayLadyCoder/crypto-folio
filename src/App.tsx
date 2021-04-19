@@ -20,7 +20,7 @@ const App: React.FC = () => {
           <GlobalStyle />
           <NavBar />
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route path="/crypto-folio" exact component={Home} />
             <Route path="/watchlist" exact component={Watchlist} />
             <Route path="/portfolio" exact component={Portfolio} />
           </Switch>
