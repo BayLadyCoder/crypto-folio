@@ -7,10 +7,13 @@ const SearchBar: React.FC = () => {
 
   return (
     <Wrapper>
-      <SearchInput list="browsers" placeholder="Search" type="text" />{" "}
-      <datalist id="browsers">
+      <SearchInput list="coins" placeholder="Search" type="text" />
+      <datalist id="coins">
         {marketCoins.map((coin) => (
-          <option key={coin.id} value={`${coin.name} (${coin.symbol})`} />
+          <option
+            key={coin.id}
+            value={`${coin.name} (${coin.symbol.toUpperCase()})`}
+          />
         ))}
       </datalist>
     </Wrapper>
