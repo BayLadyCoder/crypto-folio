@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { MarketCoinsContext } from "../../context/context";
+import { TiDelete } from "react-icons/ti";
 
 import { Container } from "../../styles/globalStyles";
 import {
@@ -10,6 +11,10 @@ import {
   FormTitle,
   AddCoinsInput,
   AddCoinBtn,
+  Coin,
+  CoinName,
+  DeleteCoinBtn,
+  DeleteCoinIcon,
 } from "./WatchListForm.styled";
 
 const WatchListForm = () => {
@@ -58,7 +63,12 @@ const WatchListForm = () => {
           <FormRightContainer>
             <FormTitle>Your Watchlist</FormTitle>
             {watchList.map((coin: any, index: number) => (
-              <p key={index}>{coin.name}</p>
+              <Coin>
+                <CoinName key={index}>{coin.name}</CoinName>
+                <DeleteCoinBtn>
+                  <DeleteCoinIcon />
+                </DeleteCoinBtn>
+              </Coin>
             ))}
           </FormRightContainer>
         </Form>
