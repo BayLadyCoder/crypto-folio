@@ -34,6 +34,14 @@ export const Wrapper = styled.div`
   cursor: pointer;
 `;
 
+export const LogoAppNameLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  cursor: pointer;
+  text-decoration: none;
+`;
+
 export const Logo = styled.img`
   width: 40px;
   height: 40px;

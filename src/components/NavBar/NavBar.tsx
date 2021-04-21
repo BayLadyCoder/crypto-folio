@@ -3,6 +3,7 @@ import {
   NavBarBigContainer,
   NavBarContainer,
   Wrapper,
+  LogoAppNameLink,
   Logo,
   AppName,
   MenuBtn,
@@ -14,10 +15,10 @@ const NavBar: React.FC = () => {
   return (
     <NavBarBigContainer>
       <NavBarContainer>
-        <Wrapper>
+        <LogoAppNameLink to="/crypto-folio">
           <Logo src={logo} alt="img" />
           <AppName>Crypto Folio</AppName>
-        </Wrapper>
+        </LogoAppNameLink>
         <Wrapper>
           <MenuBtn to="/crypto-folio">Market</MenuBtn>
           {/* <MenuBtn>Trending</MenuBtn> */}
