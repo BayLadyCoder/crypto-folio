@@ -11,6 +11,7 @@ import {
   FormTitle,
   AddCoinsInput,
   AddCoinBtn,
+  CoinsContainer,
   Coin,
   CoinName,
   DeleteCoinBtn,
@@ -62,14 +63,16 @@ const WatchListForm = () => {
           </FormLeftContainer>
           <FormRightContainer>
             <FormTitle>Your Watchlist</FormTitle>
-            {watchList.map((coin: any, index: number) => (
-              <Coin>
-                <CoinName key={index}>{coin.name}</CoinName>
-                <DeleteCoinBtn>
-                  <DeleteCoinIcon />
-                </DeleteCoinBtn>
-              </Coin>
-            ))}
+            <CoinsContainer>
+              {watchList.map((coin: any, index: number) => (
+                <Coin>
+                  <CoinName key={index}>{coin.name}</CoinName>
+                  <DeleteCoinBtn>
+                    <DeleteCoinIcon />
+                  </DeleteCoinBtn>
+                </Coin>
+              ))}
+            </CoinsContainer>
           </FormRightContainer>
         </Form>
       </FormWrapper>

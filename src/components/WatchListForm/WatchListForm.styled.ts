@@ -51,6 +51,11 @@ export const AddCoinBtn = styled.button`
   padding: 10px 20px;
 `;
 
+export const CoinsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 export const CoinName = styled.p`
   cursor: default;
 `;
@@ -93,6 +98,7 @@ export const Coin = styled.div`
   border: 2px solid #acf2e4;
   color: #acf2e4;
   margin-bottom: 10px;
+  margin-right: 10px;
 
   &:hover {
     border: 2px solid ${theme.color.primary};
