@@ -73,9 +73,7 @@ export const DeleteCoinIcon = styled(HiOutlineX)`
   font-size: 18px;
   width: 15px;
   height: 15px;
-  background: #acf2e4;
-  background: #f5ccff;
-  background: #fff2bf;
+  background: #ddd;
   font-weight: 700;
   border-radius: 50%;
 `;
@@ -84,20 +82,19 @@ export const DeleteCoinBtn = styled.button`
   justify-content: center;
   align-items: center;
   margin-left: 10px;
-  border: none;
-  padding: 5px;
+  padding: 4px;
   border-radius: 50%;
-  background-color: #acf2e4;
-  background-color: #f5ccff;
-  background-color: #fff2bf;
+  background-color: #ddd;
   cursor: pointer;
+  border: 1px solid transparent;
 
   &:hover {
-    background: #e31b1b !important;
+    background: #db1d1d !important;
     color: #fff;
+    border: 1px solid #fff;
 
     ${DeleteCoinIcon} {
-      background: #e31b1b !important;
+      background: #db1d1d !important;
     }
   }
 `;
@@ -106,29 +103,21 @@ export const Coin = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #524101;
   padding: 8px 12px;
   border-radius: 20px;
-  border: 2px solid #acf2e4;
-  border: 2px solid #f5ccff;
-  border: 2px solid #fff2bf;
-  color: #acf2e4;
-  color: #f5ccff;
-  color: #fff2bf;
+  border: 2px solid #bbb;
+  color: #eee;
   margin-bottom: 10px;
   margin-right: 10px;
 
   &:hover {
-    background-color: #111;
-
-    border: 2px solid ${theme.color.primary};
-    color: ${theme.color.primary};
-    border: 2px solid #ffd83d;
-    color: #ffd83d;
+    background-color: #786001;
+    color: #fff;
+    border: 2px solid #fff;
 
     ${DeleteCoinBtn},${DeleteCoinIcon} {
-      background: #ff8787;
-      background: #ff6161;
+      background: #ffcc00;
     }
   }
 `;
