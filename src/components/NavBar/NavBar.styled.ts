@@ -61,22 +61,22 @@ interface MenuBtnProps {
 
 export const MenuBtn = styled(Link)<MenuBtnProps>`
   background: transparent;
-  border: none;
   text-decoration: none;
   white-space: nowrap;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  border: 1px solid transparent;
+  margin-right: 10px;
   color: ${({ primary }) =>
     primary === "true" ? theme.color.primary : "#fff"};
 
   &:hover {
     transition: all 0.3s ease-out;
-    background-color: ${({ primary }) =>
-      primary === "true" ? "#3d3d3d" : theme.color.secondary};
+    /* border: 1px solid ${theme.color.primary_bright}; */
     color: ${({ primary }) =>
-      primary === "true" ? theme.color.primary_bright : "#fff"};
+      primary === "true" ? theme.color.primary_bright : "#ffd52e"};
   }
 `;

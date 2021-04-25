@@ -17,6 +17,7 @@ import {
   DeleteCoinBtn,
   DeleteCoinIcon,
 } from "./WatchListForm.styled";
+import { Button } from "../../styles/globalStyles";
 
 const WatchListForm = () => {
   const [watchList, setWatchList] = useState<any>([]);
@@ -73,6 +74,10 @@ const WatchListForm = () => {
                 </Coin>
               ))}
             </CoinsContainer>
+            <div style={{ alignSelf: "flex-end" }}>
+              <Button>Cancel</Button>
+              <Button primary="true">Save</Button>
+            </div>
           </FormRightContainer>
         </Form>
       </FormWrapper>

@@ -9,7 +9,7 @@ import {
   MenuBtn,
 } from "./NavBar.styled";
 import logo from "../../images/logo.png";
-import { Button } from "../../styles/globalStyles";
+import { ButtonLink } from "../../styles/globalStyles";
 
 const NavBar: React.FC = () => {
   return (
@@ -26,12 +26,10 @@ const NavBar: React.FC = () => {
           <MenuBtn to="/crypto-folio/portfolio">Portfolio</MenuBtn>
         </Wrapper>
         <Wrapper>
-          <MenuBtn to="/crypto-folio/login" primary="true">
-            Log In
-          </MenuBtn>
-          <Button to="/crypto-folio/sign-up" primary="true">
+          <ButtonLink to="/crypto-folio/login">LOG IN</ButtonLink>
+          <ButtonLink to="/crypto-folio/sign-up" primary="true">
             Sign Up
-          </Button>
+          </ButtonLink>
         </Wrapper>
       </NavBarContainer>
     </NavBarBigContainer>

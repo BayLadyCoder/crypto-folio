@@ -37,23 +37,34 @@ interface ButtonProps {
   fontBig?: boolean;
 }
 
-export const Button = styled(Link)<ButtonProps>`
+export const ButtonLink = styled(Link)<ButtonProps>`
   border-radius: 4px;
   background: ${({ primary }) =>
-    primary === "true" ? theme.color.primary : theme.color.secondary};
+    primary === "true" ? theme.color.secondary : "transparent"};
   padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
-  color: #000;
+  color: ${({ primary }) =>
+    primary === "true" ? "#fff" : theme.color.primary};
   font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
-  border: none;
   white-space: nowrap;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-color: ${({ primary }) =>
+    primary === "true" ? theme.color.secondary : "transparent"};
+
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-left: 10px;
 
   &:hover {
     transition: all 0.3s ease-out;
-    color: #fff;
+    color: ${({ primary }) =>
+      primary === "true" ? "#fff" : theme.color.primary_bright};
     background: ${({ primary }) =>
-      primary === "true" ? theme.color.secondary : theme.color.primary};
+      primary === "true" ? "#cc00ff" : "transparent"};
+
+    border-color: ${({ primary }) =>
+      primary === "true" ? "#444" : theme.color.primary_bright};
   }
 
   @media screen and (max-width: 960px) {
@@ -71,6 +82,43 @@ export const HeaderWrapper = styled.div`
 export const PageTitle = styled.h1`
   font-size: 30px;
   color: #fff;
+`;
+
+interface ButtonProps {
+  primary?: string;
+}
+export const Button = styled.button<ButtonProps>`
+  border-radius: 4px;
+  background: ${({ primary }) =>
+    primary === "true" ? theme.color.primary : "transparent"};
+  padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
+  color: ${({ primary }) =>
+    primary === "true" ? "#000" : theme.color.primary};
+  font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
+  border: 1px solid transparent;
+  /* border-color: ${({ primary }) =>
+    primary === "true" ? theme.color.primary : theme.color.primary}; */
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  align-self: flex-end;
+  margin-left: 5px;
+  text-transform: uppercase;
+
+  &:hover {
+    transition: all 0.2s linear;
+    color: ${({ primary }) =>
+      primary === "true" ? "#000" : theme.color.primary_bright};
+    border-color: ${({ primary }) =>
+      primary === "true" ? "#21b598" : theme.color.primary_bright};
+    background: ${({ primary }) =>
+      primary === "true" ? theme.color.primary_bright : "transparent"};
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
 `;
 
 export default GlobalStyle;
