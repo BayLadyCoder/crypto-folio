@@ -19,7 +19,11 @@ import {
 } from "./WatchListForm.styled";
 import { Button } from "../../styles/globalStyles";
 
-const WatchListForm = () => {
+interface WatchListFormProps {
+  closeForm: () => void;
+}
+
+const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
   const [watchList, setWatchList] = useState<any>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
@@ -27,11 +31,16 @@ const WatchListForm = () => {
     fetchMarketCoins();
   }, [fetchMarketCoins]);
 
-  const onSubmit = (e: any) => {
+  const onAddCoin = (e: any) => {
     e.preventDefault();
     console.log(inputValue);
     setWatchList([...watchList, { name: inputValue }]);
     setInputValue("");
+  };
+  const onSave = (e: any) => {
+    e.preventDefault();
+    console.log("watchList", watchList);
+    closeForm();
   };
   const handleChangeInput = (e: any) => {
     console.log("input", e.target.value);
@@ -58,16 +67,14 @@ const WatchListForm = () => {
                 />
               ))}
             </datalist>
-            <AddCoinBtn type="submit" onClick={onSubmit}>
-              ADD
-            </AddCoinBtn>
+            <AddCoinBtn onClick={onAddCoin}>ADD</AddCoinBtn>
           </FormLeftContainer>
           <FormRightContainer>
             <FormTitle>Your Watchlist</FormTitle>
             <CoinsContainer>
               {watchList.map((coin: any, index: number) => (
-                <Coin>
-                  <CoinName key={index}>{coin.name}</CoinName>
+                <Coin key={index}>
+                  <CoinName>{coin.name}</CoinName>
                   <DeleteCoinBtn>
                     <DeleteCoinIcon />
                   </DeleteCoinBtn>
@@ -75,8 +82,12 @@ const WatchListForm = () => {
               ))}
             </CoinsContainer>
             <div style={{ alignSelf: "flex-end" }}>
-              <Button>Cancel</Button>
-              <Button primary="true">Save</Button>
+              <Button type="button" onClick={closeForm}>
+                Cancel
+              </Button>
+              <Button type="submit" primary="true" onClick={onSave}>
+                Save
+              </Button>
             </div>
           </FormRightContainer>
         </Form>

@@ -1,15 +1,29 @@
-import { Container, HeaderWrapper, PageTitle } from "../../styles/globalStyles";
+import { useState } from "react";
+import {
+  Container,
+  HeaderWrapper,
+  PageTitle,
+  Button,
+} from "../../styles/globalStyles";
 import { AddNewWatchListBtn } from "./Watchlist.styled";
 import WatchListForm from "../../components/WatchListForm";
 
 const Home = () => {
+  const [watchListFormOpen, setWatchListFormOpen] = useState(false);
+  const onClickAddCoins = () => {
+    setWatchListFormOpen(true);
+  };
   return (
     <Container>
       <HeaderWrapper>
         <PageTitle>Watchlist</PageTitle>
-        <AddNewWatchListBtn>+ADD COINS</AddNewWatchListBtn>
+        <Button primary="true" onClick={onClickAddCoins}>
+          +ADD COINS
+        </Button>
       </HeaderWrapper>
-      <WatchListForm />
+      {watchListFormOpen && (
+        <WatchListForm closeForm={() => setWatchListFormOpen(false)} />
+      )}
     </Container>
   );
 };
