@@ -9,4 +9,7 @@ export interface MarketCoinsContextData {
 export interface WatchListContextData {
   watchList: MarketCoin[];
   updateWatchList: (watchListCoins: MarketCoin[]) => void;
+  coinOptions: MarketCoin[];
+  updateCoinOptions: (coinSymbol: string) => void;
+  createCoinOptions: (MarketCoins: MarketCoin[]) => void;
 }

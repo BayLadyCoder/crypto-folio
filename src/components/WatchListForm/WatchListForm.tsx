@@ -24,7 +24,12 @@ interface WatchListFormProps {
 }
 
 const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
-  const { updateWatchList } = useWatchList();
+  const {
+    updateWatchList,
+    coinOptions,
+    createCoinOptions,
+    updateCoinOptions,
+  } = useWatchList();
   const [inputValue, setInputValue] = useState<string>("");
   const [coins, setCoins] = useState<CoinType[]>([]);
 
@@ -32,10 +37,13 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
   useEffect(() => {
     if (marketCoins.length === 0) fetchMarketCoins();
   }, [fetchMarketCoins]);
+  useEffect(() => {
+    if (coinOptions.length === 0) createCoinOptions(marketCoins);
+  }, [marketCoins]);
 
-  const coinOptions = useMemo(() => {
+  const allCoinOptions = useMemo(() => {
     const options: string[] = [];
-    if (marketCoins) {
+    if (marketCoins.length > 0) {
       marketCoins.forEach((coin: MarketCoin) => {
         options.push(`${coin.name} (${coin.symbol.toUpperCase()})`);
       });
@@ -44,7 +52,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
   }, [marketCoins]);
 
   const isValidateValue = () => {
-    const isInOptions = coinOptions.includes(inputValue);
+    const isInOptions = allCoinOptions.includes(inputValue);
     if (isInOptions) return true;
 
     return false;
@@ -55,6 +63,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
     if (isValidateValue()) {
       const coinSymbol = inputValue.split("(")[1].split(")")[0].toLowerCase();
       setCoins([...coins, { symbol: coinSymbol, name: inputValue }]);
+      updateCoinOptions(coinSymbol);
       setInputValue("");
     } else {
       alert("This coin is not supported currently. Please try again.");
@@ -95,7 +104,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
               onChange={onChangeInput}
             />
             <datalist id="coins">
-              {marketCoins.map((coin) => (
+              {coinOptions.map((coin) => (
                 <option
                   key={coin.id}
                   value={`${coin.name} (${coin.symbol.toUpperCase()})`}

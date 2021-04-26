@@ -5,7 +5,6 @@ import axios from "axios";
 const CreateMarketCoinsContext = () => {
   const [marketCoins, setMarketCoins] = useState<MarketCoin[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const fetchMarketCoins = useCallback(async () => {
     try {
       const res = await axios.get(
@@ -22,7 +21,6 @@ const CreateMarketCoinsContext = () => {
   return {
     marketCoins,
     setMarketCoins,
-
     isLoading,
     fetchMarketCoins,
   };
