@@ -16,7 +16,7 @@ import {
   DeleteCoinIcon,
 } from "./WatchListForm.styled";
 import { Button } from "../../styles/globalStyles";
-import { MarketCoin, Coin as CoinType } from "../../Types/coins";
+import { MarketCoin } from "../../Types/coins";
 import { useWatchList } from "../../context/WatchListContext";
 
 interface WatchListFormProps {
@@ -27,19 +27,22 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
   const {
     updateWatchList,
     coinOptions,
+    tempCoins,
+    addNewTempCoins,
     createCoinOptions,
     updateCoinOptions,
   } = useWatchList();
+
   const [inputValue, setInputValue] = useState<string>("");
-  const [coins, setCoins] = useState<CoinType[]>([]);
 
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
   useEffect(() => {
     if (marketCoins.length === 0) fetchMarketCoins();
-  }, [fetchMarketCoins]);
+  }, [fetchMarketCoins, marketCoins]);
+
   useEffect(() => {
     if (coinOptions.length === 0) createCoinOptions(marketCoins);
-  }, [marketCoins]);
+  }, [marketCoins, coinOptions, createCoinOptions]);
 
   const allCoinOptions = useMemo(() => {
     const options: string[] = [];
@@ -62,8 +65,8 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
 
     if (isValidateValue()) {
       const coinSymbol = inputValue.split("(")[1].split(")")[0].toLowerCase();
-      setCoins([...coins, { symbol: coinSymbol, name: inputValue }]);
       updateCoinOptions(coinSymbol);
+      addNewTempCoins({ symbol: coinSymbol, name: inputValue });
       setInputValue("");
     } else {
       alert("This coin is not supported currently. Please try again.");
@@ -77,15 +80,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
 
   const onSave = (e: React.MouseEvent) => {
     e.preventDefault();
-    let watchListCoins: MarketCoin[] = [];
-    for (let i = 0; i < coins.length; i++) {
-      marketCoins.forEach((marketCoin) => {
-        if (coins[i].symbol === marketCoin.symbol) {
-          watchListCoins.push(marketCoin);
-        }
-      });
-    }
-    updateWatchList(watchListCoins);
+    updateWatchList(tempCoins, marketCoins);
     closeForm();
   };
 
@@ -116,7 +111,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
           <FormRightContainer>
             <FormTitle>Your Watchlist</FormTitle>
             <CoinsContainer>
-              {coins.map((coin: any, index: number) => (
+              {tempCoins.map((coin: any, index: number) => (
                 <Coin key={index}>
                   <CoinName>{coin.name}</CoinName>
                   <DeleteCoinBtn>
