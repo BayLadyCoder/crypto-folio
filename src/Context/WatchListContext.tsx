@@ -51,6 +51,7 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         }
       });
     }
+    updateCoinOptions(watchListCoins, marketCoins);
     setWatchList(watchListCoins);
   };
 

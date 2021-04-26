@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Container,
   HeaderWrapper,
@@ -9,17 +8,17 @@ import WatchListForm from "../../components/WatchListForm";
 import { useWatchList } from "../../context/WatchListContext";
 
 const Home = () => {
-  const { watchListFormOpen, onClickOpenForm } = useWatchList();
-
-  const { watchList } = useWatchList();
+  const { watchList, watchListFormOpen, onClickOpenForm } = useWatchList();
 
   return (
     <Container>
       <HeaderWrapper>
         <PageTitle>Watchlist</PageTitle>
-        <Button primary="true" onClick={onClickOpenForm}>
-          +ADD COINS
-        </Button>
+        {!watchListFormOpen && (
+          <Button primary="true" onClick={onClickOpenForm}>
+            +ADD COINS
+          </Button>
+        )}
       </HeaderWrapper>
       {watchListFormOpen ? (
         <WatchListForm />

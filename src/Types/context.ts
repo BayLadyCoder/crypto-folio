@@ -1,4 +1,4 @@
-import { MarketCoin, NameCoin, Coin } from "./coins";
+import { MarketCoin, Coin } from "./coins";
 
 export interface MarketCoinsContextData {
   marketCoins: MarketCoin[];
