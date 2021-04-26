@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { MarketCoinsContextData, NameCoinsContextData } from "../Types/context";
+import { MarketCoinsContextData } from "../Types/context";
 
 // MarketCoins Context
 const marketCoinsDefaultValues = {
@@ -11,16 +11,4 @@ const marketCoinsDefaultValues = {
 
 export const MarketCoinsContext = createContext<MarketCoinsContextData>(
   marketCoinsDefaultValues
-);
-
-// NameCoins Context
-const nameCoinsDefaultValues = {
-  nameCoins: [],
-  setNameCoins: () => null,
-  fetchNameCoins: () => null,
-  isLoading: true,
-};
-
-export const NameCoinsContext = createContext<NameCoinsContextData>(
-  nameCoinsDefaultValues
 );

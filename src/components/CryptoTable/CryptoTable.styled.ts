@@ -68,9 +68,3 @@ export const CoinImg = styled.img`
   width: 25px;
   margin-right: 15px;
 `;
-
-export const Loading = styled.p`
-  color: #fff;
-  font-size: 25px;
-  margin-top: 50px;
-`;

@@ -121,4 +121,10 @@ export const Button = styled.button<ButtonProps>`
   }
 `;
 
+export const Loading = styled.p`
+  color: #fff;
+  font-size: 25px;
+  margin-top: 50px;
+`;
+
 export default GlobalStyle;

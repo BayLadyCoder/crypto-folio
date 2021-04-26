@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
 import { MarketCoinsContext } from "../../context/context";
-import { Container } from "../../styles/globalStyles";
+import { Container, Loading } from "../../styles/globalStyles";
 import {
   FormWrapper,
   Form,
@@ -16,27 +16,32 @@ import {
   DeleteCoinIcon,
 } from "./WatchListForm.styled";
 import { Button } from "../../styles/globalStyles";
-import { MarketCoin } from "../../Types/coins";
+import { MarketCoin, Coin as CoinType } from "../../Types/coins";
+import { useWatchList } from "../../context/WatchListContext";
+
 interface WatchListFormProps {
   closeForm: () => void;
 }
 
 const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
-  const [coins, setCoins] = useState<any>([]);
-  const [watchList, setWatchList] = useState<any>([]);
+  const { updateWatchList } = useWatchList();
   const [inputValue, setInputValue] = useState<string>("");
+  const [coins, setCoins] = useState<CoinType[]>([]);
+
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
   useEffect(() => {
-    fetchMarketCoins();
+    if (marketCoins.length === 0) fetchMarketCoins();
   }, [fetchMarketCoins]);
 
-  const coinOptions: any = [];
-
-  if (marketCoins) {
-    marketCoins.forEach((coin: MarketCoin) => {
-      coinOptions.push(`${coin.name} (${coin.symbol.toUpperCase()})`);
-    });
-  }
+  const coinOptions = useMemo(() => {
+    const options: string[] = [];
+    if (marketCoins) {
+      marketCoins.forEach((coin: MarketCoin) => {
+        options.push(`${coin.name} (${coin.symbol.toUpperCase()})`);
+      });
+    }
+    return options;
+  }, [marketCoins]);
 
   const isValidateValue = () => {
     const isInOptions = coinOptions.includes(inputValue);
@@ -44,9 +49,9 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
 
     return false;
   };
-
-  const onAddCoin = (e: any) => {
+  const onAddCoin = (e: React.MouseEvent) => {
     e.preventDefault();
+
     if (isValidateValue()) {
       const coinSymbol = inputValue.split("(")[1].split(")")[0].toLowerCase();
       setCoins([...coins, { symbol: coinSymbol, name: inputValue }]);
@@ -56,9 +61,14 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
       setInputValue("");
     }
   };
-  const onSave = (e: any) => {
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const onSave = (e: React.MouseEvent) => {
     e.preventDefault();
-    let watchListCoins: any = [];
+    let watchListCoins: MarketCoin[] = [];
     for (let i = 0; i < coins.length; i++) {
       marketCoins.forEach((marketCoin) => {
         if (coins[i].symbol === marketCoin.symbol) {
@@ -66,18 +76,12 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
         }
       });
     }
-    console.log("watchListCoins", watchListCoins);
-    setWatchList(watchListCoins);
+    updateWatchList(watchListCoins);
     closeForm();
   };
-  const handleChangeInput = (e: any) => {
-    setInputValue(e.target.value);
-  };
 
-  console.log("watchList", watchList);
-  console.log("coins", coins);
-  // console.log(coinsMap);
-  // console.log(marketCoins);
+  if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
+
   return (
     <Container>
       <FormWrapper>
@@ -88,7 +92,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
               type="text"
               list="coins"
               value={inputValue}
-              onChange={handleChangeInput}
+              onChange={onChangeInput}
             />
             <datalist id="coins">
               {marketCoins.map((coin) => (

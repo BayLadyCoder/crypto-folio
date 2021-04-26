@@ -10,9 +10,8 @@ import {
   Ticker,
   CoinImg,
   CoinNameWrapper,
-  Loading,
 } from "./CryptoTable.styled";
-import { HeaderWrapper, PageTitle } from "../../styles/globalStyles";
+import { HeaderWrapper, PageTitle, Loading } from "../../styles/globalStyles";
 
 const CryptoTable = () => {
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);

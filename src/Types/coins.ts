@@ -1,3 +1,7 @@
+export interface Coin {
+  name: string;
+  symbol: string;
+}
 export interface NameCoin {
   id: string;
   name: string;

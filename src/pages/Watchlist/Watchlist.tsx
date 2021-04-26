@@ -5,14 +5,17 @@ import {
   PageTitle,
   Button,
 } from "../../styles/globalStyles";
-import { AddNewWatchListBtn } from "./Watchlist.styled";
 import WatchListForm from "../../components/WatchListForm";
+import { useWatchList } from "../../context/WatchListContext";
 
 const Home = () => {
   const [watchListFormOpen, setWatchListFormOpen] = useState(false);
   const onClickAddCoins = () => {
     setWatchListFormOpen(true);
   };
+
+  const { watchList } = useWatchList();
+
   return (
     <Container>
       <HeaderWrapper>
@@ -21,8 +24,14 @@ const Home = () => {
           +ADD COINS
         </Button>
       </HeaderWrapper>
-      {watchListFormOpen && (
+      {watchListFormOpen ? (
         <WatchListForm closeForm={() => setWatchListFormOpen(false)} />
+      ) : (
+        <div style={{ background: "#fff" }}>
+          {watchList.map((coin) => (
+            <p key={coin.id}>{coin.name}</p>
+          ))}
+        </div>
       )}
     </Container>
   );

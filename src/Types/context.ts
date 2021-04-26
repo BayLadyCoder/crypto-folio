@@ -1,4 +1,4 @@
-import { MarketCoin, NameCoin } from "./coins";
+import { MarketCoin, NameCoin, Coin } from "./coins";
 
 export interface MarketCoinsContextData {
   marketCoins: MarketCoin[];
@@ -6,9 +6,7 @@ export interface MarketCoinsContextData {
   fetchMarketCoins: () => void;
   isLoading: boolean;
 }
-export interface NameCoinsContextData {
-  nameCoins: NameCoin[];
-  setNameCoins: (coins: NameCoin[]) => void;
-  fetchNameCoins: () => void;
-  isLoading: boolean;
+export interface WatchListContextData {
+  watchList: MarketCoin[];
+  updateWatchList: (watchListCoins: MarketCoin[]) => void;
 }
