@@ -2,19 +2,16 @@ import { AppContainer } from "./App.styled";
 import NavBar from "./components/NavBar";
 import GlobalStyle from "./styles/globalStyles";
 import Home from "./pages/Home";
-import Watchlist from "./pages/Watchlist";
+import WatchList from "./pages/WatchList";
 import Portfolio from "./pages/Portfolio";
-import getMarketCoinsContext from "./context/createMarketCoinsContext";
 import { WatchListProvider } from "./context/WatchListContext";
-import { MarketCoinsContext } from "./context/context";
+import { MarketCoinsProvider } from "./context/MarketCoinsContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App: React.FC = () => {
-  const marketCoinsContextValues = getMarketCoinsContext();
-
   return (
     <Router>
-      <MarketCoinsContext.Provider value={marketCoinsContextValues}>
+      <MarketCoinsProvider>
         <WatchListProvider>
           <AppContainer>
             <GlobalStyle />
@@ -24,7 +21,7 @@ const App: React.FC = () => {
               <Route
                 path="/crypto-folio/watchlist"
                 exact
-                component={Watchlist}
+                component={WatchList}
               />
               <Route
                 path="/crypto-folio/portfolio"
@@ -34,7 +31,7 @@ const App: React.FC = () => {
             </Switch>
           </AppContainer>
         </WatchListProvider>
-      </MarketCoinsContext.Provider>
+      </MarketCoinsProvider>
     </Router>
   );
 };

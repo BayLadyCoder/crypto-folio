@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { MarketCoinsContext } from "../../context/context";
+import { MarketCoinsContext } from "../../context/MarketCoinsContext";
 import {
   Wrapper,
   Table,
