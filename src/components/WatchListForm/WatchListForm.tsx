@@ -19,12 +19,9 @@ import { Button } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
 import { useWatchList } from "../../context/WatchListContext";
 
-interface WatchListFormProps {
-  closeForm: () => void;
-}
-
-const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
+const WatchListForm: React.FC = () => {
   const {
+    onClickCloseForm,
     updateWatchList,
     coinOptions,
     tempCoins,
@@ -86,13 +83,18 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
 
   const onCloseForm = () => {
     updateTempCoins(marketCoins);
-    closeForm();
+    onClickCloseForm();
   };
 
   const onSave = (e: React.MouseEvent) => {
     e.preventDefault();
     updateWatchList(tempCoins, marketCoins);
-    closeForm();
+    onClickCloseForm();
+  };
+
+  const onClickDeleteCoin = (e: React.MouseEvent, coinSymbol: string) => {
+    e.preventDefault();
+    removeCoinFromTempCoins(coinSymbol);
   };
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
@@ -125,7 +127,9 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
               {tempCoins.map((coin: any, index: number) => (
                 <Coin key={index}>
                   <CoinName>{coin.name}</CoinName>
-                  <DeleteCoinBtn>
+                  <DeleteCoinBtn
+                    onClick={(e) => onClickDeleteCoin(e, coin.symbol)}
+                  >
                     <DeleteCoinIcon />
                   </DeleteCoinBtn>
                 </Coin>

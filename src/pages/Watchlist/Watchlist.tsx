@@ -9,10 +9,7 @@ import WatchListForm from "../../components/WatchListForm";
 import { useWatchList } from "../../context/WatchListContext";
 
 const Home = () => {
-  const [watchListFormOpen, setWatchListFormOpen] = useState(false);
-  const onClickAddCoins = () => {
-    setWatchListFormOpen(true);
-  };
+  const { watchListFormOpen, onClickOpenForm } = useWatchList();
 
   const { watchList } = useWatchList();
 
@@ -20,12 +17,12 @@ const Home = () => {
     <Container>
       <HeaderWrapper>
         <PageTitle>Watchlist</PageTitle>
-        <Button primary="true" onClick={onClickAddCoins}>
+        <Button primary="true" onClick={onClickOpenForm}>
           +ADD COINS
         </Button>
       </HeaderWrapper>
       {watchListFormOpen ? (
-        <WatchListForm closeForm={() => setWatchListFormOpen(false)} />
+        <WatchListForm />
       ) : (
         <div style={{ background: "#fff" }}>
           {watchList.map((coin) => (

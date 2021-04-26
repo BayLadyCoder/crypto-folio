@@ -3,6 +3,9 @@ import { MarketCoin, Coin } from "../types/coins";
 import { WatchListContextData } from "../types/context";
 
 const watchListDefaultValues = {
+  watchListFormOpen: false,
+  onClickOpenForm: () => null,
+  onClickCloseForm: () => null,
   watchList: [],
   updateWatchList: () => null,
   tempCoins: [],
@@ -18,6 +21,7 @@ const watchListDefaultValues = {
 export const WatchListContext = createContext<WatchListContextData>(
   watchListDefaultValues
 );
+
 export const useWatchList = () => {
   return useContext(WatchListContext);
 };
@@ -27,10 +31,17 @@ interface Props {
 }
 
 export const WatchListProvider: React.FC<Props> = ({ children }) => {
+  const [watchListFormOpen, setWatchListFormOpen] = useState<boolean>(false);
   const [watchList, setWatchList] = useState<MarketCoin[]>([]);
   const [tempCoins, setTempCoins] = useState<Coin[]>([]);
   const [coinOptions, setCoinOptions] = useState<MarketCoin[]>([]);
 
+  const onClickOpenForm = () => {
+    setWatchListFormOpen(true);
+  };
+  const onClickCloseForm = () => {
+    setWatchListFormOpen(false);
+  };
   const updateWatchList = (tempCoins: Coin[], marketCoins: MarketCoin[]) => {
     let watchListCoins: MarketCoin[] = [];
     for (let i = 0; i < tempCoins.length; i++) {
@@ -40,7 +51,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         }
       });
     }
-    updateCoinOptions(watchListCoins, marketCoins);
     setWatchList(watchListCoins);
   };
 
@@ -88,6 +98,9 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   return (
     <WatchListContext.Provider
       value={{
+        watchListFormOpen,
+        onClickOpenForm,
+        onClickCloseForm,
         watchList,
         updateWatchList,
         tempCoins,

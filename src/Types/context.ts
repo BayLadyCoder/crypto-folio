@@ -7,6 +7,9 @@ export interface MarketCoinsContextData {
   isLoading: boolean;
 }
 export interface WatchListContextData {
+  watchListFormOpen: boolean;
+  onClickOpenForm: () => void;
+  onClickCloseForm: () => void;
   watchList: MarketCoin[];
   updateWatchList: (tempCoins: Coin[], marketCoins: MarketCoin[]) => void;
   tempCoins: Coin[];
