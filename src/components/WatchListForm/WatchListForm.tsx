@@ -16,7 +16,7 @@ import {
   DeleteCoinIcon,
 } from "./WatchListForm.styled";
 import { Button } from "../../styles/globalStyles";
-import { MarketCoin } from "../../Types/coins";
+import { MarketCoin } from "../../types/coins";
 import { useWatchList } from "../../context/WatchListContext";
 
 interface WatchListFormProps {
@@ -29,8 +29,10 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
     coinOptions,
     tempCoins,
     addNewTempCoins,
+    updateTempCoins,
+    removeCoinFromTempCoins,
     createCoinOptions,
-    updateCoinOptions,
+    removeCoinFromCoinOptions,
   } = useWatchList();
 
   const [inputValue, setInputValue] = useState<string>("");
@@ -39,6 +41,10 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
   useEffect(() => {
     if (marketCoins.length === 0) fetchMarketCoins();
   }, [fetchMarketCoins, marketCoins]);
+
+  useEffect(() => {
+    if (coinOptions.length === 0) createCoinOptions(marketCoins);
+  }, [marketCoins, coinOptions, createCoinOptions]);
 
   useEffect(() => {
     if (coinOptions.length === 0) createCoinOptions(marketCoins);
@@ -65,7 +71,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
 
     if (isValidateValue()) {
       const coinSymbol = inputValue.split("(")[1].split(")")[0].toLowerCase();
-      updateCoinOptions(coinSymbol);
+      removeCoinFromCoinOptions(coinSymbol);
       addNewTempCoins({ symbol: coinSymbol, name: inputValue });
       setInputValue("");
     } else {
@@ -76,6 +82,11 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+  };
+
+  const onCloseForm = () => {
+    updateTempCoins(marketCoins);
+    closeForm();
   };
 
   const onSave = (e: React.MouseEvent) => {
@@ -106,7 +117,7 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
                 />
               ))}
             </datalist>
-            <AddCoinBtn onClick={onAddCoin}>ADD</AddCoinBtn>
+            <AddCoinBtn onClick={onAddCoin}>ADD TO WATCHLIST {">"}</AddCoinBtn>
           </FormLeftContainer>
           <FormRightContainer>
             <FormTitle>Your Watchlist</FormTitle>
@@ -121,7 +132,11 @@ const WatchListForm: React.FC<WatchListFormProps> = ({ closeForm }) => {
               ))}
             </CoinsContainer>
             <div style={{ alignSelf: "flex-end" }}>
-              <Button type="button" aria-label="Close Form" onClick={closeForm}>
+              <Button
+                type="button"
+                aria-label="Close Form"
+                onClick={onCloseForm}
+              >
                 Cancel
               </Button>
               <Button type="submit" primary="true" onClick={onSave}>

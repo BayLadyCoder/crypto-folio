@@ -11,8 +11,13 @@ export interface WatchListContextData {
   updateWatchList: (tempCoins: Coin[], marketCoins: MarketCoin[]) => void;
   tempCoins: Coin[];
   addNewTempCoins: (coin: Coin) => void;
+  updateTempCoins: (marketCoins: MarketCoin[]) => void;
   removeCoinFromTempCoins: (coinSymbol: string) => void;
   coinOptions: MarketCoin[];
-  updateCoinOptions: (coinSymbol: string) => void;
   createCoinOptions: (MarketCoins: MarketCoin[]) => void;
+  updateCoinOptions: (
+    watchListCoins: MarketCoin[],
+    MarketCoins: MarketCoin[]
+  ) => void;
+  removeCoinFromCoinOptions: (coinSymbol: string) => void;
 }
