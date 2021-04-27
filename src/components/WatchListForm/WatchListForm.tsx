@@ -14,6 +14,8 @@ import {
   CoinName,
   DeleteCoinBtn,
   DeleteCoinIcon,
+  CloseFormButton,
+  FormHeaderContainer,
 } from "./WatchListForm.styled";
 import { Button } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
@@ -68,7 +70,9 @@ const WatchListForm: React.FC = () => {
       <FormWrapper>
         <Form>
           <FormLeftContainer>
-            <FormTitle>Add Coins</FormTitle>
+            <FormHeaderContainer>
+              <FormTitle>Add Coins</FormTitle>
+            </FormHeaderContainer>
             <AddCoinsInput
               type="text"
               list="coins"
@@ -83,23 +87,16 @@ const WatchListForm: React.FC = () => {
             <AddCoinBtn onClick={onAddCoin}>ADD TO WATCHLIST {">"}</AddCoinBtn>
           </FormLeftContainer>
           <FormRightContainer>
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
+            <FormHeaderContainer>
               <FormTitle>Your Watchlist</FormTitle>
-              <Button
+              <CloseFormButton
                 type="button"
                 aria-label="Close Form"
                 onClick={onCloseForm}
               >
                 X
-              </Button>
-            </div>
+              </CloseFormButton>
+            </FormHeaderContainer>
             <CoinsContainer>
               {watchList.map((coin: MarketCoin) => (
                 <Coin key={coin.id}>

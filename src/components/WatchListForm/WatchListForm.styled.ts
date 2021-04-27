@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { HiOutlineX } from "react-icons/hi";
+import { VscChromeClose } from "react-icons/vsc";
 
 export const FormWrapper = styled.div`
   margin-top: 30px;
@@ -29,7 +30,7 @@ export const FormRightContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   background: #444;
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 `;
@@ -60,7 +61,6 @@ export const CoinsContainer = styled.div`
   width: 100%;
   border: 1px solid #aaa;
   padding: 10px 0px 10px 10px;
-  margin-bottom: 20px;
   overflow-y: scroll;
 `;
 
@@ -119,4 +119,30 @@ export const Coin = styled.div`
       background: #ffcc00;
     }
   }
+`;
+
+export const CloseFormButton = styled(VscChromeClose)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 10px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  font-size: 40px;
+
+  &:hover {
+    transition: all 0.2s linear;
+    background-color: #223;
+  }
+`;
+
+export const FormHeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
 `;
