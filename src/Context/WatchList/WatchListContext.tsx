@@ -1,6 +1,17 @@
-import { useState, useContext, createContext } from "react";
-import { MarketCoin, Coin } from "../types/coins";
-import { WatchListContextData } from "../types/context";
+import {
+  useState,
+  useContext,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
+import { MarketCoin } from "../../types/coins";
+import { WatchListContextData } from "../../types/context";
+import {
+  addCoinToCoinOptions,
+  isValidatedValue,
+  handleAddNewCoinToWatchList,
+} from "./WatchListContextHelpers";
 
 const watchListDefaultValues = {
   watchListFormOpen: false,
@@ -12,8 +23,6 @@ const watchListDefaultValues = {
   coinOptions: [],
   createCoinOptions: () => null,
   updateCoinOptions: () => null,
-  removeCoinFromCoinOptions: () => null,
-  addCoinToCoinOptions: () => null,
 };
 
 export const WatchListContext = createContext<WatchListContextData>(
@@ -41,16 +50,30 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   };
 
   const addNewCoinToWatchList = (
+    marketCoins: MarketCoin[],
+    allCoinOptions: string[],
+    inputValue: string,
+    setInputValue: Dispatch<SetStateAction<string>>
+  ) => {
+    if (isValidatedValue(allCoinOptions, inputValue)) {
+      handleAddNewCoinToWatchList(
+        marketCoins,
+        inputValue,
+        setCoinOptions,
+        setWatchList
+      );
+    } else {
+      alert("This coin is not supported currently. Please try again.");
+    }
+    setInputValue("");
+  };
+
+  const removeCoinFromWatchList = (
     coinSymbol: string,
     marketCoins: MarketCoin[]
   ) => {
-    const newCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol);
-
-    setWatchList((prev) => [...prev, newCoin[0]]);
-  };
-
-  const removeCoinFromWatchList = (coinSymbol: string) => {
     setWatchList((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
+    addCoinToCoinOptions(marketCoins, setCoinOptions, coinSymbol);
   };
 
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
@@ -70,13 +93,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
     setCoinOptions(restOfCoins);
   };
 
-  const removeCoinFromCoinOptions = (coinSymbol: string) => {
-    setCoinOptions((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
-  };
-  const addCoinToCoinOptions = (coin: MarketCoin) => {
-    setCoinOptions((prev) => [coin, ...prev]);
-  };
-
   return (
     <WatchListContext.Provider
       value={{
@@ -89,8 +105,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         coinOptions,
         createCoinOptions,
         updateCoinOptions,
-        removeCoinFromCoinOptions,
-        addCoinToCoinOptions,
       }}
     >
       {children}

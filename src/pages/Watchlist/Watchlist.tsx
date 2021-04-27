@@ -5,7 +5,7 @@ import {
   Button,
 } from "../../styles/globalStyles";
 import WatchListForm from "../../components/WatchListForm";
-import { useWatchList } from "../../context/WatchListContext";
+import { useWatchList } from "../../context/WatchList/WatchListContext";
 
 const Home = () => {
   const { watchList, watchListFormOpen, onClickOpenForm } = useWatchList();

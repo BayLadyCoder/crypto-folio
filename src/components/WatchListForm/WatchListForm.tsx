@@ -17,7 +17,7 @@ import {
 } from "./WatchListForm.styled";
 import { Button } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
-import { useWatchList } from "../../context/WatchListContext";
+import { useWatchList } from "../../context/WatchList/WatchListContext";
 
 const WatchListForm: React.FC = () => {
   const {
@@ -28,8 +28,6 @@ const WatchListForm: React.FC = () => {
     coinOptions,
     createCoinOptions,
     updateCoinOptions,
-    removeCoinFromCoinOptions,
-    addCoinToCoinOptions,
   } = useWatchList();
 
   const [inputValue, setInputValue] = useState<string>("");
@@ -57,24 +55,14 @@ const WatchListForm: React.FC = () => {
     return options;
   }, [marketCoins]);
 
-  const isValidateValue = () => {
-    const isInOptions = allCoinOptions.includes(inputValue);
-    if (isInOptions) return true;
-
-    return false;
-  };
   const onAddCoin = (e: React.MouseEvent) => {
     e.preventDefault();
-
-    if (isValidateValue()) {
-      const coinSymbol = inputValue.split("(")[1].split(")")[0].toLowerCase();
-      removeCoinFromCoinOptions(coinSymbol);
-      addNewCoinToWatchList(coinSymbol, marketCoins);
-      setInputValue("");
-    } else {
-      alert("This coin is not supported currently. Please try again.");
-      setInputValue("");
-    }
+    addNewCoinToWatchList(
+      marketCoins,
+      allCoinOptions,
+      inputValue,
+      setInputValue
+    );
   };
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,9 +75,7 @@ const WatchListForm: React.FC = () => {
 
   const onClickDeleteCoin = (e: React.MouseEvent, coinSymbol: string) => {
     e.preventDefault();
-    const fullCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol);
-    removeCoinFromWatchList(coinSymbol);
-    addCoinToCoinOptions(fullCoin[0]);
+    removeCoinFromWatchList(coinSymbol, marketCoins);
   };
 
   // FIXME: coinOptions come back full after add coins

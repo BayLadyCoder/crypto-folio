@@ -12,16 +12,19 @@ export interface WatchListContextData {
   onClickCloseForm: () => void;
   watchList: MarketCoin[];
   addNewCoinToWatchList: (
+    marketCoins: MarketCoin[],
+    allCoinOptions: string[],
+    inputValue: string,
+    setInputValue: any
+  ) => void;
+  removeCoinFromWatchList: (
     coinSymbol: string,
     marketCoins: MarketCoin[]
   ) => void;
-  removeCoinFromWatchList: (coinSymbol: string) => void;
   coinOptions: MarketCoin[];
   createCoinOptions: (MarketCoins: MarketCoin[]) => void;
   updateCoinOptions: (
     watchListCoins: MarketCoin[],
     MarketCoins: MarketCoin[]
   ) => void;
-  removeCoinFromCoinOptions: (coinSymbol: string) => void;
-  addCoinToCoinOptions: (coin: MarketCoin) => void;
 }
