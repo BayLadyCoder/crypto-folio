@@ -1,9 +1,8 @@
-import { MarketCoin, Coin } from "./coins";
-
+import { MarketCoin } from "./coins";
 export interface MarketCoinsContextData {
   marketCoins: MarketCoin[];
   setMarketCoins: (coins: MarketCoin[]) => void;
-  fetchMarketCoins: () => void;
+  fetchMarketCoins: () => Promise<MarketCoin[]>;
   isLoading: boolean;
 }
 export interface WatchListContextData {
@@ -13,7 +12,7 @@ export interface WatchListContextData {
   watchList: MarketCoin[];
   addNewCoinToWatchList: (
     marketCoins: MarketCoin[],
-    allCoinOptions: string[],
+    coinOptions: string[],
     inputValue: string,
     setInputValue: any
   ) => void;
@@ -21,10 +20,6 @@ export interface WatchListContextData {
     coinSymbol: string,
     marketCoins: MarketCoin[]
   ) => void;
-  coinOptions: MarketCoin[];
+  coinOptions: string[];
   createCoinOptions: (MarketCoins: MarketCoin[]) => void;
-  updateCoinOptions: (
-    watchListCoins: MarketCoin[],
-    MarketCoins: MarketCoin[]
-  ) => void;
 }

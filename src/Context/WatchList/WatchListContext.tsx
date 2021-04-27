@@ -11,6 +11,7 @@ import {
   addCoinToCoinOptions,
   isValidatedValue,
   handleAddNewCoinToWatchList,
+  getCoinNameAndSymbolArray,
 } from "./WatchListContextHelpers";
 
 const watchListDefaultValues = {
@@ -22,7 +23,6 @@ const watchListDefaultValues = {
   removeCoinFromWatchList: () => null,
   coinOptions: [],
   createCoinOptions: () => null,
-  updateCoinOptions: () => null,
 };
 
 export const WatchListContext = createContext<WatchListContextData>(
@@ -40,7 +40,7 @@ interface Props {
 export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const [watchListFormOpen, setWatchListFormOpen] = useState<boolean>(false);
   const [watchList, setWatchList] = useState<MarketCoin[]>([]);
-  const [coinOptions, setCoinOptions] = useState<MarketCoin[]>([]);
+  const [coinOptions, setCoinOptions] = useState<string[]>([]);
 
   const onClickOpenForm = () => {
     setWatchListFormOpen(true);
@@ -51,11 +51,11 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
 
   const addNewCoinToWatchList = (
     marketCoins: MarketCoin[],
-    allCoinOptions: string[],
+    coinOptions: string[],
     inputValue: string,
     setInputValue: Dispatch<SetStateAction<string>>
   ) => {
-    if (isValidatedValue(allCoinOptions, inputValue)) {
+    if (isValidatedValue(coinOptions, inputValue)) {
       handleAddNewCoinToWatchList(
         marketCoins,
         inputValue,
@@ -77,20 +77,8 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   };
 
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
-    setCoinOptions(marketCoins);
-  };
-
-  const updateCoinOptions = (
-    watchListCoins: MarketCoin[],
-    marketCoins: MarketCoin[]
-  ) => {
-    let restOfCoins: MarketCoin[] = [];
-
-    for (let i = 0; i < marketCoins.length; i++) {
-      if (!watchListCoins.includes(marketCoins[i]))
-        restOfCoins.push(marketCoins[i]);
-    }
-    setCoinOptions(restOfCoins);
+    const options = getCoinNameAndSymbolArray(marketCoins);
+    setCoinOptions(options);
   };
 
   return (
@@ -104,7 +92,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         removeCoinFromWatchList,
         coinOptions,
         createCoinOptions,
-        updateCoinOptions,
       }}
     >
       {children}

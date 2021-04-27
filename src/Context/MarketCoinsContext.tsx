@@ -6,7 +6,9 @@ import { MarketCoinsContextData } from "../types/context";
 const marketCoinsDefaultValues = {
   marketCoins: [],
   setMarketCoins: () => null,
-  fetchMarketCoins: () => null,
+  fetchMarketCoins: () => {
+    throw new Error("GithubContext not avaliable");
+  },
   isLoading: true,
 };
 export const MarketCoinsContext = createContext<MarketCoinsContextData>(
@@ -30,6 +32,7 @@ export const MarketCoinsProvider: React.FC<Props> = ({ children }) => {
       );
       setMarketCoins(res.data);
       setIsLoading(false);
+      return res.data;
     } catch (error) {
       console.error(error);
       setIsLoading(false);

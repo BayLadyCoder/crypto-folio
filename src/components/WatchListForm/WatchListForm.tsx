@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useMemo } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MarketCoinsContext } from "../../context/MarketCoinsContext";
 import { Container, Loading } from "../../styles/globalStyles";
 import {
@@ -27,42 +27,23 @@ const WatchListForm: React.FC = () => {
     removeCoinFromWatchList,
     coinOptions,
     createCoinOptions,
-    updateCoinOptions,
   } = useWatchList();
 
   const [inputValue, setInputValue] = useState<string>("");
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
 
   useEffect(() => {
-    if (marketCoins.length === 0) fetchMarketCoins();
-  }, [fetchMarketCoins, marketCoins]);
+    const getCoins = async () => {
+      const coins = await fetchMarketCoins();
+      createCoinOptions(coins);
+    };
 
-  useEffect(() => {
-    if (coinOptions.length === 0) createCoinOptions(marketCoins);
-  }, [marketCoins, coinOptions, createCoinOptions]);
-
-  useEffect(() => {
-    updateCoinOptions(watchList, marketCoins);
-  }, []);
-
-  const allCoinOptions = useMemo(() => {
-    const options: string[] = [];
-    if (marketCoins.length > 0) {
-      marketCoins.forEach((coin: MarketCoin) => {
-        options.push(`${coin.name} (${coin.symbol.toUpperCase()})`);
-      });
-    }
-    return options;
-  }, [marketCoins]);
+    if (marketCoins.length === 0) getCoins();
+  }, [fetchMarketCoins, marketCoins.length, createCoinOptions]);
 
   const onAddCoin = (e: React.MouseEvent) => {
     e.preventDefault();
-    addNewCoinToWatchList(
-      marketCoins,
-      allCoinOptions,
-      inputValue,
-      setInputValue
-    );
+    addNewCoinToWatchList(marketCoins, coinOptions, inputValue, setInputValue);
   };
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +59,6 @@ const WatchListForm: React.FC = () => {
     removeCoinFromWatchList(coinSymbol, marketCoins);
   };
 
-  // FIXME: coinOptions come back full after add coins
   // TODO: Add Crypto Table to WatchList according to watchList data
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
@@ -97,10 +77,7 @@ const WatchListForm: React.FC = () => {
             />
             <datalist id="coins">
               {coinOptions.map((coin) => (
-                <option
-                  key={coin.id}
-                  value={`${coin.name} (${coin.symbol.toUpperCase()})`}
-                />
+                <option key={coin} value={coin} />
               ))}
             </datalist>
             <AddCoinBtn onClick={onAddCoin}>ADD TO WATCHLIST {">"}</AddCoinBtn>
