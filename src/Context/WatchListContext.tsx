@@ -7,11 +7,8 @@ const watchListDefaultValues = {
   onClickOpenForm: () => null,
   onClickCloseForm: () => null,
   watchList: [],
-  updateWatchList: () => null,
-  tempCoins: [],
-  addNewTempCoins: () => null,
-  updateTempCoins: () => null,
-  removeCoinFromTempCoins: () => null,
+  addNewCoinToWatchList: () => null,
+  removeCoinFromWatchList: () => null,
   coinOptions: [],
   createCoinOptions: () => null,
   updateCoinOptions: () => null,
@@ -33,7 +30,6 @@ interface Props {
 export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const [watchListFormOpen, setWatchListFormOpen] = useState<boolean>(false);
   const [watchList, setWatchList] = useState<MarketCoin[]>([]);
-  const [tempCoins, setTempCoins] = useState<Coin[]>([]);
   const [coinOptions, setCoinOptions] = useState<MarketCoin[]>([]);
 
   const onClickOpenForm = () => {
@@ -42,17 +38,18 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const onClickCloseForm = () => {
     setWatchListFormOpen(false);
   };
-  const updateWatchList = (tempCoins: Coin[], marketCoins: MarketCoin[]) => {
-    let watchListCoins: MarketCoin[] = [];
-    for (let i = 0; i < tempCoins.length; i++) {
-      marketCoins.forEach((marketCoin) => {
-        if (tempCoins[i].symbol === marketCoin.symbol) {
-          watchListCoins.push(marketCoin);
-        }
-      });
-    }
-    updateCoinOptions(watchListCoins, marketCoins);
-    setWatchList(watchListCoins);
+
+  const addNewCoinToWatchList = (
+    coinSymbol: string,
+    marketCoins: MarketCoin[]
+  ) => {
+    const newCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol);
+
+    setWatchList((prev) => [...prev, newCoin[0]]);
+  };
+
+  const removeCoinFromWatchList = (coinSymbol: string) => {
+    setWatchList((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
   };
 
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
@@ -76,26 +73,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
     setCoinOptions((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
   };
 
-  const updateTempCoins = (marketCoins: MarketCoin[]) => {
-    if (tempCoins.length !== watchList.length) {
-      setTempCoins(
-        watchList.map((coin) => ({
-          symbol: coin.symbol,
-          name: `${coin.name} (${coin.symbol.toUpperCase()})`,
-        }))
-      );
-      updateCoinOptions(watchList, marketCoins);
-    }
-  };
-
-  const addNewTempCoins = (coin: Coin) => {
-    setTempCoins((prev) => [...prev, coin]);
-  };
-
-  const removeCoinFromTempCoins = (coinSymbol: string) => {
-    setTempCoins((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
-  };
-
   return (
     <WatchListContext.Provider
       value={{
@@ -103,11 +80,8 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         onClickOpenForm,
         onClickCloseForm,
         watchList,
-        updateWatchList,
-        tempCoins,
-        addNewTempCoins,
-        updateTempCoins,
-        removeCoinFromTempCoins,
+        addNewCoinToWatchList,
+        removeCoinFromWatchList,
         coinOptions,
         createCoinOptions,
         updateCoinOptions,

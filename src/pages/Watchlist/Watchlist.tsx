@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <Container>
       <HeaderWrapper>
-        <PageTitle>Watchlist</PageTitle>
+        <PageTitle>Your Watchlist</PageTitle>
         {!watchListFormOpen && (
           <Button primary="true" onClick={onClickOpenForm}>
             +ADD COINS

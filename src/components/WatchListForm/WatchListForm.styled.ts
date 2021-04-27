@@ -36,7 +36,7 @@ export const FormRightContainer = styled.div`
 
 export const FormTitle = styled.h2`
   font-size: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   color: #fff;
 `;
 

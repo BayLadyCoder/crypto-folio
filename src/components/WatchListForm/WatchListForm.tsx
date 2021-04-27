@@ -21,14 +21,13 @@ import { useWatchList } from "../../context/WatchListContext";
 
 const WatchListForm: React.FC = () => {
   const {
+    watchList,
     onClickCloseForm,
-    updateWatchList,
+    addNewCoinToWatchList,
+    removeCoinFromWatchList,
     coinOptions,
-    tempCoins,
-    addNewTempCoins,
-    updateTempCoins,
-    removeCoinFromTempCoins,
     createCoinOptions,
+    updateCoinOptions,
     removeCoinFromCoinOptions,
   } = useWatchList();
 
@@ -46,6 +45,10 @@ const WatchListForm: React.FC = () => {
   useEffect(() => {
     if (coinOptions.length === 0) createCoinOptions(marketCoins);
   }, [marketCoins, coinOptions, createCoinOptions]);
+
+  useEffect(() => {
+    updateCoinOptions(watchList, marketCoins);
+  }, []);
 
   const allCoinOptions = useMemo(() => {
     const options: string[] = [];
@@ -69,7 +72,7 @@ const WatchListForm: React.FC = () => {
     if (isValidateValue()) {
       const coinSymbol = inputValue.split("(")[1].split(")")[0].toLowerCase();
       removeCoinFromCoinOptions(coinSymbol);
-      addNewTempCoins({ symbol: coinSymbol, name: inputValue });
+      addNewCoinToWatchList(coinSymbol, marketCoins);
       setInputValue("");
     } else {
       alert("This coin is not supported currently. Please try again.");
@@ -82,20 +85,17 @@ const WatchListForm: React.FC = () => {
   };
 
   const onCloseForm = () => {
-    updateTempCoins(marketCoins);
-    onClickCloseForm();
-  };
-
-  const onSave = (e: React.MouseEvent) => {
-    e.preventDefault();
-    updateWatchList(tempCoins, marketCoins);
     onClickCloseForm();
   };
 
   const onClickDeleteCoin = (e: React.MouseEvent, coinSymbol: string) => {
     e.preventDefault();
-    removeCoinFromTempCoins(coinSymbol);
+
+    removeCoinFromWatchList(coinSymbol);
   };
+
+  // FIXME: coinOptions come back full after add coins
+  // TODO: Add Crypto Table to WatchList according to watchList data
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
 
@@ -122,11 +122,29 @@ const WatchListForm: React.FC = () => {
             <AddCoinBtn onClick={onAddCoin}>ADD TO WATCHLIST {">"}</AddCoinBtn>
           </FormLeftContainer>
           <FormRightContainer>
-            <FormTitle>Your Watchlist</FormTitle>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <FormTitle>Your Watchlist</FormTitle>
+              <Button
+                type="button"
+                aria-label="Close Form"
+                onClick={onCloseForm}
+              >
+                X
+              </Button>
+            </div>
             <CoinsContainer>
-              {tempCoins.map((coin: any, index: number) => (
-                <Coin key={index}>
-                  <CoinName>{coin.name}</CoinName>
+              {watchList.map((coin: MarketCoin) => (
+                <Coin key={coin.id}>
+                  <CoinName>{`${
+                    coin.name
+                  } (${coin.symbol.toUpperCase()})`}</CoinName>
                   <DeleteCoinBtn
                     onClick={(e) => onClickDeleteCoin(e, coin.symbol)}
                   >
@@ -135,18 +153,6 @@ const WatchListForm: React.FC = () => {
                 </Coin>
               ))}
             </CoinsContainer>
-            <div style={{ alignSelf: "flex-end" }}>
-              <Button
-                type="button"
-                aria-label="Close Form"
-                onClick={onCloseForm}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" primary="true" onClick={onSave}>
-                Save
-              </Button>
-            </div>
           </FormRightContainer>
         </Form>
       </FormWrapper>
