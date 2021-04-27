@@ -7,7 +7,7 @@ export const FormWrapper = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 900px;
+  width: 1000px;
   display: flex;
   justify-content: center;
   background-color: #fff;
@@ -37,7 +37,6 @@ export const FormRightContainer = styled.div`
 
 export const FormTitle = styled.h2`
   font-size: 20px;
-  /* margin-bottom: 10px; */
   color: #fff;
 `;
 
@@ -57,10 +56,11 @@ export const CoinsContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
-  height: 300px;
+  min-height: 120px;
+  max-height: 450px;
   width: 100%;
   border: 1px solid #aaa;
-  padding: 10px 0px 10px 10px;
+  padding: 10px 0px 0px 10px;
   overflow-y: scroll;
 `;
 
