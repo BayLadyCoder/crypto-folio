@@ -7,25 +7,38 @@ export const FormWrapper = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 1000px;
+  width: 900px;
   display: flex;
   justify-content: center;
   background-color: #fff;
   border-radius: 10px;
+
+  @media screen and (max-width: 960px) {
+    flex-direction: column;
+    width: 450px;
+  }
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+    width: 330px;
+  }
 `;
 
 export const FormLeftContainer = styled.div`
-  width: 35%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background: #555;
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  @media screen and (max-width: 960px) {
+    width: 100%;
+    border-bottom-left-radius: 0px;
+  }
 `;
 export const FormRightContainer = styled.div`
-  width: 65%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -33,6 +46,10 @@ export const FormRightContainer = styled.div`
   padding: 10px 20px 20px 20px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  @media screen and (max-width: 960px) {
+    width: 100%;
+    border-top-right-radius: 0px;
+  }
 `;
 
 export const FormTitle = styled.h2`
@@ -44,10 +61,6 @@ export const AddCoinsInput = styled.input`
   width: 100%;
   padding: 5px 10px;
   margin-bottom: 10px;
-`;
-
-export const AddCoinBtn = styled.button`
-  padding: 10px 20px;
 `;
 
 export const CoinsContainer = styled.div`
@@ -136,6 +149,30 @@ export const CloseFormButton = styled(VscChromeClose)`
   &:hover {
     transition: all 0.2s linear;
     background-color: #223;
+  }
+  @media screen and (max-width: 960px) {
+    display: none;
+  }
+`;
+export const CloseFormButtonLeft = styled(VscChromeClose)`
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 10px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  font-size: 40px;
+
+  &:hover {
+    transition: all 0.2s linear;
+    background-color: #223;
+  }
+  @media screen and (max-width: 960px) {
+    display: flex;
   }
 `;
 

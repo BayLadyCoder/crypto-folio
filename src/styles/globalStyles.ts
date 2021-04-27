@@ -82,28 +82,30 @@ export const HeaderWrapper = styled.div`
 export const PageTitle = styled.h1`
   font-size: 30px;
   color: #fff;
+  @media screen and (max-width: 960px) {
+    font-size: 25px;
+  }
 `;
 
 interface ButtonProps {
   primary?: string;
 }
 export const Button = styled.button<ButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 4px;
   background: ${({ primary }) =>
-    primary === "true" ? theme.color.primary : "transparent"};
+    primary === "true" ? theme.color.primary_bright : "transparent"};
   padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
   color: ${({ primary }) =>
     primary === "true" ? "#000" : theme.color.primary};
   font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
   border: 1px solid transparent;
-  /* border-color: ${({ primary }) =>
-    primary === "true" ? theme.color.primary : theme.color.primary}; */
   white-space: nowrap;
   cursor: pointer;
   font-weight: 500;
   text-decoration: none;
-  align-self: flex-end;
-  margin-left: 5px;
   text-transform: uppercase;
 
   &:hover {
@@ -113,11 +115,16 @@ export const Button = styled.button<ButtonProps>`
     border-color: ${({ primary }) =>
       primary === "true" ? "#21b598" : theme.color.primary_bright};
     background: ${({ primary }) =>
-      primary === "true" ? theme.color.primary_bright : "transparent"};
+      primary === "true" ? theme.color.primary : "transparent"};
   }
 
   @media screen and (max-width: 960px) {
-    width: 100%;
+    padding: ${({ big }) => (big ? "10px 50px" : "7px 14px")};
+    font-size: ${({ fontBig }) => (fontBig ? "18px" : "16px")};
+  }
+
+  @media screen and (max-width: 550px) {
+    padding: ${({ big }) => (big ? "8px 40px" : "5px 10px")};
   }
 `;
 
