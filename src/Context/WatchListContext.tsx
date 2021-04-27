@@ -13,6 +13,7 @@ const watchListDefaultValues = {
   createCoinOptions: () => null,
   updateCoinOptions: () => null,
   removeCoinFromCoinOptions: () => null,
+  addCoinToCoinOptions: () => null,
 };
 
 export const WatchListContext = createContext<WatchListContextData>(
@@ -72,6 +73,9 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const removeCoinFromCoinOptions = (coinSymbol: string) => {
     setCoinOptions((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
   };
+  const addCoinToCoinOptions = (coin: MarketCoin) => {
+    setCoinOptions((prev) => [coin, ...prev]);
+  };
 
   return (
     <WatchListContext.Provider
@@ -86,6 +90,7 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         createCoinOptions,
         updateCoinOptions,
         removeCoinFromCoinOptions,
+        addCoinToCoinOptions,
       }}
     >
       {children}

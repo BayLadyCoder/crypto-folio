@@ -29,18 +29,15 @@ const WatchListForm: React.FC = () => {
     createCoinOptions,
     updateCoinOptions,
     removeCoinFromCoinOptions,
+    addCoinToCoinOptions,
   } = useWatchList();
 
   const [inputValue, setInputValue] = useState<string>("");
-
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
+
   useEffect(() => {
     if (marketCoins.length === 0) fetchMarketCoins();
   }, [fetchMarketCoins, marketCoins]);
-
-  useEffect(() => {
-    if (coinOptions.length === 0) createCoinOptions(marketCoins);
-  }, [marketCoins, coinOptions, createCoinOptions]);
 
   useEffect(() => {
     if (coinOptions.length === 0) createCoinOptions(marketCoins);
@@ -90,8 +87,9 @@ const WatchListForm: React.FC = () => {
 
   const onClickDeleteCoin = (e: React.MouseEvent, coinSymbol: string) => {
     e.preventDefault();
-
+    const fullCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol);
     removeCoinFromWatchList(coinSymbol);
+    addCoinToCoinOptions(fullCoin[0]);
   };
 
   // FIXME: coinOptions come back full after add coins
