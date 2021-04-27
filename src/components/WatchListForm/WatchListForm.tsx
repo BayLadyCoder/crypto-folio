@@ -44,6 +44,11 @@ const WatchListForm: React.FC = () => {
     if (marketCoins.length === 0) getCoins();
   }, [fetchMarketCoins, marketCoins.length, createCoinOptions]);
 
+  useEffect(() => {
+    if (marketCoins.length > 0 && coinOptions.length === 0)
+      createCoinOptions(marketCoins);
+  }, [marketCoins.length, coinOptions.length, createCoinOptions]);
+
   const onAddCoin = (e: React.MouseEvent) => {
     e.preventDefault();
     addNewCoinToWatchList(marketCoins, coinOptions, inputValue, setInputValue);
