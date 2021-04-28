@@ -25,3 +25,4 @@ export interface WatchListContextData {
   coinOptions: string[];
   createCoinOptions: (MarketCoins: MarketCoin[]) => void;
 }
+export interface PortfolioContextData {}
