@@ -10,6 +10,8 @@ export interface WatchListContextData {
   onClickOpenForm: () => void;
   onClickCloseForm: () => void;
   watchList: MarketCoin[];
+  watchListName: string;
+  updateWatchListName: (newName: string) => void;
   addNewCoinToWatchList: (
     marketCoins: MarketCoin[],
     coinOptions: string[],
