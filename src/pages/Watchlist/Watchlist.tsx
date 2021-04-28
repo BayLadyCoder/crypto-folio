@@ -1,31 +1,29 @@
-import {
-  Container,
-  HeaderWrapper,
-  PageTitle,
-  Button,
-} from "../../styles/globalStyles";
-import WatchListForm from "../../components/WatchListForm";
+import { Container, PageTitle, Button } from "../../styles/globalStyles";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
-import CryptoTable from "../../components/CryptoTable";
+import WatchList from "../../components/WatchListTable";
 
-const Home = () => {
+const WatchListPage = () => {
   const { watchList, watchListFormOpen, onClickOpenForm } = useWatchList();
 
   return (
     <Container>
-      <HeaderWrapper>
-        <PageTitle>Your Watchlist</PageTitle>
-        {!watchListFormOpen && (
-          <Button primary="true" onClick={onClickOpenForm}>
-            +ADD COINS
-          </Button>
-        )}
-      </HeaderWrapper>
-      {watchListFormOpen && <WatchListForm />}
-
-      <CryptoTable coins={watchList} tableName="Watchlist 1" />
+      <PageTitle marginBottom>Your Watchlist</PageTitle>
+      {!watchListFormOpen && (
+        <Button
+          primary="true"
+          onClick={() => console.log("Open Create new watchlist form")}
+        >
+          + CREATE NEW WATCHLIST
+        </Button>
+      )}
+      <WatchList
+        tableName="Watchlist 1"
+        coins={watchList}
+        watchListFormOpen={watchListFormOpen}
+        onClickOpenForm={onClickOpenForm}
+      />
     </Container>
   );
 };
 
-export default Home;
+export default WatchListPage;
