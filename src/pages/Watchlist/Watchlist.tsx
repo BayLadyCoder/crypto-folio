@@ -6,6 +6,7 @@ import {
 } from "../../styles/globalStyles";
 import WatchListForm from "../../components/WatchListForm";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
+import CryptoTable from "../../components/CryptoTable";
 
 const Home = () => {
   const { watchList, watchListFormOpen, onClickOpenForm } = useWatchList();
@@ -20,15 +21,9 @@ const Home = () => {
           </Button>
         )}
       </HeaderWrapper>
-      {watchListFormOpen ? (
-        <WatchListForm />
-      ) : (
-        <div style={{ background: "#fff" }}>
-          {watchList.map((coin) => (
-            <p key={coin.id}>{coin.name}</p>
-          ))}
-        </div>
-      )}
+      {watchListFormOpen && <WatchListForm />}
+
+      <CryptoTable coins={watchList} tableName="Watchlist 1" />
     </Container>
   );
 };
