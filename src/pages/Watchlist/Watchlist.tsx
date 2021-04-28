@@ -3,7 +3,13 @@ import { useWatchList } from "../../context/WatchList/WatchListContext";
 import WatchList from "../../components/WatchListTable";
 
 const WatchListPage = () => {
-  const { watchList, watchListFormOpen, onClickOpenForm } = useWatchList();
+  const {
+    watchList,
+    watchListName,
+    updateWatchListName,
+    watchListFormOpen,
+    onClickOpenForm,
+  } = useWatchList();
 
   return (
     <Container>
@@ -21,6 +27,8 @@ const WatchListPage = () => {
         coins={watchList}
         watchListFormOpen={watchListFormOpen}
         onClickOpenForm={onClickOpenForm}
+        watchListName={watchListName}
+        updateWatchListName={updateWatchListName}
       />
     </Container>
   );

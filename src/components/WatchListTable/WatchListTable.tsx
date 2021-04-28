@@ -10,6 +10,8 @@ interface Props {
   tableName: string;
   watchListFormOpen: boolean;
   onClickOpenForm: () => void;
+  watchListName: string;
+  updateWatchListName: (newName: string) => void;
 }
 
 const WatchList: React.FC<Props> = ({
@@ -17,6 +19,8 @@ const WatchList: React.FC<Props> = ({
   coins,
   watchListFormOpen,
   onClickOpenForm,
+  watchListName,
+  updateWatchListName,
 }) => {
   return (
     <div style={{ width: "100%" }}>
@@ -26,7 +30,12 @@ const WatchList: React.FC<Props> = ({
           <Button onClick={onClickOpenForm}>+ADD COINS</Button>
         )}
       </HeaderWrapper>
-      {watchListFormOpen && <WatchListForm />}
+      {watchListFormOpen && (
+        <WatchListForm
+          watchListName={watchListName}
+          updateWatchListName={updateWatchListName}
+        />
+      )}
 
       {coins.length > 0 && !watchListFormOpen && <CryptoTable coins={coins} />}
     </div>

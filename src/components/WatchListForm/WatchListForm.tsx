@@ -23,8 +23,14 @@ import { Button } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
 import { AiOutlineRight } from "react-icons/ai";
-
-const WatchListForm: React.FC = () => {
+interface Props {
+  watchListName: string;
+  updateWatchListName: (newName: string) => void;
+}
+const WatchListForm: React.FC<Props> = ({
+  watchListName,
+  updateWatchListName,
+}) => {
   const {
     watchList,
     onClickCloseForm,
@@ -35,6 +41,9 @@ const WatchListForm: React.FC = () => {
   } = useWatchList();
 
   const [inputValue, setInputValue] = useState<string>("");
+  const [watchListNameInputOpen, setWatchListNameInputOpen] = useState<boolean>(
+    false
+  );
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
 
   useEffect(() => {
@@ -105,12 +114,25 @@ const WatchListForm: React.FC = () => {
           <FormRightContainer>
             <FormHeaderContainer>
               <WatchListNameWrapper>
-                <FormTitle>Your Watchlist</FormTitle>
-                <EditWatchListNameButton
-                  type="button"
-                  aria-label="Edit Watchlist Name"
-                  onClick={() => console.log("edit watchlist name")}
-                />
+                {watchListNameInputOpen ? (
+                  <>
+                    <input type="text" />
+                    <button
+                      onClick={() => updateWatchListName("New Watchlist Name")}
+                    >
+                      save
+                    </button>{" "}
+                  </>
+                ) : (
+                  <>
+                    <FormTitle>{watchListName}</FormTitle>
+                    <EditWatchListNameButton
+                      type="button"
+                      aria-label="Edit Watchlist Name"
+                      onClick={() => setWatchListNameInputOpen(true)}
+                    />
+                  </>
+                )}
               </WatchListNameWrapper>
               <CloseFormButton
                 type="button"
