@@ -42,7 +42,7 @@ interface Props {
 export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const [watchListFormOpen, setWatchListFormOpen] = useState<boolean>(false);
   const [watchList, setWatchList] = useState<MarketCoin[]>([]);
-  const [watchListName, setWatchListName] = useState<string>("");
+  const [watchListName, setWatchListName] = useState<string>("My Watchlist");
   const [coinOptions, setCoinOptions] = useState<string[]>([]);
 
   const onClickOpenForm = () => {

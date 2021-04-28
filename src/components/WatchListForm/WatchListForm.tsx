@@ -41,6 +41,7 @@ const WatchListForm: React.FC<Props> = ({
   } = useWatchList();
 
   const [inputValue, setInputValue] = useState<string>("");
+
   const [thisWatchListName, setThisWatchListName] = useState<string>(
     watchListName
   );
