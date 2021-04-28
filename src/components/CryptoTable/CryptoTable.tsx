@@ -1,6 +1,5 @@
 import {
   Wrapper,
-  TableName,
   Table,
   TableHeadRow,
   TableHeadData,
@@ -10,20 +9,14 @@ import {
   CoinImg,
   CoinNameWrapper,
 } from "./CryptoTable.styled";
-import { HeaderWrapper, PageTitle } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
-
 interface Props {
   coins: MarketCoin[];
-  tableName: string;
 }
 
-const CryptoTable: React.FC<Props> = ({ coins, tableName }) => {
+const CryptoTable: React.FC<Props> = ({ coins }) => {
   return (
     <Wrapper>
-      <HeaderWrapper>
-        <TableName>{tableName}</TableName>
-      </HeaderWrapper>
       <Table>
         <thead>
           <TableHeadRow>

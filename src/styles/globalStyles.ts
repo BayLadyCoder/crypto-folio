@@ -77,11 +77,17 @@ export const HeaderWrapper = styled.div`
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
-export const PageTitle = styled.h1`
+interface PageTitleProps {
+  marginBottom?: boolean;
+}
+
+export const PageTitle = styled.h1<PageTitleProps>`
   font-size: 30px;
   margin-top: 30px;
+  margin-bottom: ${({ marginBottom }) => (marginBottom ? "20px" : "0px")};
   color: #fff;
   @media screen and (max-width: 960px) {
     font-size: 25px;
