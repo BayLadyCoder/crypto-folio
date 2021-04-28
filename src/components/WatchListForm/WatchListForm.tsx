@@ -16,6 +16,8 @@ import {
   CloseFormButtonLeft,
   CloseFormButton,
   FormHeaderContainer,
+  WatchListNameWrapper,
+  EditWatchListNameButton,
 } from "./WatchListForm.styled";
 import { Button } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
@@ -67,8 +69,6 @@ const WatchListForm: React.FC = () => {
     removeCoinFromWatchList(coinSymbol, marketCoins);
   };
 
-  // TODO: Add Crypto Table to WatchList according to watchList data
-
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
 
   return (
@@ -104,14 +104,19 @@ const WatchListForm: React.FC = () => {
           </FormLeftContainer>
           <FormRightContainer>
             <FormHeaderContainer>
-              <FormTitle>Your Watchlist</FormTitle>
+              <WatchListNameWrapper>
+                <FormTitle>Your Watchlist</FormTitle>
+                <EditWatchListNameButton
+                  type="button"
+                  aria-label="Edit Watchlist Name"
+                  onClick={() => console.log("edit watchlist name")}
+                />
+              </WatchListNameWrapper>
               <CloseFormButton
                 type="button"
                 aria-label="Close Form"
                 onClick={onCloseForm}
-              >
-                X
-              </CloseFormButton>
+              />
             </FormHeaderContainer>
             <CoinsContainer>
               {watchList.map((coin: MarketCoin) => (

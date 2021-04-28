@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { HiOutlineX } from "react-icons/hi";
 import { VscChromeClose } from "react-icons/vsc";
+import { AiFillEdit } from "react-icons/ai";
 
 export const FormWrapper = styled.div`
   margin-top: 30px;
@@ -182,4 +183,21 @@ export const FormHeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5px;
+`;
+
+export const WatchListNameWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+export const EditWatchListNameButton = styled(AiFillEdit)`
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 40px;
+  border-radius: 50%;
+
+  &:hover {
+    background: #223;
+  }
 `;
