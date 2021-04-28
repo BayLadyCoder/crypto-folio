@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/crypto-folio/static/css/main.82078840.chunk.css",
-    "main.js": "/crypto-folio/static/js/main.a88e5249.chunk.js",
-    "main.js.map": "/crypto-folio/static/js/main.a88e5249.chunk.js.map",
+    "main.js": "/crypto-folio/static/js/main.96f991bc.chunk.js",
+    "main.js.map": "/crypto-folio/static/js/main.96f991bc.chunk.js.map",
     "runtime-main.js": "/crypto-folio/static/js/runtime-main.d1254835.js",
     "runtime-main.js.map": "/crypto-folio/static/js/runtime-main.d1254835.js.map",
     "static/js/2.10b37427.chunk.js": "/crypto-folio/static/js/2.10b37427.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.d1254835.js",
     "static/js/2.10b37427.chunk.js",
     "static/css/main.82078840.chunk.css",
-    "static/js/main.a88e5249.chunk.js"
+    "static/js/main.96f991bc.chunk.js"
   ]
 }
