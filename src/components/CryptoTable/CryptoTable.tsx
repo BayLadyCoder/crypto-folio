@@ -1,7 +1,6 @@
-import { useEffect, useContext } from "react";
-import { MarketCoinsContext } from "../../context/MarketCoinsContext";
 import {
   Wrapper,
+  TableName,
   Table,
   TableHeadRow,
   TableHeadData,
@@ -11,20 +10,19 @@ import {
   CoinImg,
   CoinNameWrapper,
 } from "./CryptoTable.styled";
-import { HeaderWrapper, PageTitle, Loading } from "../../styles/globalStyles";
+import { HeaderWrapper, PageTitle } from "../../styles/globalStyles";
+import { MarketCoin } from "../../types/coins";
 
-const CryptoTable = () => {
-  const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
-  useEffect(() => {
-    fetchMarketCoins();
-  }, [fetchMarketCoins]);
+interface Props {
+  coins: MarketCoin[];
+  tableName: string;
+}
 
-  if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
-
+const CryptoTable: React.FC<Props> = ({ coins, tableName }) => {
   return (
     <Wrapper>
       <HeaderWrapper>
-        <PageTitle>Crypto Market Monitor</PageTitle>
+        <TableName>{tableName}</TableName>
       </HeaderWrapper>
       <Table>
         <thead>
@@ -38,7 +36,7 @@ const CryptoTable = () => {
           </TableHeadRow>
         </thead>
         <tbody>
-          {marketCoins.map((coin, index) => (
+          {coins.map((coin, index) => (
             <TableBodyRow key={coin.id}>
               <TableBodyData align="center">{index + 1}</TableBodyData>
               <TableBodyData align="left">

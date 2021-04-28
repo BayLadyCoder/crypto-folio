@@ -55,6 +55,7 @@ export const FormRightContainer = styled.div`
 export const FormTitle = styled.h2`
   font-size: 20px;
   color: #fff;
+  padding: 10px;
 `;
 
 export const AddCoinsInput = styled.input`
@@ -156,7 +157,6 @@ export const CloseFormButton = styled(VscChromeClose)`
 `;
 export const CloseFormButtonLeft = styled(VscChromeClose)`
   display: none;
-
   justify-content: center;
   align-items: center;
   border: none;

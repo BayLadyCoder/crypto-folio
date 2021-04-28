@@ -14,6 +14,14 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
+export const TableName = styled.h2`
+  font-size: 25px;
+  color: #fff;
+  @media screen and (max-width: 960px) {
+    font-size: 20px;
+  }
+`;
+
 export const Table = styled.table`
   border-collapse: collapse;
   margin: 25px 0;

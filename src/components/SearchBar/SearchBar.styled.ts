@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 0 15px;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 export const SearchInput = styled.input`

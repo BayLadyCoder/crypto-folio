@@ -74,13 +74,14 @@ export const ButtonLink = styled(Link)<ButtonProps>`
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  margin-top: 40px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
 `;
 
 export const PageTitle = styled.h1`
   font-size: 30px;
+  margin-top: 30px;
   color: #fff;
   @media screen and (max-width: 960px) {
     font-size: 25px;
