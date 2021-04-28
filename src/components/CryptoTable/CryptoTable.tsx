@@ -29,9 +29,11 @@ const CryptoTable: React.FC<Props> = ({ coins }) => {
           </TableHeadRow>
         </thead>
         <tbody>
-          {coins.map((coin, index) => (
+          {coins.map((coin) => (
             <TableBodyRow key={coin.id}>
-              <TableBodyData align="center">{index + 1}</TableBodyData>
+              <TableBodyData align="center">
+                {coin.market_cap_rank}
+              </TableBodyData>
               <TableBodyData align="left">
                 <CoinNameWrapper>
                   <CoinImg src={coin.image} alt={coin.name} />

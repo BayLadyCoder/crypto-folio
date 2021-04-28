@@ -1,11 +1,6 @@
 import React from "react";
-import { MarketCoin } from "../../types/coins";
 import { TableName } from "./CryptoTableName.styled";
-import { Container, HeaderWrapper, Button } from "../../styles/globalStyles";
-import WatchListForm from "../WatchListForm";
-import { useWatchList } from "../../context/WatchList/WatchListContext";
-import CryptoTable from "./CryptoTable";
-
+import { HeaderWrapper } from "../../styles/globalStyles";
 interface Props {
   tableName: string;
 }
