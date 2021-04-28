@@ -14,7 +14,7 @@ const WatchListPage = () => {
 
   return (
     <Container>
-      <PageTitle marginBottom>Your Watchlist</PageTitle>
+      <PageTitle>Your Watchlist</PageTitle>
       {/* {!watchListFormOpen && (
         <Button
           primary="true"
