@@ -41,6 +41,9 @@ const WatchListForm: React.FC<Props> = ({
   } = useWatchList();
 
   const [inputValue, setInputValue] = useState<string>("");
+  const [thisWatchListName, setThisWatchListName] = useState<string>(
+    watchListName
+  );
   const [watchListNameInputOpen, setWatchListNameInputOpen] = useState<boolean>(
     false
   );
@@ -76,6 +79,15 @@ const WatchListForm: React.FC<Props> = ({
   const onClickDeleteCoin = (e: React.MouseEvent, coinSymbol: string) => {
     e.preventDefault();
     removeCoinFromWatchList(coinSymbol, marketCoins);
+  };
+
+  const onChangeWatchListName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setThisWatchListName(e.target.value);
+  };
+  const onClickSaveWatchListName = (e: React.MouseEvent) => {
+    e.preventDefault();
+    updateWatchListName(thisWatchListName);
+    setWatchListNameInputOpen(false);
   };
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
@@ -116,16 +128,18 @@ const WatchListForm: React.FC<Props> = ({
               <WatchListNameWrapper>
                 {watchListNameInputOpen ? (
                   <>
-                    <input type="text" />
-                    <button
-                      onClick={() => updateWatchListName("New Watchlist Name")}
-                    >
+                    <input
+                      type="text"
+                      value={thisWatchListName}
+                      onChange={onChangeWatchListName}
+                    />
+                    <button onClick={(e) => onClickSaveWatchListName(e)}>
                       save
                     </button>{" "}
                   </>
                 ) : (
                   <>
-                    <FormTitle>{watchListName}</FormTitle>
+                    <FormTitle>{thisWatchListName}</FormTitle>
                     <EditWatchListNameButton
                       type="button"
                       aria-label="Edit Watchlist Name"

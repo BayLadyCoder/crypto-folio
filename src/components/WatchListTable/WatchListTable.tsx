@@ -7,7 +7,6 @@ import { CryptoTable } from "../CryptoTable";
 
 interface Props {
   coins: MarketCoin[];
-  tableName: string;
   watchListFormOpen: boolean;
   onClickOpenForm: () => void;
   watchListName: string;
@@ -15,7 +14,6 @@ interface Props {
 }
 
 const WatchList: React.FC<Props> = ({
-  tableName,
   coins,
   watchListFormOpen,
   onClickOpenForm,
@@ -25,7 +23,7 @@ const WatchList: React.FC<Props> = ({
   return (
     <div style={{ width: "100%" }}>
       <HeaderWrapper>
-        <TableName>{tableName}</TableName>
+        <TableName>{watchListName}</TableName>
         {!watchListFormOpen && (
           <Button onClick={onClickOpenForm}>+ADD COINS</Button>
         )}

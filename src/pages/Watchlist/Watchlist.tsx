@@ -23,7 +23,6 @@ const WatchListPage = () => {
         </Button>
       )}
       <WatchList
-        tableName="Watchlist 1"
         coins={watchList}
         watchListFormOpen={watchListFormOpen}
         onClickOpenForm={onClickOpenForm}
