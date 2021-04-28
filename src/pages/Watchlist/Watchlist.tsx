@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Container, PageTitle, Button } from "../../styles/globalStyles";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
 import WatchList from "../../components/WatchListTable";
@@ -14,7 +13,7 @@ const WatchListPage = () => {
 
   return (
     <Container>
-      <PageTitle>Your Watchlist</PageTitle>
+      <PageTitle>Watchlist</PageTitle>
       {/* {!watchListFormOpen && (
         <Button
           primary="true"
