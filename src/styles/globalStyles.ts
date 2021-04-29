@@ -14,12 +14,18 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 
-export const Container = styled.div`
+interface ContainerProps {
+  alignCenter?: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 80%;
   max-width: 1300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: ${({ alignCenter }) =>
+    alignCenter ? "center" : "flex-start"};
 
   @media screen and (max-width: 1200px) {
     width: 90%;

@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { MarketCoinsContext } from "../../context/MarketCoinsContext";
 import { Container, Loading } from "../../styles/globalStyles";
 import {
-  FormWrapper,
   Form,
   FormLeftContainer,
   FormRightContainer,
@@ -94,84 +93,82 @@ const WatchListForm: React.FC<Props> = ({
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
 
   return (
-    <Container>
-      <FormWrapper>
-        <Form>
-          <FormLeftContainer>
-            <FormHeaderContainer>
-              <FormTitle>Add Coins</FormTitle>
-              <CloseFormButtonLeft
-                type="button"
-                aria-label="Close Form"
-                onClick={onCloseForm}
-              >
-                X
-              </CloseFormButtonLeft>
-            </FormHeaderContainer>
-            <AddCoinsInput
-              type="text"
-              list="coins"
-              value={inputValue}
-              onChange={onChangeInput}
+    <Container alignCenter>
+      <Form>
+        <FormLeftContainer>
+          <FormHeaderContainer>
+            <FormTitle>Add Coins</FormTitle>
+            <CloseFormButtonLeft
+              type="button"
+              aria-label="Close Form"
+              onClick={onCloseForm}
+            >
+              X
+            </CloseFormButtonLeft>
+          </FormHeaderContainer>
+          <AddCoinsInput
+            type="text"
+            list="coins"
+            value={inputValue}
+            onChange={onChangeInput}
+          />
+          <datalist id="coins">
+            {coinOptions.map((coin) => (
+              <option key={coin} value={coin} />
+            ))}
+          </datalist>
+          <Button primary="true" onClick={onAddCoin}>
+            ADD TO WATCHLIST{" "}
+            <AiOutlineRight style={{ marginLeft: "5px", fontSize: "20px" }} />
+          </Button>
+        </FormLeftContainer>
+        <FormRightContainer>
+          <FormHeaderContainer>
+            <WatchListNameWrapper>
+              {watchListNameInputOpen ? (
+                <>
+                  <input
+                    type="text"
+                    value={thisWatchListName}
+                    onChange={onChangeWatchListName}
+                  />
+                  <button onClick={(e) => onClickSaveWatchListName(e)}>
+                    save
+                  </button>{" "}
+                </>
+              ) : (
+                <>
+                  <FormTitle>{thisWatchListName}</FormTitle>
+                  <EditWatchListNameButton
+                    type="button"
+                    aria-label="Edit Watchlist Name"
+                    onClick={() => setWatchListNameInputOpen(true)}
+                  />
+                </>
+              )}
+            </WatchListNameWrapper>
+            <CloseFormButton
+              type="button"
+              aria-label="Close Form"
+              onClick={onCloseForm}
             />
-            <datalist id="coins">
-              {coinOptions.map((coin) => (
-                <option key={coin} value={coin} />
-              ))}
-            </datalist>
-            <Button primary="true" onClick={onAddCoin}>
-              ADD TO WATCHLIST{" "}
-              <AiOutlineRight style={{ marginLeft: "5px", fontSize: "20px" }} />
-            </Button>
-          </FormLeftContainer>
-          <FormRightContainer>
-            <FormHeaderContainer>
-              <WatchListNameWrapper>
-                {watchListNameInputOpen ? (
-                  <>
-                    <input
-                      type="text"
-                      value={thisWatchListName}
-                      onChange={onChangeWatchListName}
-                    />
-                    <button onClick={(e) => onClickSaveWatchListName(e)}>
-                      save
-                    </button>{" "}
-                  </>
-                ) : (
-                  <>
-                    <FormTitle>{thisWatchListName}</FormTitle>
-                    <EditWatchListNameButton
-                      type="button"
-                      aria-label="Edit Watchlist Name"
-                      onClick={() => setWatchListNameInputOpen(true)}
-                    />
-                  </>
-                )}
-              </WatchListNameWrapper>
-              <CloseFormButton
-                type="button"
-                aria-label="Close Form"
-                onClick={onCloseForm}
-              />
-            </FormHeaderContainer>
-            <CoinsContainer>
-              {watchList.map((coin: MarketCoin) => (
-                <Coin key={coin.id}>
-                  <CoinName>{`${
-                    coin.name
-                  } (${coin.symbol.toUpperCase()})`}</CoinName>
-                  <DeleteCoinBtn
-                    onClick={(e) => onClickDeleteCoin(e, coin.symbol)}
-                  >
-                    <DeleteCoinIcon />
-                  </DeleteCoinBtn>
-                </Coin>
-              ))}
-            </CoinsContainer>
-          </FormRightContainer>
-        </Form>
-      </FormWrapper>
+          </FormHeaderContainer>
+          <CoinsContainer>
+            {watchList.map((coin: MarketCoin) => (
+              <Coin key={coin.id}>
+                <CoinName>{`${
+                  coin.name
+                } (${coin.symbol.toUpperCase()})`}</CoinName>
+                <DeleteCoinBtn
+                  onClick={(e) => onClickDeleteCoin(e, coin.symbol)}
+                >
+                  <DeleteCoinIcon />
+                </DeleteCoinBtn>
+              </Coin>
+            ))}
+          </CoinsContainer>
+        </FormRightContainer>
+      </Form>
     </Container>
   );
 };
