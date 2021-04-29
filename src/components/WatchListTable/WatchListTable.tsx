@@ -1,6 +1,6 @@
 import React from "react";
 import { MarketCoin } from "../../types/coins";
-import { TableName } from "./WatchListTable.styled";
+import { TableName, WatchListContainer } from "./WatchListTable.styled";
 import { HeaderWrapper, Button } from "../../styles/globalStyles";
 import WatchListForm from "../WatchListForm";
 import { CryptoTable } from "../CryptoTable";
@@ -21,7 +21,7 @@ const WatchList: React.FC<Props> = ({
   updateWatchListName,
 }) => {
   return (
-    <div style={{ width: "100%" }}>
+    <WatchListContainer>
       <HeaderWrapper>
         <TableName>{watchListName}</TableName>
         {!watchListFormOpen && (
@@ -36,7 +36,7 @@ const WatchList: React.FC<Props> = ({
       )}
 
       {coins.length > 0 && !watchListFormOpen && <CryptoTable coins={coins} />}
-    </div>
+    </WatchListContainer>
   );
 };
 

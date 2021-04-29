@@ -2,11 +2,11 @@ import React from "react";
 import { MarketCoin } from "../../types/coins";
 import { TableName } from "./PortfolioTable.styled";
 import { HeaderWrapper, Button } from "../../styles/globalStyles";
-import WatchListForm from "../WatchListForm";
+import PortfolioForm from "../PortfolioForm";
 import { CryptoTable } from "../CryptoTable";
 
 interface Props {
-  coins?: MarketCoin[];
+  coins: MarketCoin[];
   watchListFormOpen?: boolean;
   onClickOpenForm?: () => void;
   watchListName?: string;
@@ -28,6 +28,8 @@ const PortfolioTable: React.FC<Props> = ({
           <Button onClick={onClickOpenForm}>+ADD COINS</Button>
         )}
       </HeaderWrapper>
+      <PortfolioForm coins={coins} />
+
       {/* {watchListFormOpen && (
         <WatchListForm
           watchListName={watchListName}

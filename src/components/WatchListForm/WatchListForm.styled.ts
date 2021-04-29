@@ -3,16 +3,13 @@ import { HiOutlineX } from "react-icons/hi";
 import { VscChromeClose } from "react-icons/vsc";
 import { AiFillEdit } from "react-icons/ai";
 
-export const FormWrapper = styled.div`
-  margin-top: 30px;
-`;
-
 export const Form = styled.form`
   width: 900px;
   display: flex;
   justify-content: center;
   background-color: #fff;
   border-radius: 10px;
+  border: 1px solid #fff;
 
   @media screen and (max-width: 960px) {
     flex-direction: column;
