@@ -3,7 +3,6 @@ import { AiFillEdit } from "react-icons/ai";
 import { VscChromeClose } from "react-icons/vsc";
 
 export const FormContainer = styled.div`
-  width: 60%;
   min-width: 350px;
   background: #333;
   color: #fff;
@@ -20,6 +19,7 @@ export const TopContainer = styled.div`
   padding: 10px 20px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  background: #444;
 `;
 export const PortfolioNameContainer = styled.div`
   display: flex;
@@ -36,6 +36,7 @@ export const EditIconButton = styled(AiFillEdit)`
   cursor: pointer;
   font-size: 40px;
   border-radius: 50%;
+  margin-left: 5px;
 
   &:hover {
     transition: all 0.2s linear;
@@ -61,23 +62,11 @@ export const CloseFormButton = styled(VscChromeClose)`
   }
 `;
 
-export const SearchCoinsContainer = styled.div`
-  background: #555;
-  padding: 10px 20px;
-  width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-`;
-
 export const SearchCoinInput = styled.input`
-  width: 50%;
-  padding: 10px 20px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  width: 250px;
+  padding: 10px;
+  border: none;
+  margin-bottom: 10px;
 `;
 
 export const DetailsContainer = styled.div`
@@ -90,12 +79,54 @@ export const DetailsContainer = styled.div`
 export const AddDetailsForm = styled.form`
   width: 100%;
   display: flex;
+  flex-direction: column;
+
   justify-content: space-between;
-  padding: 10px 20px;
+  align-items: center;
+  padding: 20px 20px 10px 20px;
 `;
 export const BottomContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding: 10px 20px;
+  padding: 10px 20px 20px 20px;
+`;
+
+export const QuantityInput = styled.input`
+  padding: 5px 10px;
+  padding: 10px;
+  width: 250px;
+  margin-bottom: 10px;
+  border: none;
+`;
+
+export const TabMenuContainer = styled.div`
+  display: flex;
+  margin-top: 10px;
+`;
+
+interface TabMenuProps {
+  tabValues: boolean;
+}
+
+export const TabMenu = styled.button<TabMenuProps>`
+  padding: 5px 10px;
+
+  background: ${({ tabValues }) => (tabValues ? "#08856c" : "#222")};
+  color: ${({ tabValues }) => (tabValues ? "#fff" : "#bbb")};
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+
+  transition: background 0.3s ease;
+`;
+
+export const TabInputContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Label = styled.label`
+  font-weight: 500;
+  padding: 5px 0px;
 `;

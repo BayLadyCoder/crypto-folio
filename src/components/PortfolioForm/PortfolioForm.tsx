@@ -6,12 +6,16 @@ import {
   PortfolioNameContainer,
   PortfolioName,
   EditIconButton,
-  SearchCoinsContainer,
   DetailsContainer,
   BottomContainer,
   CloseFormButton,
   SearchCoinInput,
   AddDetailsForm,
+  QuantityInput,
+  TabMenuContainer,
+  TabMenu,
+  TabInputContainer,
+  Label,
 } from "./PortfolioForm.styled";
 
 import { Button } from "../../styles/globalStyles";
@@ -24,7 +28,8 @@ interface Props {
 const PortfolioForm: React.FC<Props> = ({ coins, onCloseForm }) => {
   const [inputValue, setInputValue] = useState("");
   const [searchCoinFormOpen, setSearchCoinFormOpen] = useState(true);
-  const [addDetailsFormOpen, setAddDetailsFormOpen] = useState(false);
+  const [addDetailsFormOpen, setAddDetailsFormOpen] = useState(true);
+  const [tabValues, setTabValues] = useState("Price per Coin");
 
   const onChangeSearchCoinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -34,6 +39,13 @@ const PortfolioForm: React.FC<Props> = ({ coins, onCloseForm }) => {
     e.preventDefault();
     setSearchCoinFormOpen(false);
     setAddDetailsFormOpen(true);
+  };
+
+  const onClickPricePerCoin = () => {
+    setTabValues("Price per Coin");
+  };
+  const onClickCostBasis = () => {
+    setTabValues("Cost Basis");
   };
 
   // TODO: Refactor all search coin input in the applications
@@ -47,37 +59,55 @@ const PortfolioForm: React.FC<Props> = ({ coins, onCloseForm }) => {
         </PortfolioNameContainer>
         <CloseFormButton onClick={onCloseForm} />
       </TopContainer>
-      {searchCoinFormOpen && (
-        <SearchCoinsContainer>
-          <SearchCoinInput
-            type="text"
-            list="coins"
-            placeholder="Search"
-            value={inputValue}
-            onChange={onChangeSearchCoinInput}
-          />
-          <datalist id="coins">
-            {coins.map((coin) => (
-              <option
-                key={coin.id}
-                value={`${coin.name} (${coin.symbol.toUpperCase()})`}
-              />
-            ))}
-          </datalist>
-          <Button primary="true" onClick={handleClickAddCoin}>
-            + ADD
-          </Button>
-        </SearchCoinsContainer>
-      )}
+
       {addDetailsFormOpen && (
         <DetailsContainer>
           <AddDetailsForm>
-            <div>
-              <p>Name: </p> <p>Bitcoin (BTC)</p>
-            </div>
-            <input type="text" placeholder="Quantity" />
-            <input type="text" placeholder="Price per Coin or Cost Basis" />
-            {/* <button>+ ADD</button> */}
+            <TabInputContainer>
+              <Label htmlFor="Quantity">Coins</Label>
+
+              <SearchCoinInput
+                type="text"
+                list="coins"
+                placeholder="Search"
+                value={inputValue}
+                onChange={onChangeSearchCoinInput}
+              />
+              <datalist id="coins">
+                {coins.map((coin) => (
+                  <option
+                    key={coin.id}
+                    value={`${coin.name} (${coin.symbol.toUpperCase()})`}
+                  />
+                ))}
+              </datalist>
+            </TabInputContainer>
+            <TabInputContainer>
+              <Label htmlFor="Quantity">Quantity</Label>
+              <QuantityInput
+                type="text"
+                placeholder="How many coins do you have?"
+              />
+            </TabInputContainer>
+            <TabInputContainer>
+              <TabMenuContainer>
+                <TabMenu
+                  tabValues={tabValues === "Price per Coin"}
+                  onClick={onClickPricePerCoin}
+                  disabled={tabValues === "Price per Coin"}
+                >
+                  Price per Coin
+                </TabMenu>
+                <TabMenu
+                  tabValues={tabValues === "Cost Basis"}
+                  onClick={onClickCostBasis}
+                  disabled={tabValues === "Cost Basis"}
+                >
+                  Cost Basis
+                </TabMenu>
+              </TabMenuContainer>
+              <QuantityInput type="text" placeholder="$" />
+            </TabInputContainer>
           </AddDetailsForm>
           <table></table>
           <BottomContainer>
