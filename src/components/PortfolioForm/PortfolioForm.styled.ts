@@ -3,7 +3,8 @@ import { AiFillEdit } from "react-icons/ai";
 import { VscChromeClose } from "react-icons/vsc";
 
 export const FormContainer = styled.div`
-  width: 90%;
+  width: 60%;
+  min-width: 350px;
   background: #333;
   color: #fff;
   display: flex;
@@ -79,5 +80,22 @@ export const SearchCoinInput = styled.input`
   border-bottom-left-radius: 4px;
 `;
 
-export const DetailsContainer = styled.div``;
-export const BottomContainer = styled.div``;
+export const DetailsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+export const AddDetailsForm = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+`;
+export const BottomContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+`;

@@ -11,6 +11,7 @@ import {
   BottomContainer,
   CloseFormButton,
   SearchCoinInput,
+  AddDetailsForm,
 } from "./PortfolioForm.styled";
 
 import { Button } from "../../styles/globalStyles";
@@ -37,7 +38,7 @@ const PortfolioForm: React.FC<Props> = ({ coins }) => {
         </PortfolioNameContainer>
         <CloseFormButton />
       </TopContainer>
-      <SearchCoinsContainer>
+      {/* <SearchCoinsContainer>
         <SearchCoinInput
           type="text"
           list="coins"
@@ -54,20 +55,24 @@ const PortfolioForm: React.FC<Props> = ({ coins }) => {
           ))}
         </datalist>
         <Button primary="true">+ ADD</Button>
-      </SearchCoinsContainer>
-      {/* <DetailsContainer>
-        <form>
-          <p>Name: </p> <p>Bitcoin (BTC)</p>
+      </SearchCoinsContainer> */}
+      <DetailsContainer>
+        <AddDetailsForm>
+          <div>
+            <p>Name: </p> <p>Bitcoin (BTC)</p>
+          </div>
           <input type="text" placeholder="quantity" />
           <input type="text" placeholder="Price/Coin or Cost Basis" />
-          <button>+ ADD</button>
-        </form>
+          {/* <button>+ ADD</button> */}
+        </AddDetailsForm>
         <table></table>
         <BottomContainer>
-          <button>CANCEL</button>
-          <button>SAVE</button>
+          <Button>CANCEL</Button>
+          <Button style={{ marginLeft: "10px" }} primary="true">
+            ADD
+          </Button>
         </BottomContainer>
-      </DetailsContainer> */}
+      </DetailsContainer>
     </FormContainer>
   );
 };
