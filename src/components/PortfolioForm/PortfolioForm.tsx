@@ -40,25 +40,11 @@ const PortfolioForm: React.FC<Props> = ({
   portfolioBasic,
   updatePortfolioBasic,
 }) => {
-  const [inputValue, setInputValue] = useState("");
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>(
     portfolioBasic
   );
-  const [tabValues, setTabValues] = useState("Price per Coin");
-
-  // const onChangeSearchCoinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setInputValue(e.target.value);
-  // };
-
-  const onClickPriceTabMenu = (value: string) => {
-    setPortfolioData({ ...portfolioData, price_per_coin: 0, cost_basis: 0 });
-    setTabValues(value);
-  };
-  // const onClickCostBasis = () => {
-  //   setTabValues("Cost Basis");
-  // };
 
   const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPortfolioName(e.target.value);
@@ -168,41 +154,6 @@ const PortfolioForm: React.FC<Props> = ({
               onChange={updatePortfolioData}
             />
           </TabInputContainer>
-          {/* <TabInputContainer>
-            <TabMenuContainer>
-              <TabMenu
-                tabValues={tabValues === "USD"}
-                onClick={() => onClickPriceTabMenu("USD")}
-                disabled={tabValues === "USD"}
-              >
-                USD
-              </TabMenu>
-              <TabMenu
-                tabValues={tabValues === "BTC"}
-                onClick={() => onClickPriceTabMenu("BTC")}
-                disabled={tabValues === "BTC"}
-              >
-                BTC
-              </TabMenu>
-            </TabMenuContainer>
-            {tabValues === "USD" ? (
-              <QuantityInput
-                type="text"
-                name="price_per_coin"
-                placeholder="$"
-                value={portfolioData.price_per_coin || ""}
-                onChange={updatePortfolioData}
-              />
-            ) : (
-              <QuantityInput
-                type="text"
-                name="cost_basis"
-                placeholder="B"
-                value={portfolioData.cost_basis || ""}
-                onChange={updatePortfolioData}
-              />
-            )}
-          </TabInputContainer> */}
         </AddDetailsForm>
         <table></table>
         <BottomContainer>
