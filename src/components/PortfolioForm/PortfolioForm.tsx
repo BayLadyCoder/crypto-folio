@@ -19,9 +19,9 @@ import {
   TextFieldInput,
 } from "../../styles/globalStyles";
 import { PortfolioCoinBasic } from "../../types/coins";
-import CurrencyRadioButtons from "./CurrencyRadioButtons";
-import InputTextField from "../InputTextField";
-import SearchCoinInputTextField from "../SearchCoinInputTextField";
+import CurrencyRadioButtons from "../form_components/CurrencyRadioButtons";
+import InputTextField from "../form_components/InputTextField";
+import SearchCoinInputTextField from "../form_components/SearchCoinInputTextField";
 interface Props {
   coins: MarketCoin[];
   onCloseForm: (e: React.MouseEvent) => void;

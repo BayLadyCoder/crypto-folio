@@ -3,8 +3,8 @@ import {
   InputContainer,
   Label,
   TextFieldInput,
-} from "../../styles/globalStyles";
-import { MarketCoin } from "../../types/coins";
+} from "../../../styles/globalStyles";
+import { MarketCoin } from "../../../types/coins";
 
 interface Props {
   value: string;

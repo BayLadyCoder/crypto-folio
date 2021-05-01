@@ -3,7 +3,7 @@ import {
   InputContainer,
   Label,
   TextFieldInput,
-} from "../../styles/globalStyles";
+} from "../../../styles/globalStyles";
 
 interface Props {
   label: string;
