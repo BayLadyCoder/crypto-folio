@@ -121,7 +121,7 @@ export const TabMenu = styled.button<TabMenuProps>`
   transition: background 0.3s ease;
 `;
 
-export const TabInputContainer = styled.form`
+export const TabInputContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;

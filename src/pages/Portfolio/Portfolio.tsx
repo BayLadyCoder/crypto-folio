@@ -17,7 +17,7 @@ const Portfolio = () => {
         coins={marketCoins}
         // watchListFormOpen={watchListFormOpen}
         // onClickOpenForm={onClickOpenForm}
-        watchListName="My Portfolio"
+        portfolioName="My Portfolio"
         // updateWatchListName={updateWatchListName}
       />
       {/* <PortfolioForm marketCoins={marketCoins} /> */}

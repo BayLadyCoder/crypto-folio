@@ -3,24 +3,25 @@ import { MarketCoin } from "../../types/coins";
 import { TableName, PortfolioContainer } from "./PortfolioTable.styled";
 import { HeaderWrapper, Button } from "../../styles/globalStyles";
 import PortfolioForm from "../PortfolioForm";
-import { CryptoTable } from "../CryptoTable";
+// import { CryptoTable } from "../CryptoTable";
 
 interface Props {
   coins: MarketCoin[];
-  watchListFormOpen?: boolean;
+  portfolioFormOpen?: boolean;
   onClickOpenForm?: () => void;
-  watchListName?: string;
-  updateWatchListName?: (newName: string) => void;
+  portfolioName?: string;
+  updatePortfolioName?: (newName: string) => void;
 }
 
 const PortfolioTable: React.FC<Props> = ({
   coins,
-  watchListFormOpen,
+  // portfolioFormOpen,
   // onClickOpenForm,
-  watchListName,
-  updateWatchListName,
+  // portfolioName,
+  // updatePortfolioName,
 }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [portfolioName, setPortfolioName] = useState("My Portfolio");
 
   const onClickOpenForm = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -31,14 +32,23 @@ const PortfolioTable: React.FC<Props> = ({
     setIsFormOpen(false);
   };
 
+  const updatePortfolioName = (newName: string) => {
+    setPortfolioName(newName);
+  };
+
   return (
     <PortfolioContainer>
       <HeaderWrapper>
-        <TableName>{watchListName}</TableName>
+        <TableName>{portfolioName}</TableName>
         {!isFormOpen && <Button onClick={onClickOpenForm}>+ADD COINS</Button>}
       </HeaderWrapper>
       {isFormOpen && (
-        <PortfolioForm coins={coins} onCloseForm={onClickCloseForm} />
+        <PortfolioForm
+          coins={coins}
+          onCloseForm={onClickCloseForm}
+          portfolioName={portfolioName}
+          updatePortfolioName={updatePortfolioName}
+        />
       )}
 
       {/* {watchListFormOpen && (
