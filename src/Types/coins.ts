@@ -36,3 +36,12 @@ export interface MarketCoin {
   roi: null;
   last_updated: string;
 }
+
+export interface PortfolioCoinBasic {
+  name_with_symbol: string;
+  quantity: number;
+  price_per_coin: number;
+  cost_basis: number;
+}
+
+export type PortfolioCoin = PortfolioCoinBasic & MarketCoin;

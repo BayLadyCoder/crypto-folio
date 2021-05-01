@@ -93,7 +93,6 @@ export const BottomContainer = styled.div`
 `;
 
 export const QuantityInput = styled.input`
-  padding: 5px 10px;
   padding: 10px;
   width: 250px;
   margin-bottom: 10px;
@@ -129,4 +128,22 @@ export const TabInputContainer = styled.div`
 export const Label = styled.label`
   font-weight: 500;
   padding: 5px 0px;
+`;
+
+export const CurrencyContainer = styled.div`
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const CurrencyWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+export const RadioButton = styled.input`
+  margin-right: 5px;
+  color: red;
+  background: red;
 `;

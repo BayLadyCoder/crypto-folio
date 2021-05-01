@@ -16,15 +16,20 @@ import {
   TabMenu,
   TabInputContainer,
   Label,
+  CurrencyContainer,
+  CurrencyWrapper,
+  RadioButton,
 } from "./PortfolioForm.styled";
 
 import { Button } from "../../styles/globalStyles";
-
+import { PortfolioCoinBasic } from "../../types/coins";
 interface Props {
   coins: MarketCoin[];
   onCloseForm: (e: React.MouseEvent) => void;
   portfolioName: string;
   updatePortfolioName: (newName: string) => void;
+  portfolioBasic: PortfolioCoinBasic;
+  updatePortfolioBasic: (newData: PortfolioCoinBasic) => void;
 }
 
 const PortfolioForm: React.FC<Props> = ({
@@ -32,23 +37,28 @@ const PortfolioForm: React.FC<Props> = ({
   onCloseForm,
   portfolioName,
   updatePortfolioName,
+  portfolioBasic,
+  updatePortfolioBasic,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
-
+  const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>(
+    portfolioBasic
+  );
   const [tabValues, setTabValues] = useState("Price per Coin");
 
-  const onChangeSearchCoinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
+  // const onChangeSearchCoinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setInputValue(e.target.value);
+  // };
 
-  const onClickPricePerCoin = () => {
-    setTabValues("Price per Coin");
+  const onClickPriceTabMenu = (value: string) => {
+    setPortfolioData({ ...portfolioData, price_per_coin: 0, cost_basis: 0 });
+    setTabValues(value);
   };
-  const onClickCostBasis = () => {
-    setTabValues("Cost Basis");
-  };
+  // const onClickCostBasis = () => {
+  //   setTabValues("Cost Basis");
+  // };
 
   const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPortfolioName(e.target.value);
@@ -56,6 +66,25 @@ const PortfolioForm: React.FC<Props> = ({
 
   const onSaveNewPortfolioName = () => {
     updatePortfolioName(newPortfolioName);
+    setPortfolioNameFormOpen(false);
+  };
+
+  const updatePortfolioData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPortfolioData({ ...portfolioData, [e.target.name]: e.target.value });
+    if (e.target.name === "price_per_coin") {
+      const pricePerCoin = Number(e.target.value);
+      setPortfolioData({
+        ...portfolioData,
+        cost_basis: portfolioData.quantity * pricePerCoin,
+      });
+    } else {
+      setPortfolioData({ ...portfolioData, [e.target.name]: e.target.value });
+    }
+  };
+
+  const onSave = (e: React.MouseEvent) => {
+    e.preventDefault();
+    updatePortfolioBasic(portfolioData);
     setPortfolioNameFormOpen(false);
   };
 
@@ -95,8 +124,9 @@ const PortfolioForm: React.FC<Props> = ({
               type="text"
               list="coins"
               placeholder="Search"
-              value={inputValue}
-              onChange={onChangeSearchCoinInput}
+              name="name_with_symbol"
+              value={portfolioData.name_with_symbol}
+              onChange={updatePortfolioData}
             />
             <datalist id="coins">
               {coins.map((coin) => (
@@ -108,36 +138,80 @@ const PortfolioForm: React.FC<Props> = ({
             </datalist>
           </TabInputContainer>
           <TabInputContainer>
-            <Label htmlFor="Quantity">Quantity</Label>
+            <Label htmlFor="quantity">Quantity</Label>
             <QuantityInput
               type="text"
+              name="quantity"
               placeholder="How many coins do you have?"
+              value={portfolioData.quantity || ""}
+              onChange={updatePortfolioData}
             />
           </TabInputContainer>
+          <CurrencyContainer>
+            <p>Currency</p>
+            <CurrencyWrapper>
+              <RadioButton type="radio" id="usd" name="currency" value="usd" />
+              <label htmlFor="usd">USD</label>
+            </CurrencyWrapper>
+            <CurrencyWrapper>
+              <RadioButton type="radio" id="btc" name="currency" value="btc" />
+              <label htmlFor="btc">BTC</label>
+            </CurrencyWrapper>
+          </CurrencyContainer>
           <TabInputContainer>
+            <Label htmlFor="quantity">Price per Coin</Label>
+            <QuantityInput
+              type="text"
+              name="price_per_coin"
+              placeholder="Price you bought per coin ($)"
+              value={portfolioData.price_per_coin || ""}
+              onChange={updatePortfolioData}
+            />
+          </TabInputContainer>
+          {/* <TabInputContainer>
             <TabMenuContainer>
               <TabMenu
-                tabValues={tabValues === "Price per Coin"}
-                onClick={onClickPricePerCoin}
-                disabled={tabValues === "Price per Coin"}
+                tabValues={tabValues === "USD"}
+                onClick={() => onClickPriceTabMenu("USD")}
+                disabled={tabValues === "USD"}
               >
-                Price per Coin
+                USD
               </TabMenu>
               <TabMenu
-                tabValues={tabValues === "Cost Basis"}
-                onClick={onClickCostBasis}
-                disabled={tabValues === "Cost Basis"}
+                tabValues={tabValues === "BTC"}
+                onClick={() => onClickPriceTabMenu("BTC")}
+                disabled={tabValues === "BTC"}
               >
-                Cost Basis
+                BTC
               </TabMenu>
             </TabMenuContainer>
-            <QuantityInput type="text" placeholder="$" />
-          </TabInputContainer>
+            {tabValues === "USD" ? (
+              <QuantityInput
+                type="text"
+                name="price_per_coin"
+                placeholder="$"
+                value={portfolioData.price_per_coin || ""}
+                onChange={updatePortfolioData}
+              />
+            ) : (
+              <QuantityInput
+                type="text"
+                name="cost_basis"
+                placeholder="B"
+                value={portfolioData.cost_basis || ""}
+                onChange={updatePortfolioData}
+              />
+            )}
+          </TabInputContainer> */}
         </AddDetailsForm>
         <table></table>
         <BottomContainer>
           <Button onClick={onCloseForm}>CANCEL</Button>
-          <Button style={{ marginLeft: "10px" }} primary="true">
+          <Button
+            onClick={onSave}
+            style={{ marginLeft: "10px" }}
+            primary="true"
+          >
             SAVE
           </Button>
         </BottomContainer>
