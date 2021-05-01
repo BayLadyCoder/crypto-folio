@@ -92,9 +92,9 @@ export const BottomContainer = styled.div`
   padding: 10px 20px 20px 20px;
 `;
 
-export const QuantityInput = styled.input`
+export const TextFieldInput = styled.input`
   padding: 10px;
-  width: 250px;
+  width: 300px;
   margin-bottom: 10px;
   border: none;
 `;
@@ -131,10 +131,11 @@ export const Label = styled.label`
 `;
 
 export const CurrencyContainer = styled.div`
-  width: 250px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 5px 0px;
 `;
 export const CurrencyWrapper = styled.div`
   display: flex;

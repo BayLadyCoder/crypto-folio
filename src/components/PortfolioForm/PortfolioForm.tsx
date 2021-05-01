@@ -11,7 +11,7 @@ import {
   CloseFormButton,
   SearchCoinInput,
   AddDetailsForm,
-  QuantityInput,
+  TextFieldInput,
   TabMenuContainer,
   TabMenu,
   TabInputContainer,
@@ -42,6 +42,8 @@ const PortfolioForm: React.FC<Props> = ({
 }) => {
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
+  const [currency, setCurrency] = useState("");
+  const [estimate, setEstimate] = useState(0);
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>(
     portfolioBasic
   );
@@ -72,6 +74,9 @@ const PortfolioForm: React.FC<Props> = ({
     e.preventDefault();
     updatePortfolioBasic(portfolioData);
     setPortfolioNameFormOpen(false);
+  };
+  const onChooseCurrency = (value: string) => {
+    setCurrency(value);
   };
 
   // TODO: Refactor all search coin input in the applications
@@ -106,7 +111,7 @@ const PortfolioForm: React.FC<Props> = ({
           <TabInputContainer>
             <Label htmlFor="Quantity">Coins</Label>
 
-            <SearchCoinInput
+            <TextFieldInput
               type="text"
               list="coins"
               placeholder="Search"
@@ -125,7 +130,7 @@ const PortfolioForm: React.FC<Props> = ({
           </TabInputContainer>
           <TabInputContainer>
             <Label htmlFor="quantity">Quantity</Label>
-            <QuantityInput
+            <TextFieldInput
               type="text"
               name="quantity"
               placeholder="How many coins do you have?"
@@ -134,26 +139,68 @@ const PortfolioForm: React.FC<Props> = ({
             />
           </TabInputContainer>
           <CurrencyContainer>
-            <p>Currency</p>
+            <Label>Currency</Label>
             <CurrencyWrapper>
-              <RadioButton type="radio" id="usd" name="currency" value="usd" />
-              <label htmlFor="usd">USD</label>
+              <RadioButton
+                type="radio"
+                id="usd"
+                name="currency"
+                value="usd"
+                onClick={() => onChooseCurrency("USD")}
+              />
+              <Label htmlFor="usd">USD</Label>
             </CurrencyWrapper>
             <CurrencyWrapper>
-              <RadioButton type="radio" id="btc" name="currency" value="btc" />
-              <label htmlFor="btc">BTC</label>
+              <RadioButton
+                type="radio"
+                id="btc"
+                name="currency"
+                value="btc"
+                onClick={() => onChooseCurrency("BTC")}
+              />
+              <Label htmlFor="btc">BTC</Label>
             </CurrencyWrapper>
           </CurrencyContainer>
-          <TabInputContainer>
-            <Label htmlFor="quantity">Price per Coin</Label>
-            <QuantityInput
-              type="text"
-              name="price_per_coin"
-              placeholder="Price you bought per coin ($)"
-              value={portfolioData.price_per_coin || ""}
-              onChange={updatePortfolioData}
-            />
-          </TabInputContainer>
+          {currency && currency === "USD" ? (
+            <TabInputContainer>
+              <Label htmlFor="quantity">Price per Coin</Label>
+              <TextFieldInput
+                type="text"
+                name="price_per_coin"
+                placeholder="Price you paid per coin ($)"
+                value={portfolioData.price_per_coin || ""}
+                onChange={updatePortfolioData}
+              />
+            </TabInputContainer>
+          ) : currency === "BTC" ? (
+            <>
+              <TabInputContainer>
+                <Label htmlFor="quantity">Bitcoin Price</Label>
+                <TextFieldInput
+                  type="text"
+                  name="price_per_coin"
+                  placeholder="BTC price when bought this coin ($)"
+                  value={portfolioData.price_per_coin || ""}
+                  onChange={updatePortfolioData}
+                />
+              </TabInputContainer>
+              <TabInputContainer>
+                <Label htmlFor="quantity">Bitcoin Paid per Coin</Label>
+                <TextFieldInput
+                  type="text"
+                  name="price_per_coin"
+                  placeholder="Paid Bitcoin quantity per coin (₿)"
+                  value={portfolioData.price_per_coin || ""}
+                  onChange={updatePortfolioData}
+                />
+              </TabInputContainer>
+              {estimate && (
+                <p style={{ width: "250px", alignSelf: "start" }}>
+                  estimated in USD ~ $3,000
+                </p>
+              )}
+            </>
+          ) : null}
         </AddDetailsForm>
         <table></table>
         <BottomContainer>
