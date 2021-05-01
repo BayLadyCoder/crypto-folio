@@ -46,6 +46,10 @@ const PortfolioForm: React.FC<Props> = ({
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>(
     portfolioBasic
   );
+  const [boughtWithBitcoin, setBoughtWithBitcoin] = useState({
+    btc_price_at_bought: 0,
+    btc_paid_quantity: 0,
+  });
 
   const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPortfolioName(e.target.value);
@@ -69,7 +73,12 @@ const PortfolioForm: React.FC<Props> = ({
     setCurrency(value);
   };
 
-  // TODO: Refactor all search coin input in the applications
+  const updateBoughtWithBitcoin = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBoughtWithBitcoin({
+      ...boughtWithBitcoin,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <FormContainer>
@@ -111,6 +120,17 @@ const PortfolioForm: React.FC<Props> = ({
             value={portfolioData.quantity}
             handleChange={updatePortfolioData}
           />
+
+          {portfolioData.name_with_symbol === "Bitcoin (BTC)" && (
+            <InputTextField
+              label="Cost Basis"
+              name="cost_basis"
+              placeholder="Price you paid for this transaction ($)"
+              value={portfolioData.cost_basis}
+              handleChange={updatePortfolioData}
+            />
+          )}
+
           {portfolioData.name_with_symbol &&
             portfolioData.name_with_symbol !== "Bitcoin (BTC)" && (
               <CurrencyRadioButtons onChooseCurrency={onChooseCurrency} />
@@ -128,41 +148,28 @@ const PortfolioForm: React.FC<Props> = ({
             />
           ) : currency === "BTC" ? (
             <>
-              <InputContainer>
-                <Label htmlFor="btc_price_at_bought">Bitcoin Price</Label>
-                <TextFieldInput
-                  type="text"
-                  name="btc_price_at_bought"
-                  placeholder="BTC price when bought this coin ($)"
-                  // value={portfolioData.total_price || ""}
-                  // onChange={updatePortfolioData}
-                />
-              </InputContainer>
-              <InputContainer>
-                <Label htmlFor="quantity">Total Bitcoin Paid</Label>
-                <TextFieldInput
-                  type="text"
-                  name="total_btc_paid_quantity"
-                  placeholder="Total paid Bitcoin quantity (₿)"
-                  // value={portfolioData.total_price || ""}
-                  // onChange={updatePortfolioData}
-                />
-              </InputContainer>
+              <InputTextField
+                label="Bitcoin Price"
+                name="btc_price_at_bought"
+                placeholder="BTC price when bought this coin ($)"
+                value={boughtWithBitcoin.btc_price_at_bought}
+                handleChange={updateBoughtWithBitcoin}
+              />
+              <InputTextField
+                label="Total Bitcoin Paid"
+                name="btc_paid_quantity"
+                placeholder="Total Bitcoin quantity spent (₿)"
+                value={boughtWithBitcoin.btc_paid_quantity}
+                handleChange={updateBoughtWithBitcoin}
+              />
+
               {/* {estimate && (
                 <p style={{ width: "250px", alignSelf: "start" }}>
                   estimated in USD ~ ${estimate}
                 </p>
               )} */}
             </>
-          ) : (
-            <InputTextField
-              label="Cost Basis"
-              name="cost_basis"
-              placeholder="Price you paid for this transaction ($)"
-              value={portfolioData.cost_basis}
-              handleChange={updatePortfolioData}
-            />
-          )}
+          ) : null}
         </AddDetailsForm>
         <BottomContainer>
           <Button onClick={onCloseForm}>CANCEL</Button>
