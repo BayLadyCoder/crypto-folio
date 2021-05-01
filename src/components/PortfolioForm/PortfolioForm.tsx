@@ -20,7 +20,7 @@ import {
 } from "../../styles/globalStyles";
 import { PortfolioCoinBasic } from "../../types/coins";
 import CurrencyRadioButtons from "./CurrencyRadioButtons";
-import InputTextField from "./InputTextField";
+import InputTextField from "../InputTextField";
 import SearchCoinInputTextField from "../SearchCoinInputTextField";
 interface Props {
   coins: MarketCoin[];
@@ -104,25 +104,6 @@ const PortfolioForm: React.FC<Props> = ({
             handleChange={updatePortfolioData}
             coins={coins}
           />
-          {/* <InputContainer>
-            <Label htmlFor="coins">Coins</Label>
-            <TextFieldInput
-              type="text"
-              list="coins"
-              placeholder="Search"
-              name="name_with_symbol"
-              value={portfolioData.name_with_symbol}
-              onChange={updatePortfolioData}
-            />
-            <datalist id="coins">
-              {coins.map((coin) => (
-                <option
-                  key={coin.id}
-                  value={`${coin.name} (${coin.symbol.toUpperCase()})`}
-                />
-              ))}
-            </datalist>
-          </InputContainer> */}
           <InputTextField
             label="Quantity"
             name="quantity"
