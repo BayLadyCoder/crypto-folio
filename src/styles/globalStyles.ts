@@ -147,4 +147,20 @@ export const Loading = styled.p`
   margin-top: 50px;
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Label = styled.label`
+  font-weight: 500;
+  padding: 5px 0px;
+`;
+export const TextFieldInput = styled.input`
+  padding: 10px;
+  width: 300px;
+  margin-bottom: 10px;
+  border: none;
+`;
+
 export default GlobalStyle;

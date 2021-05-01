@@ -62,13 +62,6 @@ export const CloseFormButton = styled(VscChromeClose)`
   }
 `;
 
-export const SearchCoinInput = styled.input`
-  width: 250px;
-  padding: 10px;
-  border: none;
-  margin-bottom: 10px;
-`;
-
 export const DetailsContainer = styled.div`
   width: 100%;
   display: flex;
@@ -90,61 +83,4 @@ export const BottomContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px 20px 20px;
-`;
-
-export const TextFieldInput = styled.input`
-  padding: 10px;
-  width: 300px;
-  margin-bottom: 10px;
-  border: none;
-`;
-
-export const TabMenuContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-`;
-
-interface TabMenuProps {
-  tabValues: boolean;
-}
-
-export const TabMenu = styled.button<TabMenuProps>`
-  padding: 5px 10px;
-
-  background: ${({ tabValues }) => (tabValues ? "#08856c" : "#222")};
-  color: ${({ tabValues }) => (tabValues ? "#fff" : "#bbb")};
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-
-  transition: background 0.3s ease;
-`;
-
-export const TabInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Label = styled.label`
-  font-weight: 500;
-  padding: 5px 0px;
-`;
-
-export const CurrencyContainer = styled.div`
-  width: 300px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 5px 0px;
-`;
-export const CurrencyWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-export const RadioButton = styled.input`
-  margin-right: 5px;
-  color: red;
-  background: red;
 `;
