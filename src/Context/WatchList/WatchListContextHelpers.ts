@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { MarketCoin } from "../../types/coins";
+import { getCoinNameAndSymbol } from "../../utils/helpers";
 
 export const handleAddNewCoinToWatchList = (
   marketCoins: MarketCoin[],
@@ -38,16 +39,4 @@ export const addCoinToCoinOptions = (
   const fullCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol)[0];
   const coinName = getCoinNameAndSymbol(fullCoin);
   setCoinOptions((prev) => [coinName, ...prev]);
-};
-
-export const getCoinNameAndSymbol = (coin: MarketCoin) => {
-  return `${coin.name} (${coin.symbol.toUpperCase()})`;
-};
-
-export const getCoinNameAndSymbolArray = (marketCoins: MarketCoin[]) => {
-  const options = marketCoins.map((coin: MarketCoin) => {
-    return `${coin.name} (${coin.symbol.toUpperCase()})`;
-  });
-
-  return options;
 };
