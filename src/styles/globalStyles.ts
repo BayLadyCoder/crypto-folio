@@ -156,11 +156,19 @@ export const Label = styled.label`
   font-weight: 500;
   padding: 5px 0px;
 `;
-export const TextFieldInput = styled.input`
+export const TextField = styled.input`
   padding: 10px;
   width: 300px;
   margin-bottom: 10px;
   border: none;
+`;
+
+export const TableName = styled.h2`
+  font-size: 25px;
+  color: #fff;
+  @media screen and (max-width: 960px) {
+    font-size: 20px;
+  }
 `;
 
 export default GlobalStyle;

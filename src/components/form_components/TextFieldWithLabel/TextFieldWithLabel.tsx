@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  InputContainer,
-  Label,
-  TextFieldInput,
-} from "../../../styles/globalStyles";
+import { InputContainer, Label, TextField } from "../../../styles/globalStyles";
 
 interface Props {
   label: string;
@@ -23,7 +19,7 @@ const InputTextField: React.FC<Props> = ({
   return (
     <InputContainer>
       <Label htmlFor={name}>{label}</Label>
-      <TextFieldInput
+      <TextField
         type="text"
         name={name}
         placeholder={placeholder}

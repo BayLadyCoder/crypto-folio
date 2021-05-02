@@ -1,7 +1,7 @@
 import React from "react";
 import { MarketCoin } from "../../types/coins";
-import { TableName, WatchListContainer } from "./EachWatchList.styled";
-import { HeaderWrapper, Button } from "../../styles/globalStyles";
+import { WatchListContainer } from "./EachWatchList.styled";
+import { HeaderWrapper, Button, TableName } from "../../styles/globalStyles";
 import WatchListForm from "../WatchListForm";
 import { CryptoTable } from "../CryptoTable";
 

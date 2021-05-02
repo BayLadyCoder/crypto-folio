@@ -56,11 +56,11 @@ export const FormTitle = styled.h2`
   padding: 10px;
 `;
 
-export const AddCoinsInput = styled.input`
-  width: 100%;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-`;
+// export const AddCoinsInput = styled.input`
+//   width: 100%;
+//   padding: 5px 10px;
+//   margin-bottom: 10px;
+// `;
 
 export const CoinsContainer = styled.div`
   background-color: #222;

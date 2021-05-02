@@ -14,9 +14,12 @@ import {
 
 import { Button } from "../../styles/globalStyles";
 import { PortfolioCoinBasic } from "../../types/coins";
-import CurrencyRadioButtons from "../form_components/CurrencyRadioButtons";
-import InputTextField from "../form_components/InputTextField";
-import SearchCoinInputTextField from "../form_components/SearchCoinInputTextField";
+import {
+  TextFieldWithLabel,
+  SearchCoinTextField,
+  CurrencyRadioButtons,
+} from "../form_components";
+
 interface Props {
   marketCoins: MarketCoin[];
   onCloseForm: () => void;
@@ -128,13 +131,13 @@ const PortfolioForm: React.FC<Props> = ({
 
       <DetailsContainer>
         <AddDetailsForm>
-          <SearchCoinInputTextField
+          <SearchCoinTextField
             value={portfolioData.name_with_symbol}
             name="name_with_symbol"
             handleChange={updatePortfolioData}
             coins={marketCoins}
           />
-          <InputTextField
+          <TextFieldWithLabel
             label="Quantity"
             name="bought_quantity"
             placeholder="How many coins do you have?"
@@ -143,7 +146,7 @@ const PortfolioForm: React.FC<Props> = ({
           />
 
           {portfolioData.name_with_symbol === "Bitcoin (BTC)" && (
-            <InputTextField
+            <TextFieldWithLabel
               label="Total Cost ($)"
               name="cost_basis"
               placeholder="Price you paid for this transaction"
@@ -160,7 +163,7 @@ const PortfolioForm: React.FC<Props> = ({
           {portfolioData.name_with_symbol !== "Bitcoin (BTC)" &&
           currency &&
           currency === "USD" ? (
-            <InputTextField
+            <TextFieldWithLabel
               label="Total Cost ($)"
               name="cost_basis"
               placeholder="Price you paid for this transaction"
@@ -169,14 +172,14 @@ const PortfolioForm: React.FC<Props> = ({
             />
           ) : currency === "BTC" ? (
             <>
-              <InputTextField
+              <TextFieldWithLabel
                 label="Bitcoin Price ($)"
                 name="btc_price_at_bought"
                 placeholder="BTC price when bought this coin"
                 value={boughtWithBitcoin.btc_price_at_bought}
                 handleChange={updateBoughtWithBitcoin}
               />
-              <InputTextField
+              <TextFieldWithLabel
                 label="Total Bitcoin Paid (₿)"
                 name="btc_paid_quantity"
                 placeholder="BTC quantity spent on this transaction"

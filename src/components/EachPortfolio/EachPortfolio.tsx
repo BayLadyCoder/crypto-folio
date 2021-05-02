@@ -1,6 +1,6 @@
 import { MarketCoin } from "../../types/coins";
-import { TableName, PortfolioContainer } from "./EachPortfolio.styled";
-import { HeaderWrapper, Button } from "../../styles/globalStyles";
+import { PortfolioContainer } from "./EachPortfolio.styled";
+import { HeaderWrapper, Button, TableName } from "../../styles/globalStyles";
 import PortfolioForm from "../PortfolioForm";
 import { PortfolioCoinBasic, PortfolioCoin } from "../../types/coins";
 import PortfolioTable from "../PortfolioTable";

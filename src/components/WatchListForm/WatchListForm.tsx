@@ -6,7 +6,6 @@ import {
   FormLeftContainer,
   FormRightContainer,
   FormTitle,
-  AddCoinsInput,
   CoinsContainer,
   Coin,
   CoinName,
@@ -22,6 +21,11 @@ import { Button } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
 import { AiOutlineRight } from "react-icons/ai";
+import {
+  TextFieldWithLabel,
+  SearchCoinTextField,
+  CurrencyRadioButtons,
+} from "../form_components";
 interface Props {
   watchListName: string;
   updateWatchListName: (newName: string) => void;
@@ -106,17 +110,13 @@ const WatchListForm: React.FC<Props> = ({
               X
             </CloseFormButtonLeft>
           </FormHeaderContainer>
-          <AddCoinsInput
-            type="text"
-            list="coins"
+          <SearchCoinTextField
             value={inputValue}
-            onChange={onChangeInput}
+            name="coins"
+            handleChange={onChangeInput}
+            coins={marketCoins}
           />
-          <datalist id="coins">
-            {coinOptions.map((coin) => (
-              <option key={coin} value={coin} />
-            ))}
-          </datalist>
+
           <Button primary="true" onClick={onAddCoin}>
             ADD TO WATCHLIST{" "}
             <AiOutlineRight style={{ marginLeft: "5px", fontSize: "20px" }} />
