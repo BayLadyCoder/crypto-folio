@@ -25,7 +25,7 @@ interface Props {
   onCloseForm: () => void;
   portfolioName: string;
   updatePortfolioName: (newName: string) => void;
-  updatePortfolioCoins: (
+  addNewCoinToPortfolio: (
     newData: PortfolioCoinBasic,
     marketCoins: MarketCoin[]
   ) => void;
@@ -36,7 +36,7 @@ const PortfolioForm: React.FC<Props> = ({
   onCloseForm,
   portfolioName,
   updatePortfolioName,
-  updatePortfolioCoins,
+  addNewCoinToPortfolio,
 }) => {
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
@@ -82,7 +82,7 @@ const PortfolioForm: React.FC<Props> = ({
     e.preventDefault();
     const { bought_quantity, cost_basis } = portfolioData;
 
-    updatePortfolioCoins(
+    addNewCoinToPortfolio(
       {
         ...portfolioData,
         bought_quantity: Number(bought_quantity),

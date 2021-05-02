@@ -32,7 +32,7 @@ export interface PortfolioContextData {
   portfolioName: string;
   updatePortfolioName: (newName: string) => void;
   portfolioCoins: PortfolioCoin[];
-  updatePortfolioCoins: (
+  addNewCoinToPortfolio: (
     newCoin: PortfolioCoinBasic,
     marketCoins: MarketCoin[]
   ) => void;

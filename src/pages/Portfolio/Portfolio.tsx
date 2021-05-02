@@ -17,7 +17,7 @@ const Portfolio = () => {
     onClickOpenPortfolioForm,
     onClickClosePortfolioForm,
     portfolioCoins,
-    updatePortfolioCoins,
+    addNewCoinToPortfolio,
   } = usePortfolio();
   return (
     <Container>
@@ -27,7 +27,7 @@ const Portfolio = () => {
         portfolioName={portfolioName}
         updatePortfolioName={updatePortfolioName}
         portfolioCoins={portfolioCoins}
-        updatePortfolioCoins={updatePortfolioCoins}
+        addNewCoinToPortfolio={addNewCoinToPortfolio}
         portfolioFormOpen={portfolioFormOpen}
         onClickOpenPortfolioForm={onClickOpenPortfolioForm}
         onClickClosePortfolioForm={onClickClosePortfolioForm}

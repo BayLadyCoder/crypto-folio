@@ -14,7 +14,7 @@ const portfolioDefaultValues = {
   portfolioName: "",
   updatePortfolioName: () => null,
   portfolioCoins: [],
-  updatePortfolioCoins: () => null,
+  addNewCoinToPortfolio: () => null,
 };
 
 export const PortfolioContext = createContext<PortfolioContextData>(
@@ -33,6 +33,9 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
   const [portfolioFormOpen, setPortfolioFormOpen] = useState(false);
   const [portfolioName, setPortfolioName] = useState("My Portfolio");
   const [portfolioCoins, setPortfolioCoins] = useState<PortfolioCoin[]>([]);
+  const [portfolioCoinOptions, setPortfolioCoinOptions] = useState<
+    MarketCoin[]
+  >([]);
 
   const onClickOpenPortfolioForm = () => {
     setPortfolioFormOpen(true);
@@ -45,7 +48,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
     setPortfolioName(newName);
   };
 
-  const updatePortfolioCoins = (
+  const addNewCoinToPortfolio = (
     newCoin: PortfolioCoinBasic,
     marketCoins: MarketCoin[]
   ) => {
@@ -84,7 +87,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
         portfolioName,
         updatePortfolioName,
         portfolioCoins,
-        updatePortfolioCoins,
+        addNewCoinToPortfolio,
       }}
     >
       {children}

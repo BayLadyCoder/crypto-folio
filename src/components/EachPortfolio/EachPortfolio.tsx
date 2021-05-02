@@ -12,7 +12,7 @@ interface Props {
   portfolioName: string;
   updatePortfolioName: (newName: string) => void;
   portfolioCoins: PortfolioCoin[];
-  updatePortfolioCoins: (
+  addNewCoinToPortfolio: (
     newCoin: PortfolioCoinBasic,
     marketCoins: MarketCoin[]
   ) => void;
@@ -23,7 +23,7 @@ const EachPortfolio: React.FC<Props> = ({
   portfolioName,
   updatePortfolioName,
   portfolioCoins,
-  updatePortfolioCoins,
+  addNewCoinToPortfolio,
   portfolioFormOpen,
   onClickOpenPortfolioForm,
   onClickClosePortfolioForm,
@@ -42,7 +42,7 @@ const EachPortfolio: React.FC<Props> = ({
           onCloseForm={onClickClosePortfolioForm}
           portfolioName={portfolioName}
           updatePortfolioName={updatePortfolioName}
-          updatePortfolioCoins={updatePortfolioCoins}
+          addNewCoinToPortfolio={addNewCoinToPortfolio}
         />
       )}
 
