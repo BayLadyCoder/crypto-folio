@@ -21,11 +21,7 @@ import { Button } from "../../styles/globalStyles";
 import { MarketCoin } from "../../types/coins";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
 import { AiOutlineRight } from "react-icons/ai";
-import {
-  TextFieldWithLabel,
-  SearchCoinTextField,
-  CurrencyRadioButtons,
-} from "../form_components";
+import { SearchCoinTextField } from "../form_components";
 interface Props {
   watchListName: string;
   updateWatchListName: (newName: string) => void;
@@ -94,7 +90,8 @@ const WatchListForm: React.FC<Props> = ({
     setWatchListNameInputOpen(false);
   };
 
-  if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
+  if (marketCoins.length === 0 || coinOptions.length === 0)
+    return <Loading>Loading...</Loading>;
 
   return (
     <Container alignCenter>
@@ -114,7 +111,7 @@ const WatchListForm: React.FC<Props> = ({
             value={inputValue}
             name="coins"
             handleChange={onChangeInput}
-            coins={marketCoins}
+            coins={coinOptions}
           />
 
           <Button primary="true" onClick={onAddCoin}>

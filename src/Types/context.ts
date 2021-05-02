@@ -14,7 +14,7 @@ export interface WatchListContextData {
   updateWatchListName: (newName: string) => void;
   addNewCoinToWatchList: (
     marketCoins: MarketCoin[],
-    coinOptions: string[],
+    coinOptions: MarketCoin[],
     inputValue: string,
     setInputValue: any
   ) => void;
@@ -22,7 +22,7 @@ export interface WatchListContextData {
     coinSymbol: string,
     marketCoins: MarketCoin[]
   ) => void;
-  coinOptions: string[];
+  coinOptions: MarketCoin[];
   createCoinOptions: (MarketCoins: MarketCoin[]) => void;
 }
 export interface PortfolioContextData {

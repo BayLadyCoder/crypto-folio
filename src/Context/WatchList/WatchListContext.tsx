@@ -12,7 +12,6 @@ import {
   isValidatedValue,
   handleAddNewCoinToWatchList,
 } from "./WatchListContextHelpers";
-import { getCoinNameAndSymbolArray } from "../../utils/helpers";
 
 const watchListDefaultValues = {
   watchListFormOpen: false,
@@ -43,7 +42,7 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const [watchListFormOpen, setWatchListFormOpen] = useState<boolean>(false);
   const [watchList, setWatchList] = useState<MarketCoin[]>([]);
   const [watchListName, setWatchListName] = useState<string>("My Watchlist");
-  const [coinOptions, setCoinOptions] = useState<string[]>([]);
+  const [coinOptions, setCoinOptions] = useState<MarketCoin[]>([]);
 
   const onClickOpenForm = () => {
     setWatchListFormOpen(true);
@@ -58,21 +57,23 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
 
   const addNewCoinToWatchList = (
     marketCoins: MarketCoin[],
-    coinOptions: string[],
+    coinOptions: MarketCoin[],
     inputValue: string,
     setInputValue: Dispatch<SetStateAction<string>>
   ) => {
-    if (isValidatedValue(coinOptions, inputValue)) {
-      handleAddNewCoinToWatchList(
-        marketCoins,
-        inputValue,
-        setCoinOptions,
-        setWatchList
-      );
-    } else {
-      alert("This coin is not supported currently. Please try again.");
+    if (inputValue.length > 0) {
+      if (isValidatedValue(coinOptions, inputValue)) {
+        handleAddNewCoinToWatchList(
+          marketCoins,
+          inputValue,
+          setCoinOptions,
+          setWatchList
+        );
+      } else {
+        alert("This coin is not supported currently. Please try again.");
+      }
+      setInputValue("");
     }
-    setInputValue("");
   };
 
   const removeCoinFromWatchList = (
@@ -84,8 +85,7 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   };
 
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
-    const options = getCoinNameAndSymbolArray(marketCoins);
-    setCoinOptions(options);
+    setCoinOptions(marketCoins);
   };
 
   return (
