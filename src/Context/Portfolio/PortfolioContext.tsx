@@ -1,10 +1,4 @@
-import {
-  useState,
-  useContext,
-  createContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useState, useContext, createContext } from "react";
 import {
   MarketCoin,
   PortfolioCoin,
