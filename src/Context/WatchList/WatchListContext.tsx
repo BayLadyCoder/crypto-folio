@@ -11,8 +11,8 @@ import {
   addCoinToCoinOptions,
   isValidatedValue,
   handleAddNewCoinToWatchList,
-  getCoinNameAndSymbolArray,
 } from "./WatchListContextHelpers";
+import { getCoinNameAndSymbolArray } from "../../utils/helpers";
 
 const watchListDefaultValues = {
   watchListFormOpen: false,
