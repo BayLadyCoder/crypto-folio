@@ -12,6 +12,7 @@ import {
   isValidatedValue,
   handleAddNewCoinToWatchList,
 } from "./WatchListContextHelpers";
+import { getCoinSymbol } from "../../utils/helpers";
 
 const watchListDefaultValues = {
   watchListFormOpen: false,
@@ -62,10 +63,12 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
     setInputValue: Dispatch<SetStateAction<string>>
   ) => {
     if (inputValue.length > 0) {
-      if (isValidatedValue(coinOptions, inputValue)) {
+      const coinSymbol = getCoinSymbol(inputValue);
+
+      if (isValidatedValue(coinOptions, coinSymbol)) {
         handleAddNewCoinToWatchList(
           marketCoins,
-          inputValue,
+          coinSymbol,
           setCoinOptions,
           setWatchList
         );

@@ -4,21 +4,19 @@ import { getCoinSymbol } from "../../utils/helpers";
 
 export const handleAddNewCoinToWatchList = (
   marketCoins: MarketCoin[],
-  inputValue: string,
+  coinSymbol: string,
   setCoinOptions: Dispatch<SetStateAction<MarketCoin[]>>,
   setWatchList: Dispatch<SetStateAction<MarketCoin[]>>
 ) => {
-  const coinSymbol = inputValue.split("(")[1].split(")")[0].toLowerCase();
-  removeCoinFromCoinOptions(inputValue, setCoinOptions);
-  const newCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol);
-  setWatchList((prev) => [...prev, newCoin[0]]);
+  removeCoinFromCoinOptions(coinSymbol, setCoinOptions);
+  const newCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol)[0];
+  setWatchList((prev) => [...prev, newCoin]);
 };
 
 export const isValidatedValue = (
   coinOptions: MarketCoin[],
-  inputValue: string
+  coinSymbol: string
 ) => {
-  const coinSymbol = getCoinSymbol(inputValue);
   const isInOptions = coinOptions.find((coin) => coin.symbol === coinSymbol);
   if (isInOptions) return true;
 
@@ -26,11 +24,10 @@ export const isValidatedValue = (
 };
 
 export const removeCoinFromCoinOptions = (
-  inputValue: string,
+  coinSymbol: string,
   setCoinOptions: Dispatch<SetStateAction<MarketCoin[]>>
 ) => {
   setCoinOptions((prev) => {
-    const coinSymbol = getCoinSymbol(inputValue);
     const coinNames = prev.filter((coin) => coin.symbol !== coinSymbol);
     return coinNames;
   });
