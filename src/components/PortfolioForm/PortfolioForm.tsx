@@ -129,7 +129,7 @@ const PortfolioForm: React.FC<Props> = ({
 
           {portfolioData.name_with_symbol === "Bitcoin (BTC)" && (
             <InputTextField
-              label="Cost Basis"
+              label="Total Cost"
               name="cost_basis"
               placeholder="Price you paid for this transaction ($)"
               value={portfolioData.cost_basis}
