@@ -12,12 +12,11 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow-x: scroll;
 `;
 
 export const Table = styled.table`
-  border-collapse: collapse;
   margin: 25px 0;
-  min-width: 400px;
 `;
 
 export const TableHead = styled.thead``;
@@ -28,9 +27,11 @@ export const TableHeadRow = styled.tr`
 `;
 
 export const TableHeadData = styled.th<TableHeadDataProps>`
-  color: #ccc;
+  color: #ddd;
   text-align: ${({ align }) => align};
-  padding: 15px 30px;
+  padding: 15px 10px;
+  font-weight: 500;
+  font-size: 15px;
 `;
 
 export const TableBodyRow = styled.tr`
@@ -46,7 +47,7 @@ export const CoinNameWrapper = styled.span`
 
 export const TableBodyData = styled.td<TableBodyDataProps>`
   text-align: ${({ align }) => align};
-  padding: 25px 30px;
+  padding: 20px 10px;
   border-bottom: solid 1px #777;
   color: ${({ change }) =>
     change === "positive"
