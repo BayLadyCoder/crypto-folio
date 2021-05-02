@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import WatchList from "./pages/WatchList";
 import Portfolio from "./pages/Portfolio";
 import { WatchListProvider } from "./context/WatchList/WatchListContext";
+import { PortfolioProvider } from "./context/Portfolio/PortfolioContext";
 import { MarketCoinsProvider } from "./context/MarketCoinsContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -13,23 +14,25 @@ const App: React.FC = () => {
     <Router>
       <MarketCoinsProvider>
         <WatchListProvider>
-          <AppContainer>
-            <GlobalStyle />
-            <NavBar />
-            <Switch>
-              <Route path="/crypto-folio" exact component={Home} />
-              <Route
-                path="/crypto-folio/watchlist"
-                exact
-                component={WatchList}
-              />
-              <Route
-                path="/crypto-folio/portfolio"
-                exact
-                component={Portfolio}
-              />
-            </Switch>
-          </AppContainer>
+          <PortfolioProvider>
+            <AppContainer>
+              <GlobalStyle />
+              <NavBar />
+              <Switch>
+                <Route path="/crypto-folio" exact component={Home} />
+                <Route
+                  path="/crypto-folio/watchlist"
+                  exact
+                  component={WatchList}
+                />
+                <Route
+                  path="/crypto-folio/portfolio"
+                  exact
+                  component={Portfolio}
+                />
+              </Switch>
+            </AppContainer>
+          </PortfolioProvider>
         </WatchListProvider>
       </MarketCoinsProvider>
     </Router>

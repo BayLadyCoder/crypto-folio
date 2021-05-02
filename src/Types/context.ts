@@ -1,4 +1,4 @@
-import { MarketCoin } from "./coins";
+import { MarketCoin, PortfolioCoin, PortfolioCoinBasic } from "./coins";
 export interface MarketCoinsContextData {
   marketCoins: MarketCoin[];
   setMarketCoins: (coins: MarketCoin[]) => void;
@@ -25,4 +25,15 @@ export interface WatchListContextData {
   coinOptions: string[];
   createCoinOptions: (MarketCoins: MarketCoin[]) => void;
 }
-export interface PortfolioContextData {}
+export interface PortfolioContextData {
+  portfolioFormOpen: boolean;
+  onClickOpenPortfolioForm: () => void;
+  onClickClosePortfolioForm: () => void;
+  portfolioName: string;
+  updatePortfolioName: (newName: string) => void;
+  portfolioCoins: PortfolioCoin[];
+  updatePortfolioCoins: (
+    newCoin: PortfolioCoinBasic,
+    marketCoins: MarketCoin[]
+  ) => void;
+}

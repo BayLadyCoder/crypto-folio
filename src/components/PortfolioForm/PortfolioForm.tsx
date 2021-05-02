@@ -18,15 +18,18 @@ import CurrencyRadioButtons from "../form_components/CurrencyRadioButtons";
 import InputTextField from "../form_components/InputTextField";
 import SearchCoinInputTextField from "../form_components/SearchCoinInputTextField";
 interface Props {
-  coins: MarketCoin[];
+  marketCoins: MarketCoin[];
   onCloseForm: () => void;
   portfolioName: string;
   updatePortfolioName: (newName: string) => void;
-  updatePortfolioCoins: (newData: PortfolioCoinBasic) => void;
+  updatePortfolioCoins: (
+    newData: PortfolioCoinBasic,
+    marketCoins: MarketCoin[]
+  ) => void;
 }
 
 const PortfolioForm: React.FC<Props> = ({
-  coins,
+  marketCoins,
   onCloseForm,
   portfolioName,
   updatePortfolioName,
@@ -76,12 +79,15 @@ const PortfolioForm: React.FC<Props> = ({
     e.preventDefault();
     const { bought_quantity, cost_basis } = portfolioData;
 
-    updatePortfolioCoins({
-      ...portfolioData,
-      bought_quantity: Number(bought_quantity),
-      cost_basis: Number(cost_basis),
-      bought_price_per_coin: cost_basis / bought_quantity,
-    });
+    updatePortfolioCoins(
+      {
+        ...portfolioData,
+        bought_quantity: Number(bought_quantity),
+        cost_basis: Number(cost_basis),
+        bought_price_per_coin: cost_basis / bought_quantity,
+      },
+      marketCoins
+    );
     onCloseForm();
   };
   const onChooseCurrency = (value: string) => {
@@ -126,7 +132,7 @@ const PortfolioForm: React.FC<Props> = ({
             value={portfolioData.name_with_symbol}
             name="name_with_symbol"
             handleChange={updatePortfolioData}
-            coins={coins}
+            coins={marketCoins}
           />
           <InputTextField
             label="Quantity"

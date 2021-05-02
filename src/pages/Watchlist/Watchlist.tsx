@@ -1,6 +1,6 @@
 import { Container, PageTitle } from "../../styles/globalStyles";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
-import WatchListTable from "../../components/WatchListTable";
+import EachWatchList from "../../components/EachWatchList/";
 
 const WatchListPage = () => {
   const {
@@ -22,7 +22,7 @@ const WatchListPage = () => {
           + CREATE NEW WATCHLIST
         </Button>
       )} */}
-      <WatchListTable
+      <EachWatchList
         coins={watchList}
         watchListFormOpen={watchListFormOpen}
         onClickOpenForm={onClickOpenForm}
