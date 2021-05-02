@@ -148,6 +148,7 @@ export const Loading = styled.p`
 `;
 
 export const InputContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -156,9 +157,10 @@ export const Label = styled.label`
   font-weight: 500;
   padding: 5px 0px;
 `;
+
 export const TextField = styled.input`
   padding: 10px;
-  width: 300px;
+  width: 100%;
   margin-bottom: 10px;
   border: none;
 `;

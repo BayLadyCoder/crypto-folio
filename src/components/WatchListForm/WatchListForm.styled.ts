@@ -4,7 +4,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import { AiFillEdit } from "react-icons/ai";
 
 export const Form = styled.form`
-  width: 900px;
+  width: 950px;
   display: flex;
   justify-content: center;
   background-color: #fff;

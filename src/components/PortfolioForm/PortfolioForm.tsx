@@ -29,6 +29,8 @@ interface Props {
     newData: PortfolioCoinBasic,
     marketCoins: MarketCoin[]
   ) => void;
+  portfolioCoinOptions: MarketCoin[];
+  createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
 }
 
 const PortfolioForm: React.FC<Props> = ({
@@ -37,6 +39,8 @@ const PortfolioForm: React.FC<Props> = ({
   portfolioName,
   updatePortfolioName,
   addNewCoinToPortfolio,
+  portfolioCoinOptions,
+  createPortfolioCoinOptions,
 }) => {
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
@@ -64,6 +68,11 @@ const PortfolioForm: React.FC<Props> = ({
       setPortfolioData((prev) => ({ ...prev, cost_basis: costBasis }));
     }
   }, [boughtWithBitcoin]);
+
+  useEffect(() => {
+    if (marketCoins.length > 0 && portfolioCoinOptions.length === 0)
+      createPortfolioCoinOptions(marketCoins);
+  }, [marketCoins, portfolioCoinOptions.length, createPortfolioCoinOptions]);
 
   const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPortfolioName(e.target.value);

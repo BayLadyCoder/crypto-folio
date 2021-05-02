@@ -59,29 +59,34 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
     newCoin: PortfolioCoinBasic,
     marketCoins: MarketCoin[]
   ) => {
-    const coinSymbol = getCoinSymbol(newCoin.name_with_symbol);
-    // isValidatedValue();
-    let myCoin: PortfolioCoin;
-    const { bought_price_per_coin, bought_quantity } = newCoin;
-    for (let i = 0; i < marketCoins.length; i++) {
-      if (marketCoins[i].symbol === coinSymbol) {
-        const gainUSD =
-          (marketCoins[i].current_price - bought_price_per_coin) *
-          bought_quantity;
-        const gainPercentage =
-          ((marketCoins[i].current_price - bought_price_per_coin) /
-            bought_price_per_coin) *
-          100;
-        const currentValue = marketCoins[i].current_price * bought_quantity;
-        myCoin = {
-          ...marketCoins[i],
-          ...newCoin,
-          total_gain_usd: gainUSD,
-          total_gain_percentage: gainPercentage,
-          current_value: currentValue,
-        };
-        setPortfolioCoins([...portfolioCoins, myCoin]);
-        break;
+    if (newCoin.name_with_symbol.length > 0) {
+      const coinSymbol = getCoinSymbol(newCoin.name_with_symbol);
+      if (isValidatedValue(portfolioCoinOptions, coinSymbol)) {
+        let myCoin: PortfolioCoin;
+        const { bought_price_per_coin, bought_quantity } = newCoin;
+        for (let i = 0; i < marketCoins.length; i++) {
+          if (marketCoins[i].symbol === coinSymbol) {
+            const gainUSD =
+              (marketCoins[i].current_price - bought_price_per_coin) *
+              bought_quantity;
+            const gainPercentage =
+              ((marketCoins[i].current_price - bought_price_per_coin) /
+                bought_price_per_coin) *
+              100;
+            const currentValue = marketCoins[i].current_price * bought_quantity;
+            myCoin = {
+              ...marketCoins[i],
+              ...newCoin,
+              total_gain_usd: gainUSD,
+              total_gain_percentage: gainPercentage,
+              current_value: currentValue,
+            };
+            setPortfolioCoins([...portfolioCoins, myCoin]);
+            break;
+          }
+        }
+      } else {
+        alert("This coin is not available");
       }
     }
   };

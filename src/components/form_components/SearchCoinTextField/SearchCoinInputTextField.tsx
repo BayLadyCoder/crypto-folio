@@ -8,26 +8,25 @@ interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   coins: MarketCoin[];
   name: string;
+  hasLabel?: boolean;
 }
-
 const SearchCoinInputTextField: React.FC<Props> = ({
-  width,
   value,
   name,
   handleChange,
   coins,
+  hasLabel,
 }) => {
   return (
     <InputContainer>
-      <Label htmlFor="coins">Coins</Label>
+      {hasLabel && <Label htmlFor="coins">Coins</Label>}
       <TextField
-        type="text"
+        type="search"
         list="coins"
         placeholder="Search"
         name={name}
         value={value}
         onChange={handleChange}
-        width={width}
       />
       <datalist id="coins">
         {coins.map((coin) => (

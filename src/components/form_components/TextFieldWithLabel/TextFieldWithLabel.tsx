@@ -25,6 +25,7 @@ const InputTextField: React.FC<Props> = ({
         placeholder={placeholder}
         value={value || ""}
         onChange={handleChange}
+        required
       />
     </InputContainer>
   );

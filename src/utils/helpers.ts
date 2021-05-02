@@ -12,6 +12,18 @@ export const getCoinNameAndSymbolArray = (marketCoins: MarketCoin[]) => {
   return options;
 };
 
+const validateCoinNameWithSymbol = (coinNameWithSymbol: string) => {
+  if (!coinNameWithSymbol.includes("(")) return false;
+  if (!coinNameWithSymbol.includes(")")) return false;
+  if (coinNameWithSymbol.length < 4) return false;
+
+  return true;
+};
+
 export const getCoinSymbol = (coinNameWithSymbol: string) => {
-  return coinNameWithSymbol.split("(")[1].split(")")[0].toLowerCase();
+  if (validateCoinNameWithSymbol(coinNameWithSymbol)) {
+    return coinNameWithSymbol.split("(")[1].split(")")[0].toLowerCase();
+  } else {
+    return "Invalid coin";
+  }
 };

@@ -62,20 +62,18 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
     inputValue: string,
     setInputValue: Dispatch<SetStateAction<string>>
   ) => {
-    if (inputValue.length > 0) {
-      const coinSymbol = getCoinSymbol(inputValue);
+    const coinSymbol = getCoinSymbol(inputValue);
 
-      if (isValidatedValue(coinOptions, coinSymbol)) {
-        removeCoinFromCoinOptions(coinSymbol, setCoinOptions);
-        const newCoin = marketCoins.filter(
-          (coin) => coin.symbol === coinSymbol
-        )[0];
-        setWatchList((prev) => [...prev, newCoin]);
-      } else {
-        alert("This coin is not supported currently. Please try again.");
-      }
-      setInputValue("");
+    if (isValidatedValue(coinOptions, coinSymbol)) {
+      removeCoinFromCoinOptions(coinSymbol, setCoinOptions);
+      const newCoin = marketCoins.filter(
+        (coin) => coin.symbol === coinSymbol
+      )[0];
+      setWatchList((prev) => [...prev, newCoin]);
+    } else {
+      alert("This coin is not supported currently. Please try again.");
     }
+    setInputValue("");
   };
 
   const removeCoinFromWatchList = (

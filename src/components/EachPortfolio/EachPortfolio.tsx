@@ -16,6 +16,8 @@ interface Props {
     newCoin: PortfolioCoinBasic,
     marketCoins: MarketCoin[]
   ) => void;
+  portfolioCoinOptions: MarketCoin[];
+  createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
 }
 
 const EachPortfolio: React.FC<Props> = ({
@@ -27,6 +29,8 @@ const EachPortfolio: React.FC<Props> = ({
   portfolioFormOpen,
   onClickOpenPortfolioForm,
   onClickClosePortfolioForm,
+  portfolioCoinOptions,
+  createPortfolioCoinOptions,
 }) => {
   return (
     <PortfolioContainer>
@@ -43,6 +47,8 @@ const EachPortfolio: React.FC<Props> = ({
           portfolioName={portfolioName}
           updatePortfolioName={updatePortfolioName}
           addNewCoinToPortfolio={addNewCoinToPortfolio}
+          portfolioCoinOptions={portfolioCoinOptions}
+          createPortfolioCoinOptions={createPortfolioCoinOptions}
         />
       )}
 

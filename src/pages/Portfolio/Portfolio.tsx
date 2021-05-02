@@ -18,6 +18,8 @@ const Portfolio = () => {
     onClickClosePortfolioForm,
     portfolioCoins,
     addNewCoinToPortfolio,
+    portfolioCoinOptions,
+    createPortfolioCoinOptions,
   } = usePortfolio();
   return (
     <Container>
@@ -31,6 +33,8 @@ const Portfolio = () => {
         portfolioFormOpen={portfolioFormOpen}
         onClickOpenPortfolioForm={onClickOpenPortfolioForm}
         onClickClosePortfolioForm={onClickClosePortfolioForm}
+        portfolioCoinOptions={portfolioCoinOptions}
+        createPortfolioCoinOptions={createPortfolioCoinOptions}
       />
     </Container>
   );
