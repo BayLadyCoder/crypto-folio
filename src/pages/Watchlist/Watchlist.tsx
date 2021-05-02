@@ -1,4 +1,4 @@
-import { Container, PageTitle, Button } from "../../styles/globalStyles";
+import { Container, PageTitle } from "../../styles/globalStyles";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
 import WatchListTable from "../../components/WatchListTable";
 

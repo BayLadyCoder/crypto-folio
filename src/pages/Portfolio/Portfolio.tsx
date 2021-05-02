@@ -7,7 +7,7 @@ const Portfolio = () => {
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
   useEffect(() => {
     if (marketCoins.length === 0) fetchMarketCoins();
-  }, [fetchMarketCoins]);
+  }, [fetchMarketCoins, marketCoins]);
   return (
     <Container>
       <PageTitle>Portfolio</PageTitle>

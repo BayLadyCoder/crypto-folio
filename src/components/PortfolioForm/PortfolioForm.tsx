@@ -55,9 +55,9 @@ const PortfolioForm: React.FC<Props> = ({
     if (btc_price_at_bought > 0 && btc_paid_quantity > 0) {
       const costBasis = Number(btc_price_at_bought) * Number(btc_paid_quantity);
       setEstimate(costBasis);
-      setPortfolioData({ ...portfolioData, cost_basis: costBasis });
+      setPortfolioData((prev) => ({ ...prev, cost_basis: costBasis }));
     }
-  }, [boughtWithBitcoin, portfolioData]);
+  }, [boughtWithBitcoin]);
 
   const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPortfolioName(e.target.value);
