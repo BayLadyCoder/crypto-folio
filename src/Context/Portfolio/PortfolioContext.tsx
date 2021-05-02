@@ -6,6 +6,11 @@ import {
 } from "../../types/coins";
 import { PortfolioContextData } from "../../types/context";
 import { getCoinSymbol } from "../../utils/helpers";
+import {
+  addCoinToCoinOptions,
+  removeCoinFromCoinOptions,
+  isValidatedValue,
+} from "../contextHelpers";
 
 const portfolioDefaultValues = {
   portfolioFormOpen: false,
@@ -15,6 +20,8 @@ const portfolioDefaultValues = {
   updatePortfolioName: () => null,
   portfolioCoins: [],
   addNewCoinToPortfolio: () => null,
+  portfolioCoinOptions: [],
+  createPortfolioCoinOptions: () => null,
 };
 
 export const PortfolioContext = createContext<PortfolioContextData>(
@@ -53,6 +60,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
     marketCoins: MarketCoin[]
   ) => {
     const coinSymbol = getCoinSymbol(newCoin.name_with_symbol);
+    // isValidatedValue();
     let myCoin: PortfolioCoin;
     const { bought_price_per_coin, bought_quantity } = newCoin;
     for (let i = 0; i < marketCoins.length; i++) {
@@ -77,6 +85,9 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
       }
     }
   };
+  const createPortfolioCoinOptions = (marketCoins: MarketCoin[]) => {
+    setPortfolioCoinOptions(marketCoins);
+  };
 
   return (
     <PortfolioContext.Provider
@@ -88,6 +99,8 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
         updatePortfolioName,
         portfolioCoins,
         addNewCoinToPortfolio,
+        portfolioCoinOptions,
+        createPortfolioCoinOptions,
       }}
     >
       {children}

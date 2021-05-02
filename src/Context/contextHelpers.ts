@@ -1,17 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { MarketCoin } from "../../types/coins";
-import { getCoinSymbol } from "../../utils/helpers";
-
-export const handleAddNewCoinToWatchList = (
-  marketCoins: MarketCoin[],
-  coinSymbol: string,
-  setCoinOptions: Dispatch<SetStateAction<MarketCoin[]>>,
-  setWatchList: Dispatch<SetStateAction<MarketCoin[]>>
-) => {
-  removeCoinFromCoinOptions(coinSymbol, setCoinOptions);
-  const newCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol)[0];
-  setWatchList((prev) => [...prev, newCoin]);
-};
+import { MarketCoin } from "../types/coins";
+import { getCoinSymbol } from "../utils/helpers";
 
 export const isValidatedValue = (
   coinOptions: MarketCoin[],

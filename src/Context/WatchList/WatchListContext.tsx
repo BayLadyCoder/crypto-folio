@@ -7,12 +7,12 @@ import {
 } from "react";
 import { MarketCoin } from "../../types/coins";
 import { WatchListContextData } from "../../types/context";
+import { getCoinSymbol } from "../../utils/helpers";
 import {
+  removeCoinFromCoinOptions,
   addCoinToCoinOptions,
   isValidatedValue,
-  handleAddNewCoinToWatchList,
-} from "./WatchListContextHelpers";
-import { getCoinSymbol } from "../../utils/helpers";
+} from "../contextHelpers";
 
 const watchListDefaultValues = {
   watchListFormOpen: false,
@@ -66,12 +66,11 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
       const coinSymbol = getCoinSymbol(inputValue);
 
       if (isValidatedValue(coinOptions, coinSymbol)) {
-        handleAddNewCoinToWatchList(
-          marketCoins,
-          coinSymbol,
-          setCoinOptions,
-          setWatchList
-        );
+        removeCoinFromCoinOptions(coinSymbol, setCoinOptions);
+        const newCoin = marketCoins.filter(
+          (coin) => coin.symbol === coinSymbol
+        )[0];
+        setWatchList((prev) => [...prev, newCoin]);
       } else {
         alert("This coin is not supported currently. Please try again.");
       }
@@ -90,7 +89,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
     setCoinOptions(marketCoins);
   };
-
   return (
     <WatchListContext.Provider
       value={{

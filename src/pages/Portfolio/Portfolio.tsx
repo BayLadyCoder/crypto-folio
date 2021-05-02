@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Container, PageTitle } from "../../styles/globalStyles";
 import EachPortfolio from "../../components/EachPortfolio";
-import { MarketCoinsContext } from "../../context/MarketCoinsContext";
+import { MarketCoinsContext } from "../../context/MarketCoins/MarketCoinsContext";
 import { usePortfolio } from "../../context/Portfolio/PortfolioContext";
 
 const Portfolio = () => {

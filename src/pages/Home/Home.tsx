@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { MarketCoinsContext } from "../../context/MarketCoinsContext";
+import { MarketCoinsContext } from "../../context/MarketCoins/MarketCoinsContext";
 import SearchBar from "../../components/SearchBar";
 import { CryptoTable, CryptoTableName } from "../../components/CryptoTable";
 

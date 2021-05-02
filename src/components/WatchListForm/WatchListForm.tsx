@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { MarketCoinsContext } from "../../context/MarketCoinsContext";
+import { MarketCoinsContext } from "../../context/MarketCoins/MarketCoinsContext";
 import { Container, Loading } from "../../styles/globalStyles";
 import {
   Form,

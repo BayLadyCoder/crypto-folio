@@ -6,7 +6,7 @@ import WatchList from "./pages/WatchList";
 import Portfolio from "./pages/Portfolio";
 import { WatchListProvider } from "./context/WatchList/WatchListContext";
 import { PortfolioProvider } from "./context/Portfolio/PortfolioContext";
-import { MarketCoinsProvider } from "./context/MarketCoinsContext";
+import { MarketCoinsProvider } from "./context/MarketCoins/MarketCoinsContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App: React.FC = () => {

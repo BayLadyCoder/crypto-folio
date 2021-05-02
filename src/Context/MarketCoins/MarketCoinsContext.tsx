@@ -1,7 +1,7 @@
 import { useState, useCallback, createContext, useContext } from "react";
-import { MarketCoin } from "../types/coins";
+import { MarketCoin } from "../../types/coins";
 import axios from "axios";
-import { MarketCoinsContextData } from "../types/context";
+import { MarketCoinsContextData } from "../../types/context";
 
 const marketCoinsDefaultValues = {
   marketCoins: [],
