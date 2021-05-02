@@ -143,25 +143,25 @@ const PortfolioForm: React.FC<Props> = ({
           currency &&
           currency === "USD" ? (
             <InputTextField
-              label="Cost Basis"
+              label="Cost Basis ($)"
               name="cost_basis"
-              placeholder="Price you paid for this transaction ($)"
+              placeholder="Price you paid for this transaction"
               value={portfolioData.cost_basis}
               handleChange={updatePortfolioData}
             />
           ) : currency === "BTC" ? (
             <>
               <InputTextField
-                label="Bitcoin Price"
+                label="Bitcoin Price ($)"
                 name="btc_price_at_bought"
-                placeholder="BTC price when bought this coin ($)"
+                placeholder="BTC price when bought this coin"
                 value={boughtWithBitcoin.btc_price_at_bought}
                 handleChange={updateBoughtWithBitcoin}
               />
               <InputTextField
-                label="Total Bitcoin Paid"
+                label="Total Bitcoin Paid (₿)"
                 name="btc_paid_quantity"
-                placeholder="Total Bitcoin quantity spent (₿)"
+                placeholder="BTC quantity spent on this transaction"
                 value={boughtWithBitcoin.btc_paid_quantity}
                 handleChange={updateBoughtWithBitcoin}
               />
