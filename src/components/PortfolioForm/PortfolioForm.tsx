@@ -12,23 +12,17 @@ import {
   AddDetailsForm,
 } from "./PortfolioForm.styled";
 
-import {
-  Button,
-  InputContainer,
-  Label,
-  TextFieldInput,
-} from "../../styles/globalStyles";
+import { Button } from "../../styles/globalStyles";
 import { PortfolioCoinBasic } from "../../types/coins";
 import CurrencyRadioButtons from "../form_components/CurrencyRadioButtons";
 import InputTextField from "../form_components/InputTextField";
 import SearchCoinInputTextField from "../form_components/SearchCoinInputTextField";
 interface Props {
   coins: MarketCoin[];
-  onCloseForm: (e: React.MouseEvent) => void;
+  onCloseForm: () => void;
   portfolioName: string;
   updatePortfolioName: (newName: string) => void;
-  portfolioBasic: PortfolioCoinBasic;
-  updatePortfolioBasic: (newData: PortfolioCoinBasic) => void;
+  updatePortfolioCoins: (newData: PortfolioCoinBasic) => void;
 }
 
 const PortfolioForm: React.FC<Props> = ({
@@ -36,16 +30,18 @@ const PortfolioForm: React.FC<Props> = ({
   onCloseForm,
   portfolioName,
   updatePortfolioName,
-  portfolioBasic,
-  updatePortfolioBasic,
+  updatePortfolioCoins,
 }) => {
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
   const [currency, setCurrency] = useState("");
   const [estimate, setEstimate] = useState(0);
-  const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>(
-    portfolioBasic
-  );
+  const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>({
+    name_with_symbol: "",
+    quantity: 0,
+    price_per_coin: 0,
+    cost_basis: 0,
+  });
   const [boughtWithBitcoin, setBoughtWithBitcoin] = useState({
     btc_price_at_bought: 0,
     btc_paid_quantity: 0,
@@ -66,8 +62,15 @@ const PortfolioForm: React.FC<Props> = ({
 
   const onSave = (e: React.MouseEvent) => {
     e.preventDefault();
-    updatePortfolioBasic(portfolioData);
-    setPortfolioNameFormOpen(false);
+    const { quantity, cost_basis } = portfolioData;
+
+    updatePortfolioCoins({
+      ...portfolioData,
+      quantity: Number(quantity),
+      cost_basis: Number(cost_basis),
+      price_per_coin: cost_basis / quantity,
+    });
+    onCloseForm();
   };
   const onChooseCurrency = (value: string) => {
     setCurrency(value);
@@ -162,7 +165,6 @@ const PortfolioForm: React.FC<Props> = ({
                 value={boughtWithBitcoin.btc_paid_quantity}
                 handleChange={updateBoughtWithBitcoin}
               />
-
               {/* {estimate && (
                 <p style={{ width: "250px", alignSelf: "start" }}>
                   estimated in USD ~ ${estimate}

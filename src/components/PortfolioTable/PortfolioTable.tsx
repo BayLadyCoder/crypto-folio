@@ -23,30 +23,26 @@ const PortfolioTable: React.FC<Props> = ({
 }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [portfolioName, setPortfolioName] = useState("My Portfolio");
-  const [portfolioBasic, setPortfolioBasic] = useState<PortfolioCoinBasic>({
-    name_with_symbol: "",
-    quantity: 0,
-    price_per_coin: 0,
-    cost_basis: 0,
-  });
+  const [portfolioCoins, setPortfolioCoins] = useState<PortfolioCoinBasic[]>(
+    []
+  );
 
   const onClickOpenForm = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFormOpen(true);
   };
-  const onClickCloseForm = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const onClickCloseForm = () => {
     setIsFormOpen(false);
   };
 
   const updatePortfolioName = (newName: string) => {
     setPortfolioName(newName);
   };
-  const updatePortfolioBasic = (newData: PortfolioCoinBasic) => {
-    setPortfolioBasic(newData);
+  const updatePortfolioCoins = (newData: PortfolioCoinBasic) => {
+    setPortfolioCoins([...portfolioCoins, newData]);
   };
 
-  console.log("portfolioBasic", portfolioBasic);
+  console.log("portfolioCoins", portfolioCoins);
 
   return (
     <PortfolioContainer>
@@ -60,8 +56,7 @@ const PortfolioTable: React.FC<Props> = ({
           onCloseForm={onClickCloseForm}
           portfolioName={portfolioName}
           updatePortfolioName={updatePortfolioName}
-          portfolioBasic={portfolioBasic}
-          updatePortfolioBasic={updatePortfolioBasic}
+          updatePortfolioCoins={updatePortfolioCoins}
         />
       )}
 
