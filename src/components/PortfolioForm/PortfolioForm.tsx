@@ -43,6 +43,7 @@ const PortfolioForm: React.FC<Props> = ({
     cost_basis: 0,
     total_gain_usd: 0,
     total_gain_percentage: 0,
+    current_value: 0,
   });
   const [boughtWithBitcoin, setBoughtWithBitcoin] = useState({
     btc_price_at_bought: 0,

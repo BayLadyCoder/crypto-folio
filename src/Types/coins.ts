@@ -44,6 +44,7 @@ export interface PortfolioCoinBasic {
   cost_basis: number;
   total_gain_usd: number;
   total_gain_percentage: number;
+  current_value: number;
 }
 
 export type PortfolioCoin = PortfolioCoinBasic & MarketCoin;

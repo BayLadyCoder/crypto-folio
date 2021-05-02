@@ -50,11 +50,13 @@ const EachPortfolio: React.FC<Props> = ({
           ((marketCoins[i].current_price - bought_price_per_coin) /
             bought_price_per_coin) *
           100;
+        const currentValue = marketCoins[i].current_price * bought_quantity;
         myCoin = {
           ...marketCoins[i],
           ...newCoin,
           total_gain_usd: gainUSD,
           total_gain_percentage: gainPercentage,
+          current_value: currentValue,
         };
         setPortfolioCoins([...portfolioCoins, myCoin]);
         break;

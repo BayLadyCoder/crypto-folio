@@ -56,7 +56,7 @@ const PortfolioTable: React.FC<Props> = ({ coins }) => {
                 ${coin.cost_basis.toLocaleString()}
               </TableBodyData>
               <TableBodyData align="right">
-                ${coin.cost_basis.toLocaleString()}
+                ${coin.current_value.toLocaleString()}
               </TableBodyData>
               <TableBodyData
                 align="right"
