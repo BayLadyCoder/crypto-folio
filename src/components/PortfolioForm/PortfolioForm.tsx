@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MarketCoin } from "../../types/coins";
 import {
   FormContainer,
@@ -49,6 +49,15 @@ const PortfolioForm: React.FC<Props> = ({
     btc_price_at_bought: 0,
     btc_paid_quantity: 0,
   });
+
+  useEffect(() => {
+    const { btc_price_at_bought, btc_paid_quantity } = boughtWithBitcoin;
+    if (btc_price_at_bought > 0 && btc_paid_quantity > 0) {
+      const costBasis = Number(btc_price_at_bought) * Number(btc_paid_quantity);
+      setEstimate(costBasis);
+      setPortfolioData({ ...portfolioData, cost_basis: costBasis });
+    }
+  }, [boughtWithBitcoin, portfolioData]);
 
   const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPortfolioName(e.target.value);
@@ -129,9 +138,9 @@ const PortfolioForm: React.FC<Props> = ({
 
           {portfolioData.name_with_symbol === "Bitcoin (BTC)" && (
             <InputTextField
-              label="Total Cost"
+              label="Total Cost ($)"
               name="cost_basis"
-              placeholder="Price you paid for this transaction ($)"
+              placeholder="Price you paid for this transaction"
               value={portfolioData.cost_basis}
               handleChange={updatePortfolioData}
             />
@@ -146,7 +155,7 @@ const PortfolioForm: React.FC<Props> = ({
           currency &&
           currency === "USD" ? (
             <InputTextField
-              label="Cost Basis ($)"
+              label="Total Cost ($)"
               name="cost_basis"
               placeholder="Price you paid for this transaction"
               value={portfolioData.cost_basis}
@@ -168,11 +177,17 @@ const PortfolioForm: React.FC<Props> = ({
                 value={boughtWithBitcoin.btc_paid_quantity}
                 handleChange={updateBoughtWithBitcoin}
               />
-              {/* {estimate && (
-                <p style={{ width: "250px", alignSelf: "start" }}>
-                  estimated in USD ~ ${estimate}
+              {estimate > 0 && (
+                <p
+                  style={{
+                    width: "250px",
+                    alignSelf: "start",
+                    fontSize: "13px",
+                  }}
+                >
+                  estimate total cost basis ~ ${estimate}
                 </p>
-              )} */}
+              )}
             </>
           ) : null}
         </AddDetailsForm>
