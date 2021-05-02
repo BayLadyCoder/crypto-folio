@@ -82,6 +82,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
               current_value: currentValue,
             };
             setPortfolioCoins([...portfolioCoins, myCoin]);
+            removeCoinFromCoinOptions(coinSymbol, setPortfolioCoinOptions);
             break;
           }
         }

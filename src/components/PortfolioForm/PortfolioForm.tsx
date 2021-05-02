@@ -144,7 +144,7 @@ const PortfolioForm: React.FC<Props> = ({
             value={portfolioData.name_with_symbol}
             name="name_with_symbol"
             handleChange={updatePortfolioData}
-            coins={marketCoins}
+            coins={portfolioCoinOptions}
           />
           <TextFieldWithLabel
             label="Quantity"
