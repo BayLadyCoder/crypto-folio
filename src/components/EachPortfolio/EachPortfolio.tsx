@@ -6,6 +6,7 @@ import PortfolioForm from "../PortfolioForm";
 // import { CryptoTable } from "../CryptoTable";
 import { PortfolioCoinBasic, PortfolioCoin } from "../../types/coins";
 import { getCoinSymbol } from "../../utils/helpers";
+import PortfolioTable from "../PortfolioTable";
 interface Props {
   marketCoins: MarketCoin[];
   portfolioFormOpen?: boolean;
@@ -14,7 +15,7 @@ interface Props {
   updatePortfolioName?: (newName: string) => void;
 }
 
-const PortfolioTable: React.FC<Props> = ({
+const EachPortfolio: React.FC<Props> = ({
   marketCoins,
   // portfolioFormOpen,
   // onClickOpenForm,
@@ -79,16 +80,11 @@ const PortfolioTable: React.FC<Props> = ({
         />
       )}
 
-      {/* {watchListFormOpen && (
-        <WatchListForm
-          watchListName={watchListName}
-          updateWatchListName={updateWatchListName}
-        />
+      {portfolioCoins.length > 0 && !isFormOpen && (
+        <PortfolioTable coins={portfolioCoins} />
       )}
-
-      {coins.length > 0 && !watchListFormOpen && <CryptoTable coins={coins} />} */}
     </PortfolioContainer>
   );
 };
 
-export default PortfolioTable;
+export default EachPortfolio;
