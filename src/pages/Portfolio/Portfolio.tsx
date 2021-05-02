@@ -1,20 +1,18 @@
 import { useContext, useEffect } from "react";
-
-import { Container, HeaderWrapper, PageTitle } from "../../styles/globalStyles";
-import PortfolioTable from "../../components/PortfolioTable";
-import PortfolioForm from "../../components/PortfolioForm";
+import { Container, PageTitle } from "../../styles/globalStyles";
+import PortfolioTable from "../../components/EachPortfolio";
 import { MarketCoinsContext } from "../../context/MarketCoinsContext";
 
 const Portfolio = () => {
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
   useEffect(() => {
-    fetchMarketCoins();
+    if (marketCoins.length === 0) fetchMarketCoins();
   }, [fetchMarketCoins]);
   return (
     <Container>
       <PageTitle>Portfolio</PageTitle>
       <PortfolioTable
-        coins={marketCoins}
+        marketCoins={marketCoins}
         // watchListFormOpen={watchListFormOpen}
         // onClickOpenForm={onClickOpenForm}
         portfolioName="My Portfolio"

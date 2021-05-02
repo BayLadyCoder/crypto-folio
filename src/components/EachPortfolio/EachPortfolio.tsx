@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { MarketCoin } from "../../types/coins";
-import { TableName, PortfolioContainer } from "./PortfolioTable.styled";
+import { TableName, PortfolioContainer } from "./EachPortfolio.styled";
 import { HeaderWrapper, Button } from "../../styles/globalStyles";
 import PortfolioForm from "../PortfolioForm";
 // import { CryptoTable } from "../CryptoTable";
-import { PortfolioCoinBasic } from "../../types/coins";
-
+import { PortfolioCoinBasic, PortfolioCoin } from "../../types/coins";
+import { getCoinSymbol } from "../../utils/helpers";
 interface Props {
-  coins: MarketCoin[];
+  marketCoins: MarketCoin[];
   portfolioFormOpen?: boolean;
   onClickOpenForm?: () => void;
   portfolioName?: string;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const PortfolioTable: React.FC<Props> = ({
-  coins,
+  marketCoins,
   // portfolioFormOpen,
   // onClickOpenForm,
   // portfolioName,
@@ -23,9 +23,7 @@ const PortfolioTable: React.FC<Props> = ({
 }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [portfolioName, setPortfolioName] = useState("My Portfolio");
-  const [portfolioCoins, setPortfolioCoins] = useState<PortfolioCoinBasic[]>(
-    []
-  );
+  const [portfolioCoins, setPortfolioCoins] = useState<PortfolioCoin[]>([]);
 
   const onClickOpenForm = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -38,8 +36,29 @@ const PortfolioTable: React.FC<Props> = ({
   const updatePortfolioName = (newName: string) => {
     setPortfolioName(newName);
   };
-  const updatePortfolioCoins = (newData: PortfolioCoinBasic) => {
-    setPortfolioCoins([...portfolioCoins, newData]);
+  const updatePortfolioCoins = (newCoin: PortfolioCoinBasic) => {
+    const coinSymbol = getCoinSymbol(newCoin.name_with_symbol);
+    let myCoin: PortfolioCoin;
+    const { bought_price_per_coin, bought_quantity } = newCoin;
+    for (let i = 0; i < marketCoins.length; i++) {
+      if (marketCoins[i].symbol === coinSymbol) {
+        const gainUSD =
+          (marketCoins[i].current_price - bought_price_per_coin) *
+          bought_quantity;
+        const gainPercentage =
+          ((marketCoins[i].current_price - bought_price_per_coin) /
+            bought_price_per_coin) *
+          100;
+        myCoin = {
+          ...marketCoins[i],
+          ...newCoin,
+          total_gain_usd: gainUSD,
+          total_gain_percentage: gainPercentage,
+        };
+        setPortfolioCoins([...portfolioCoins, myCoin]);
+        break;
+      }
+    }
   };
 
   console.log("portfolioCoins", portfolioCoins);
@@ -52,7 +71,7 @@ const PortfolioTable: React.FC<Props> = ({
       </HeaderWrapper>
       {isFormOpen && (
         <PortfolioForm
-          coins={coins}
+          coins={marketCoins}
           onCloseForm={onClickCloseForm}
           portfolioName={portfolioName}
           updatePortfolioName={updatePortfolioName}

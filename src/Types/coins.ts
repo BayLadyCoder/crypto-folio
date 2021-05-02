@@ -39,9 +39,11 @@ export interface MarketCoin {
 
 export interface PortfolioCoinBasic {
   name_with_symbol: string;
-  quantity: number;
-  price_per_coin: number;
+  bought_quantity: number;
+  bought_price_per_coin: number;
   cost_basis: number;
+  total_gain_usd: number;
+  total_gain_percentage: number;
 }
 
 export type PortfolioCoin = PortfolioCoinBasic & MarketCoin;

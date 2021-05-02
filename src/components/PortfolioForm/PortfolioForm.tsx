@@ -38,9 +38,11 @@ const PortfolioForm: React.FC<Props> = ({
   const [estimate, setEstimate] = useState(0);
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>({
     name_with_symbol: "",
-    quantity: 0,
-    price_per_coin: 0,
+    bought_quantity: 0,
+    bought_price_per_coin: 0,
     cost_basis: 0,
+    total_gain_usd: 0,
+    total_gain_percentage: 0,
   });
   const [boughtWithBitcoin, setBoughtWithBitcoin] = useState({
     btc_price_at_bought: 0,
@@ -62,13 +64,13 @@ const PortfolioForm: React.FC<Props> = ({
 
   const onSave = (e: React.MouseEvent) => {
     e.preventDefault();
-    const { quantity, cost_basis } = portfolioData;
+    const { bought_quantity, cost_basis } = portfolioData;
 
     updatePortfolioCoins({
       ...portfolioData,
-      quantity: Number(quantity),
+      bought_quantity: Number(bought_quantity),
       cost_basis: Number(cost_basis),
-      price_per_coin: cost_basis / quantity,
+      bought_price_per_coin: cost_basis / bought_quantity,
     });
     onCloseForm();
   };
@@ -118,9 +120,9 @@ const PortfolioForm: React.FC<Props> = ({
           />
           <InputTextField
             label="Quantity"
-            name="quantity"
+            name="bought_quantity"
             placeholder="How many coins do you have?"
-            value={portfolioData.quantity}
+            value={portfolioData.bought_quantity}
             handleChange={updatePortfolioData}
           />
 
