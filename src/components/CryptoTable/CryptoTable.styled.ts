@@ -13,6 +13,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   overflow-x: scroll;
+
+  @media screen and (min-width: 960px) {
+    overflow-x: visible;
+  }
 `;
 
 export const Table = styled.table`

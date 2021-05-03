@@ -17,7 +17,7 @@ interface Props {
 const CryptoTable: React.FC<Props> = ({ coins }) => {
   return (
     <Wrapper>
-      <Table>
+      <Table cellSpacing="0" cellPadding="0">
         <thead>
           <TableHeadRow>
             <TableHeadData align="center">Rank</TableHeadData>

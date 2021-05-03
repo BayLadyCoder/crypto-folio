@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 import { MarketCoin } from "../types/coins";
-import { getCoinSymbol } from "../utils/helpers";
 
 export const isValidatedValue = (
   coinOptions: MarketCoin[],
