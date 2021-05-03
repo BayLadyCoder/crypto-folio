@@ -156,6 +156,7 @@ export const InputContainer = styled.div`
 export const Label = styled.label`
   font-weight: 500;
   padding: 5px 0px;
+  font-size: 15px;
 `;
 
 export const TextField = styled.input`

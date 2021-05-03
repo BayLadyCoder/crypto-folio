@@ -112,7 +112,6 @@ const WatchListForm: React.FC<Props> = ({
             name="coins"
             handleChange={onChangeInput}
             coins={coinOptions}
-            hasLabel
           />
 
           <Button primary="true" onClick={onAddCoin}>

@@ -10,15 +10,19 @@ import {
   BottomContainer,
   CloseFormButton,
   AddDetailsForm,
+  SelectPortfolioActionsContainer,
+  FormTitle,
 } from "./PortfolioForm.styled";
 
 import { Button } from "../../styles/globalStyles";
-import { PortfolioCoinBasic } from "../../types/coins";
+import { PortfolioCoinBasic, PortfolioCoin } from "../../types/coins";
 import {
   TextFieldWithLabel,
   SearchCoinTextField,
   CurrencyRadioButtons,
 } from "../form_components";
+import { RiAddFill } from "react-icons/ri";
+import { MdModeEdit } from "react-icons/md";
 
 interface Props {
   marketCoins: MarketCoin[];
@@ -31,6 +35,9 @@ interface Props {
   ) => void;
   portfolioCoinOptions: MarketCoin[];
   createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
+  portfolioCoins: PortfolioCoin[];
+  formStep: string;
+  setFormStep: any;
 }
 
 const PortfolioForm: React.FC<Props> = ({
@@ -41,9 +48,111 @@ const PortfolioForm: React.FC<Props> = ({
   addNewCoinToPortfolio,
   portfolioCoinOptions,
   createPortfolioCoinOptions,
+  portfolioCoins,
+  formStep,
+  setFormStep,
 }) => {
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
+
+  const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewPortfolioName(e.target.value);
+  };
+
+  const onSaveNewPortfolioName = () => {
+    updatePortfolioName(newPortfolioName);
+    setPortfolioNameFormOpen(false);
+  };
+
+  const onClickPortfolioActionButton = (value: string) => {
+    setFormStep(value);
+  };
+
+  return (
+    <FormContainer>
+      <TopContainer>
+        <PortfolioNameContainer>
+          {portfolioNameFormOpen ? (
+            <>
+              <input
+                type="text"
+                value={newPortfolioName}
+                onChange={onChangePortfolioName}
+              />
+              <button onClick={onSaveNewPortfolioName}>Save</button>
+            </>
+          ) : (
+            <>
+              <PortfolioName>{portfolioName}</PortfolioName>
+              <EditIconButton onClick={() => setPortfolioNameFormOpen(true)}>
+                edit icon
+              </EditIconButton>
+            </>
+          )}
+        </PortfolioNameContainer>
+        <CloseFormButton onClick={onCloseForm} />
+      </TopContainer>
+      {formStep === "start" && (
+        <SelectPortfolioActionsContainer>
+          <Button
+            onClick={() => onClickPortfolioActionButton("add-coin")}
+            primary="true"
+          >
+            <RiAddFill style={{ marginRight: "5px" }} /> ADD NEW COIN
+          </Button>
+          <Button
+            onClick={() => onClickPortfolioActionButton("edit-portfolio")}
+            style={{ marginLeft: "5px" }}
+          >
+            <MdModeEdit style={{ marginRight: "5px" }} /> EDIT PORTFOLIO
+          </Button>
+        </SelectPortfolioActionsContainer>
+      )}
+      {formStep === "add-coin" && (
+        <AddOrEditCoinsForm
+          marketCoins={marketCoins}
+          onCloseForm={onCloseForm}
+          portfolioName={portfolioName}
+          updatePortfolioName={updatePortfolioName}
+          addNewCoinToPortfolio={addNewCoinToPortfolio}
+          portfolioCoinOptions={portfolioCoinOptions}
+          createPortfolioCoinOptions={createPortfolioCoinOptions}
+          portfolioCoins={portfolioCoins}
+          formStep={formStep}
+          setFormStep={setFormStep}
+        />
+      )}
+      {formStep === "edit-portfolio" && (
+        <AddDetailsForm>
+          <FormTitle>Edit Portfolio</FormTitle>
+          <BottomContainer>
+            <Button onClick={onCloseForm}>CANCEL</Button>
+            <Button
+              onClick={() => console.log("save")}
+              style={{ marginLeft: "10px" }}
+              primary="true"
+            >
+              SAVE
+            </Button>
+          </BottomContainer>
+        </AddDetailsForm>
+      )}
+    </FormContainer>
+  );
+};
+
+const AddOrEditCoinsForm: React.FC<Props> = ({
+  marketCoins,
+  onCloseForm,
+  portfolioName,
+  updatePortfolioName,
+  addNewCoinToPortfolio,
+  portfolioCoinOptions,
+  createPortfolioCoinOptions,
+  portfolioCoins,
+  formStep,
+  setFormStep,
+}) => {
   const [currency, setCurrency] = useState("");
   const [estimate, setEstimate] = useState(0);
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>({
@@ -74,15 +183,6 @@ const PortfolioForm: React.FC<Props> = ({
       createPortfolioCoinOptions(marketCoins);
   }, [marketCoins, portfolioCoinOptions.length, createPortfolioCoinOptions]);
 
-  const onChangePortfolioName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewPortfolioName(e.target.value);
-  };
-
-  const onSaveNewPortfolioName = () => {
-    updatePortfolioName(newPortfolioName);
-    setPortfolioNameFormOpen(false);
-  };
-
   const updatePortfolioData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPortfolioData({ ...portfolioData, [e.target.name]: e.target.value });
   };
@@ -112,115 +212,87 @@ const PortfolioForm: React.FC<Props> = ({
       [e.target.name]: e.target.value,
     });
   };
-
   return (
-    <FormContainer>
-      <TopContainer>
-        <PortfolioNameContainer>
-          {portfolioNameFormOpen ? (
-            <>
-              <input
-                type="text"
-                value={newPortfolioName}
-                onChange={onChangePortfolioName}
-              />
-              <button onClick={onSaveNewPortfolioName}>Save</button>
-            </>
-          ) : (
-            <>
-              <PortfolioName>{portfolioName}</PortfolioName>
-              <EditIconButton onClick={() => setPortfolioNameFormOpen(true)}>
-                edit icon
-              </EditIconButton>
-            </>
-          )}
-        </PortfolioNameContainer>
-        <CloseFormButton onClick={onCloseForm} />
-      </TopContainer>
+    <DetailsContainer>
+      <AddDetailsForm>
+        <FormTitle>Add New Coin</FormTitle>
+        <SearchCoinTextField
+          value={portfolioData.name_with_symbol}
+          name="name_with_symbol"
+          handleChange={updatePortfolioData}
+          coins={portfolioCoinOptions}
+          hasLabel
+        />
+        <TextFieldWithLabel
+          label="Quantity"
+          name="bought_quantity"
+          placeholder="How many coins do you have?"
+          value={portfolioData.bought_quantity}
+          handleChange={updatePortfolioData}
+        />
 
-      <DetailsContainer>
-        <AddDetailsForm>
-          <SearchCoinTextField
-            value={portfolioData.name_with_symbol}
-            name="name_with_symbol"
-            handleChange={updatePortfolioData}
-            coins={portfolioCoinOptions}
-          />
+        {portfolioData.name_with_symbol === "Bitcoin (BTC)" && (
           <TextFieldWithLabel
-            label="Quantity"
-            name="bought_quantity"
-            placeholder="How many coins do you have?"
-            value={portfolioData.bought_quantity}
+            label="Total Cost ($)"
+            name="cost_basis"
+            placeholder="Price you paid for this transaction"
+            value={portfolioData.cost_basis}
             handleChange={updatePortfolioData}
           />
+        )}
 
-          {portfolioData.name_with_symbol === "Bitcoin (BTC)" && (
-            <TextFieldWithLabel
-              label="Total Cost ($)"
-              name="cost_basis"
-              placeholder="Price you paid for this transaction"
-              value={portfolioData.cost_basis}
-              handleChange={updatePortfolioData}
-            />
+        {portfolioData.name_with_symbol &&
+          portfolioData.name_with_symbol !== "Bitcoin (BTC)" && (
+            <CurrencyRadioButtons onChooseCurrency={onChooseCurrency} />
           )}
 
-          {portfolioData.name_with_symbol &&
-            portfolioData.name_with_symbol !== "Bitcoin (BTC)" && (
-              <CurrencyRadioButtons onChooseCurrency={onChooseCurrency} />
-            )}
-
-          {portfolioData.name_with_symbol !== "Bitcoin (BTC)" &&
-          currency &&
-          currency === "USD" ? (
+        {portfolioData.name_with_symbol !== "Bitcoin (BTC)" &&
+        currency &&
+        currency === "USD" ? (
+          <TextFieldWithLabel
+            label="Total Cost ($)"
+            name="cost_basis"
+            placeholder="Price you paid for this transaction"
+            value={portfolioData.cost_basis}
+            handleChange={updatePortfolioData}
+          />
+        ) : currency === "BTC" ? (
+          <>
             <TextFieldWithLabel
-              label="Total Cost ($)"
-              name="cost_basis"
-              placeholder="Price you paid for this transaction"
-              value={portfolioData.cost_basis}
-              handleChange={updatePortfolioData}
+              label="Bitcoin Price ($)"
+              name="btc_price_at_bought"
+              placeholder="BTC price when bought this coin"
+              value={boughtWithBitcoin.btc_price_at_bought}
+              handleChange={updateBoughtWithBitcoin}
             />
-          ) : currency === "BTC" ? (
-            <>
-              <TextFieldWithLabel
-                label="Bitcoin Price ($)"
-                name="btc_price_at_bought"
-                placeholder="BTC price when bought this coin"
-                value={boughtWithBitcoin.btc_price_at_bought}
-                handleChange={updateBoughtWithBitcoin}
-              />
-              <TextFieldWithLabel
-                label="Total Bitcoin Paid (₿)"
-                name="btc_paid_quantity"
-                placeholder="BTC quantity spent on this transaction"
-                value={boughtWithBitcoin.btc_paid_quantity}
-                handleChange={updateBoughtWithBitcoin}
-              />
-              {estimate > 0 && (
-                <p
-                  style={{
-                    width: "250px",
-                    alignSelf: "start",
-                    fontSize: "13px",
-                  }}
-                >
-                  estimate total cost basis ~ ${estimate}
-                </p>
-              )}
-            </>
-          ) : null}
-        </AddDetailsForm>
-        <BottomContainer>
-          <Button onClick={onCloseForm}>CANCEL</Button>
-          <Button
-            onClick={onSave}
-            style={{ marginLeft: "10px" }}
-            primary="true"
-          >
-            SAVE
-          </Button>
-        </BottomContainer>
-      </DetailsContainer>
-    </FormContainer>
+            <TextFieldWithLabel
+              label="Total Bitcoin Paid (₿)"
+              name="btc_paid_quantity"
+              placeholder="BTC quantity spent on this transaction"
+              value={boughtWithBitcoin.btc_paid_quantity}
+              handleChange={updateBoughtWithBitcoin}
+            />
+            {estimate > 0 && (
+              <p
+                style={{
+                  width: "250px",
+                  alignSelf: "start",
+                  fontSize: "13px",
+                }}
+              >
+                estimate total cost basis ~ ${estimate}
+              </p>
+            )}
+          </>
+        ) : null}
+      </AddDetailsForm>
+      <BottomContainer>
+        <Button onClick={onCloseForm}>CANCEL</Button>
+        <Button onClick={onSave} style={{ marginLeft: "10px" }} primary="true">
+          SAVE
+        </Button>
+      </BottomContainer>
+    </DetailsContainer>
   );
 };
 

@@ -27,14 +27,15 @@ export const PortfolioNameContainer = styled.div`
   align-items: center;
 `;
 export const PortfolioName = styled.h2`
-  font-size: 20px;
+  font-size: 17px;
+  font-weight: 400;
 `;
 
 export const EditIconButton = styled(AiFillEdit)`
   color: #fff;
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
-  font-size: 40px;
+  font-size: 39px;
   border-radius: 50%;
   margin-left: 5px;
 
@@ -83,4 +84,20 @@ export const BottomContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px 20px 20px;
+`;
+
+export const SelectPortfolioActionsContainer = styled.div`
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+`;
+
+export const FormTitle = styled.h3`
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  align-self: start;
 `;

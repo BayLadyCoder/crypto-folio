@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MarketCoin } from "../../types/coins";
 import { PortfolioContainer } from "./EachPortfolio.styled";
 import { HeaderWrapper, Button, TableName } from "../../styles/globalStyles";
@@ -32,12 +33,25 @@ const EachPortfolio: React.FC<Props> = ({
   portfolioCoinOptions,
   createPortfolioCoinOptions,
 }) => {
+  const [formStep, setFormStep] = useState("start");
+  const onClickEditPortfolio = () => {
+    setFormStep("start");
+    onClickOpenPortfolioForm();
+  };
+  const onClickAddCoins = () => {
+    setFormStep("add-coin");
+    onClickOpenPortfolioForm();
+  };
   return (
     <PortfolioContainer>
       <HeaderWrapper>
         <TableName>{portfolioName}</TableName>
-        {!portfolioFormOpen && (
-          <Button onClick={onClickOpenPortfolioForm}>+ADD COINS</Button>
+        {!portfolioFormOpen && portfolioCoins.length > 0 ? (
+          <Button onClick={onClickEditPortfolio}>EDIT PORTFOLIO</Button>
+        ) : (
+          !portfolioFormOpen && (
+            <Button onClick={onClickAddCoins}>+ADD COINS</Button>
+          )
         )}
       </HeaderWrapper>
       {portfolioFormOpen && (
@@ -49,6 +63,9 @@ const EachPortfolio: React.FC<Props> = ({
           addNewCoinToPortfolio={addNewCoinToPortfolio}
           portfolioCoinOptions={portfolioCoinOptions}
           createPortfolioCoinOptions={createPortfolioCoinOptions}
+          portfolioCoins={portfolioCoins}
+          formStep={formStep}
+          setFormStep={setFormStep}
         />
       )}
 

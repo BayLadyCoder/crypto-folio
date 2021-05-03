@@ -19,7 +19,7 @@ const SearchCoinInputTextField: React.FC<Props> = ({
 }) => {
   return (
     <InputContainer>
-      {hasLabel && <Label htmlFor="coins">Coins</Label>}
+      {hasLabel && <Label htmlFor="coins">Crypto Currencies</Label>}
       <TextField
         type="search"
         list="coins"
