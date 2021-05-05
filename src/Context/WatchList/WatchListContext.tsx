@@ -70,6 +70,15 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         (coin) => coin.symbol === coinSymbol
       )[0];
       setWatchList((prev) => [...prev, newCoin]);
+      if (localStorage.getItem(watchListName) !== null) {
+        let stored_data = JSON.parse(localStorage[watchListName]);
+        localStorage[watchListName] = JSON.stringify([
+          ...stored_data,
+          coinSymbol,
+        ]);
+      } else {
+        localStorage[watchListName] = JSON.stringify([coinSymbol]);
+      }
     } else {
       alert("This coin is not supported currently. Please try again.");
     }
