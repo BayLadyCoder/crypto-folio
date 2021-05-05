@@ -38,3 +38,12 @@ export const addCoinToLocalStorage = (key: string, coinSymbol: string) => {
     localStorage[key] = JSON.stringify([coinSymbol]);
   }
 };
+
+export const removeCoinFromLocalStorage = (key: string, coinSymbol: string) => {
+  if (localStorage.getItem(key) !== null) {
+    let stored_data = JSON.parse(localStorage[key]);
+    localStorage[key] = JSON.stringify(
+      stored_data.filter((coin: string) => coin !== coinSymbol)
+    );
+  }
+};

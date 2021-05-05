@@ -13,6 +13,7 @@ import {
   addCoinToCoinOptions,
   isValidatedValue,
   addCoinToLocalStorage,
+  removeCoinFromLocalStorage,
 } from "../contextHelpers";
 
 const watchListDefaultValues = {
@@ -84,6 +85,7 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   ) => {
     setWatchList((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
     addCoinToCoinOptions(marketCoins, setCoinOptions, coinSymbol);
+    removeCoinFromLocalStorage(watchListName, coinSymbol);
   };
 
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
