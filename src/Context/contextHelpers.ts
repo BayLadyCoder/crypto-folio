@@ -29,3 +29,12 @@ export const addCoinToCoinOptions = (
   const fullCoin = marketCoins.filter((coin) => coin.symbol === coinSymbol)[0];
   setCoinOptions((prev) => [fullCoin, ...prev]);
 };
+
+export const addCoinToLocalStorage = (key: string, coinSymbol: string) => {
+  if (localStorage.getItem(key) !== null) {
+    let stored_data = JSON.parse(localStorage[key]);
+    localStorage[key] = JSON.stringify([...stored_data, coinSymbol]);
+  } else {
+    localStorage[key] = JSON.stringify([coinSymbol]);
+  }
+};
