@@ -25,6 +25,7 @@ export interface WatchListContextData {
   ) => void;
   coinOptions: MarketCoin[];
   createCoinOptions: (MarketCoins: MarketCoin[]) => void;
+  getWatchList: (marketCoins: MarketCoin[]) => void;
 }
 export interface PortfolioContextData {
   portfolioFormOpen: boolean;

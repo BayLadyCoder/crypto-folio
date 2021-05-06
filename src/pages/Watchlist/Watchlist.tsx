@@ -1,6 +1,8 @@
+import { useEffect, useContext } from "react";
 import { Container, PageTitle } from "../../styles/globalStyles";
 import { useWatchList } from "../../context/WatchList/WatchListContext";
 import EachWatchList from "../../components/EachWatchList/";
+import { MarketCoinsContext } from "../../context/MarketCoins/MarketCoinsContext";
 
 const WatchListPage = () => {
   const {
@@ -9,8 +11,18 @@ const WatchListPage = () => {
     updateWatchListName,
     watchListFormOpen,
     onClickOpenForm,
+    getWatchList,
   } = useWatchList();
+  const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
 
+  useEffect(() => {
+    const getMarketCoins = async () => {
+      const marketCoins = await fetchMarketCoins();
+      getWatchList(marketCoins);
+    };
+    getMarketCoins();
+  }, []);
+  console.log("watchList", watchList);
   return (
     <Container>
       <PageTitle>Watchlist</PageTitle>

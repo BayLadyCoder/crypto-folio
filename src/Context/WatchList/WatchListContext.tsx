@@ -14,6 +14,7 @@ import {
   isValidatedValue,
   addCoinToLocalStorage,
   removeCoinFromLocalStorage,
+  getDataFromLocalStorage,
 } from "../contextHelpers";
 
 const watchListDefaultValues = {
@@ -27,6 +28,7 @@ const watchListDefaultValues = {
   removeCoinFromWatchList: () => null,
   coinOptions: [],
   createCoinOptions: () => null,
+  getWatchList: () => null,
 };
 
 export const WatchListContext = createContext<WatchListContextData>(
@@ -71,8 +73,8 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
       const newCoin = marketCoins.filter(
         (coin) => coin.symbol === coinSymbol
       )[0];
-      setWatchList((prev) => [...prev, newCoin]);
       addCoinToLocalStorage(watchListName, coinSymbol);
+      setWatchList((prev) => [...prev, newCoin]);
     } else {
       alert("This coin is not supported currently. Please try again.");
     }
@@ -83,13 +85,48 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
     coinSymbol: string,
     marketCoins: MarketCoin[]
   ) => {
+    removeCoinFromLocalStorage(watchListName, coinSymbol);
     setWatchList((prev) => prev.filter((coin) => coin.symbol !== coinSymbol));
     addCoinToCoinOptions(marketCoins, setCoinOptions, coinSymbol);
-    removeCoinFromLocalStorage(watchListName, coinSymbol);
   };
 
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
-    setCoinOptions(marketCoins);
+    if (watchList.length > 0) {
+      const options: MarketCoin[] = [...marketCoins];
+
+      const toRemoveIndices: number[] = [];
+      for (let i = 0; i < watchList.length; i++) {
+        marketCoins.forEach((coin, index) => {
+          if (coin.symbol === watchList[i].symbol) toRemoveIndices.push(index);
+        });
+      }
+      toRemoveIndices.sort();
+      for (let i = toRemoveIndices.length - 1; i >= 0; i--) {
+        const index: number = toRemoveIndices[i];
+        options.splice(index, 1);
+      }
+      setCoinOptions(options);
+    } else {
+      setCoinOptions(marketCoins);
+    }
+  };
+
+  const getWatchList = (marketCoins: MarketCoin[]) => {
+    const data = getDataFromLocalStorage(watchListName);
+    console.log("data", data);
+
+    if (data && data.length > 0) {
+      let dataFromLocalStorage: MarketCoin[] = [];
+
+      for (let i = 0; i < data.length; i++) {
+        marketCoins.forEach((coin) => {
+          if (coin.symbol === data[i]) dataFromLocalStorage.push(coin);
+        });
+      }
+
+      console.log("dataFromLocalStorage", dataFromLocalStorage);
+      setWatchList(dataFromLocalStorage);
+    }
   };
   return (
     <WatchListContext.Provider
@@ -104,6 +141,7 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         removeCoinFromWatchList,
         coinOptions,
         createCoinOptions,
+        getWatchList,
       }}
     >
       {children}

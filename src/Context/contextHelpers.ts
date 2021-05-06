@@ -47,3 +47,12 @@ export const removeCoinFromLocalStorage = (key: string, coinSymbol: string) => {
     );
   }
 };
+
+export const getDataFromLocalStorage = (key: string) => {
+  if (localStorage.getItem(key) !== null) {
+    let stored_data = JSON.parse(localStorage[key]);
+    return stored_data;
+  } else {
+    return null;
+  }
+};
