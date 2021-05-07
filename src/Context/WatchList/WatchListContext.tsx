@@ -57,8 +57,19 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
     setWatchListFormOpen(false);
   };
 
-  const updateWatchListName = (newName: string) => {
-    setWatchListName(newName);
+  const updateWatchListName = (newWatchListName: string) => {
+    const oldWatchListName = watchListName;
+    const existingData = getDataFromLocalStorage(oldWatchListName);
+    // update watchListName in local storage
+    localStorage.setItem("watchListName", newWatchListName);
+
+    // add new watchListName to local storage with existing data from old name
+    localStorage[newWatchListName] = JSON.stringify(existingData);
+
+    // remove old watchListName key and its value in local storage
+    localStorage.removeItem(oldWatchListName);
+
+    setWatchListName(newWatchListName);
   };
 
   const addNewCoinToWatchList = (
@@ -112,7 +123,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
         });
       }
 
-      console.log("dataFromLocalStorage", dataFromLocalStorage);
       setWatchList(dataFromLocalStorage);
     }
   };
