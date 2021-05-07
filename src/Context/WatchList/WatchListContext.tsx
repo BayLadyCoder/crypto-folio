@@ -47,7 +47,9 @@ interface Props {
 export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const [watchListFormOpen, setWatchListFormOpen] = useState<boolean>(false);
   const [watchList, setWatchList] = useState<MarketCoin[]>([]);
-  const [watchListName, setWatchListName] = useState<string>("My Watchlist");
+  const [watchListName, setWatchListName] = useState<string>(
+    localStorage.getItem("watchListName") || "My Watchlist"
+  );
   const [coinOptions, setCoinOptions] = useState<MarketCoin[]>([]);
 
   const onClickOpenForm = () => {
@@ -60,12 +62,11 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   const updateWatchListName = (newWatchListName: string) => {
     const oldWatchListName = watchListName;
     const existingData = getDataFromLocalStorage(oldWatchListName);
+
     // update watchListName in local storage
     localStorage.setItem("watchListName", newWatchListName);
-
     // add new watchListName to local storage with existing data from old name
     localStorage[newWatchListName] = JSON.stringify(existingData);
-
     // remove old watchListName key and its value in local storage
     localStorage.removeItem(oldWatchListName);
 
@@ -112,7 +113,13 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
   };
 
   const getWatchList = (marketCoins: MarketCoin[]) => {
-    const data = getDataFromLocalStorage(watchListName);
+    let watchListNameFromStorage = localStorage.getItem("watchListName");
+    if (!watchListNameFromStorage) {
+      localStorage.setItem("watchListName", watchListName);
+      watchListNameFromStorage = watchListName;
+    }
+
+    const data = getDataFromLocalStorage(watchListNameFromStorage);
 
     if (data && data.length > 0) {
       let dataFromLocalStorage: MarketCoin[] = [];
