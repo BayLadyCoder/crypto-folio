@@ -125,6 +125,37 @@ const PortfolioForm: React.FC<Props> = ({
       {formStep === "edit-portfolio" && (
         <AddDetailsForm>
           <FormTitle>Edit Portfolio</FormTitle>
+          <table>
+            <thead>
+              <tr>
+                <th align="left">Crypto Currency</th>
+                <th align="right">Quantity</th>
+                <th align="right">
+                  Cost Basis <span>USD/BTC</span>
+                </th>
+                <th align="right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">Bitcoin (BTC)</td>
+                <td align="right">2</td>
+                <td align="right">$100,000</td>
+                <td align="right">
+                  <button>REMOVE</button>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Dogecoin (DOGE)</td>
+                <td align="right">200</td>
+                <td align="right">$120</td>
+                <td align="right">
+                  <button>REMOVE</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           <BottomContainer>
             <Button onClick={onCloseForm}>CANCEL</Button>
             <Button
