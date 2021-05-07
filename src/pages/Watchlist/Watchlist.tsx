@@ -13,7 +13,7 @@ const WatchListPage = () => {
     onClickOpenForm,
     getWatchList,
   } = useWatchList();
-  const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
+  const { fetchMarketCoins } = useContext(MarketCoinsContext);
 
   useEffect(() => {
     const getMarketCoins = async () => {

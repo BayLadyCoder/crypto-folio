@@ -15,6 +15,7 @@ import {
   addCoinToLocalStorage,
   removeCoinFromLocalStorage,
   getDataFromLocalStorage,
+  createOptionsFromWatchListData,
 } from "../contextHelpers";
 
 const watchListDefaultValues = {
@@ -92,19 +93,7 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
 
   const createCoinOptions = (marketCoins: MarketCoin[]) => {
     if (watchList.length > 0) {
-      const options: MarketCoin[] = [...marketCoins];
-
-      const toRemoveIndices: number[] = [];
-      for (let i = 0; i < watchList.length; i++) {
-        marketCoins.forEach((coin, index) => {
-          if (coin.symbol === watchList[i].symbol) toRemoveIndices.push(index);
-        });
-      }
-      toRemoveIndices.sort();
-      for (let i = toRemoveIndices.length - 1; i >= 0; i--) {
-        const index: number = toRemoveIndices[i];
-        options.splice(index, 1);
-      }
+      const options = createOptionsFromWatchListData(marketCoins, watchList);
       setCoinOptions(options);
     } else {
       setCoinOptions(marketCoins);
@@ -113,7 +102,6 @@ export const WatchListProvider: React.FC<Props> = ({ children }) => {
 
   const getWatchList = (marketCoins: MarketCoin[]) => {
     const data = getDataFromLocalStorage(watchListName);
-    console.log("data", data);
 
     if (data && data.length > 0) {
       let dataFromLocalStorage: MarketCoin[] = [];

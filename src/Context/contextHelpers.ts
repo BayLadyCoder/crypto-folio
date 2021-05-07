@@ -56,3 +56,23 @@ export const getDataFromLocalStorage = (key: string) => {
     return null;
   }
 };
+
+export const createOptionsFromWatchListData = (
+  marketCoins: MarketCoin[],
+  watchList: MarketCoin[]
+) => {
+  const options: MarketCoin[] = [...marketCoins];
+
+  const toRemoveIndices: number[] = [];
+  for (let i = 0; i < watchList.length; i++) {
+    marketCoins.forEach((coin, index) => {
+      if (coin.symbol === watchList[i].symbol) toRemoveIndices.push(index);
+    });
+  }
+  toRemoveIndices.sort();
+  for (let i = toRemoveIndices.length - 1; i >= 0; i--) {
+    const index: number = toRemoveIndices[i];
+    options.splice(index, 1);
+  }
+  return options;
+};
