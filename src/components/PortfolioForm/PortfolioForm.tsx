@@ -12,6 +12,12 @@ import {
   AddDetailsForm,
   SelectPortfolioActionsContainer,
   FormTitle,
+  Table,
+  TableHead,
+  TableHeadData,
+  TableBody,
+  TableBodyData,
+  RemoveButton,
 } from "./PortfolioForm.styled";
 
 import { Button } from "../../styles/globalStyles";
@@ -125,36 +131,36 @@ const PortfolioForm: React.FC<Props> = ({
       {formStep === "edit-portfolio" && (
         <AddDetailsForm>
           <FormTitle>Edit Portfolio</FormTitle>
-          <table>
-            <thead>
+          <Table cellSpacing="0" cellPadding="0">
+            <TableHead>
               <tr>
-                <th align="left">Crypto Currency</th>
-                <th align="right">Quantity</th>
-                <th align="right">
-                  Cost Basis <span>USD/BTC</span>
-                </th>
-                <th align="right">Action</th>
+                <TableHeadData align="left">Crypto Currency</TableHeadData>
+                <TableHeadData align="right">Quantity</TableHeadData>
+                <TableHeadData align="right">
+                  Cost Basis <span>(USD/BTC)</span>
+                </TableHeadData>
+                <TableHeadData align="center">Action</TableHeadData>
               </tr>
-            </thead>
-            <tbody>
+            </TableHead>
+            <TableBody>
               <tr>
-                <td align="left">Bitcoin (BTC)</td>
-                <td align="right">2</td>
-                <td align="right">$100,000</td>
-                <td align="right">
-                  <button>REMOVE</button>
-                </td>
+                <TableBodyData align="left">Bitcoin (BTC)</TableBodyData>
+                <TableBodyData align="right">2</TableBodyData>
+                <TableBodyData align="right">$100,000</TableBodyData>
+                <TableBodyData align="center">
+                  <RemoveButton>REMOVE</RemoveButton>
+                </TableBodyData>
               </tr>
               <tr>
-                <td align="left">Dogecoin (DOGE)</td>
-                <td align="right">200</td>
-                <td align="right">$120</td>
-                <td align="right">
-                  <button>REMOVE</button>
-                </td>
+                <TableBodyData align="left">Dogecoin (DOGE)</TableBodyData>
+                <TableBodyData align="right">200</TableBodyData>
+                <TableBodyData align="right">$120</TableBodyData>
+                <TableBodyData align="center">
+                  <RemoveButton>REMOVE</RemoveButton>
+                </TableBodyData>
               </tr>
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
 
           <BottomContainer>
             <Button onClick={onCloseForm}>CANCEL</Button>

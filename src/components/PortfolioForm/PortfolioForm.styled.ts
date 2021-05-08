@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AiFillEdit } from "react-icons/ai";
 import { VscChromeClose } from "react-icons/vsc";
+import theme from "../../styles/theme";
 
 export const FormContainer = styled.div`
   min-width: 350px;
@@ -100,4 +101,55 @@ export const FormTitle = styled.h3`
   margin-bottom: 10px;
   font-weight: 500;
   align-self: start;
+`;
+
+export const Table = styled.table`
+  width: 600px;
+`;
+
+export const TableHead = styled.thead`
+  background: #ccc;
+  color: #000;
+`;
+
+interface TableHeadDataProps {
+  align: string;
+}
+
+export const TableHeadData = styled.th<TableHeadDataProps>`
+  padding: 10px;
+  text-align: ${({ align }) => align};
+`;
+
+export const TableBody = styled.tbody`
+  background: #222;
+`;
+
+interface TableBodyDataProps {
+  align: string;
+}
+
+export const TableBodyData = styled.td<TableBodyDataProps>`
+  text-align: ${({ align }) => align};
+  padding: 15px;
+  border-bottom: solid 1px #777;
+`;
+
+export const RemoveButton = styled.button`
+  cursor: pointer;
+  background: #222;
+  color: #e580ff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e580ff;
+
+  &:hover {
+    transition: all 0.2s linear;
+    background: ${theme.color.secondary};
+    color: #fff;
+    border: 1px solid ${theme.color.secondary};
+  }
 `;
