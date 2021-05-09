@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AiFillEdit } from "react-icons/ai";
 import { VscChromeClose } from "react-icons/vsc";
+import { RiEditLine, RiDeleteBin5Line } from "react-icons/ri";
 import theme from "../../styles/theme";
 
 export const FormContainer = styled.div`
@@ -137,19 +138,66 @@ export const TableBodyData = styled.td<TableBodyDataProps>`
 
 export const RemoveButton = styled.button`
   cursor: pointer;
-  background: #222;
-  color: #e580ff;
+  background: #111;
+  color: #ff8573;
   padding: 8px 12px;
   border-radius: 4px;
   border: none;
   font-size: 14px;
   font-weight: 500;
-  border: 1px solid #e580ff;
+  border: 1px solid #ff8573;
 
   &:hover {
     transition: all 0.2s linear;
-    background: ${theme.color.secondary};
+    background: #c92e16;
     color: #fff;
-    border: 1px solid ${theme.color.secondary};
+    border: 1px solid #c92e16;
+  }
+`;
+export const RemoveCoinIconButton = styled(RiDeleteBin5Line)`
+  cursor: pointer;
+  background: #111;
+  color: #ff8573;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  font-size: 42px;
+  font-weight: 500;
+  border: 1px solid #ff8573;
+  border-radius: 50%;
+
+  &:hover {
+    transition: all 0.2s linear;
+    background: #f25038;
+    color: #000;
+    border: 1px solid #f25038;
+  }
+`;
+
+export const EditCoinIconButton = styled(RiEditLine)`
+  cursor: pointer;
+  background: #111;
+  color: #d7b738;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  font-size: 42px;
+  font-weight: 500;
+  border: 1px solid #d7b738;
+  border-radius: 50%;
+  margin-right: 10px;
+
+  &:hover {
+    transition: all 0.2s linear;
+    background: #d7b738;
+    color: #000;
+    border: 1px solid #d7b738;
+  }
+`;
+
+export const TableRow = styled.tr`
+  &:hover {
+    transition: all 0.2s linear;
+    background: #000;
   }
 `;

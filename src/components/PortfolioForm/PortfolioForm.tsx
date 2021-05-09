@@ -18,6 +18,9 @@ import {
   TableBody,
   TableBodyData,
   RemoveButton,
+  TableRow,
+  RemoveCoinIconButton,
+  EditCoinIconButton,
 } from "./PortfolioForm.styled";
 
 import { Button } from "../../styles/globalStyles";
@@ -139,31 +142,33 @@ const PortfolioForm: React.FC<Props> = ({
                 <TableHeadData align="right">
                   Cost Basis <span>(USD/BTC)</span>
                 </TableHeadData>
-                <TableHeadData align="center">Action</TableHeadData>
+                <TableHeadData align="center">Actions</TableHeadData>
               </tr>
             </TableHead>
             <TableBody>
-              <tr>
+              <TableRow>
                 <TableBodyData align="left">Bitcoin (BTC)</TableBodyData>
                 <TableBodyData align="right">2</TableBodyData>
                 <TableBodyData align="right">$100,000</TableBodyData>
                 <TableBodyData align="center">
-                  <RemoveButton>REMOVE</RemoveButton>
+                  <EditCoinIconButton />
+                  <RemoveCoinIconButton />
                 </TableBodyData>
-              </tr>
-              <tr>
+              </TableRow>
+              <TableRow>
                 <TableBodyData align="left">Dogecoin (DOGE)</TableBodyData>
                 <TableBodyData align="right">200</TableBodyData>
                 <TableBodyData align="right">$120</TableBodyData>
                 <TableBodyData align="center">
-                  <RemoveButton>REMOVE</RemoveButton>
+                  <EditCoinIconButton />
+                  <RemoveCoinIconButton />
                 </TableBodyData>
-              </tr>
+              </TableRow>
             </TableBody>
           </Table>
 
           <BottomContainer>
-            <Button onClick={onCloseForm}>CANCEL</Button>
+            <Button onClick={() => setFormStep("start")}>BACK</Button>
             <Button
               onClick={() => console.log("save")}
               style={{ marginLeft: "10px" }}
@@ -324,7 +329,7 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
         ) : null}
       </AddDetailsForm>
       <BottomContainer>
-        <Button onClick={onCloseForm}>CANCEL</Button>
+        <Button onClick={() => setFormStep("start")}>BACK</Button>
         <Button onClick={onSave} style={{ marginLeft: "10px" }} primary="true">
           SAVE
         </Button>
