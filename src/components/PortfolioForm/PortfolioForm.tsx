@@ -32,7 +32,8 @@ import {
 } from "../form_components";
 import { RiAddFill } from "react-icons/ri";
 import { MdModeEdit } from "react-icons/md";
-import AddOrEditCoinsForm from "./AddOrEditCoinForm";
+import AddOrEditCoinForm from "./AddOrEditCoinForm";
+import EditPortfolioForm from "./EditPortfolioForm";
 interface Props {
   marketCoins: MarketCoin[];
   onCloseForm: () => void;
@@ -77,10 +78,6 @@ const PortfolioForm: React.FC<Props> = ({
     setFormStep(value);
   };
 
-  const onClickRemoveCoin = (e: React.MouseEvent) => {
-    e.preventDefault();
-  };
-
   return (
     <FormContainer>
       <TopContainer>
@@ -122,7 +119,7 @@ const PortfolioForm: React.FC<Props> = ({
         </SelectPortfolioActionsContainer>
       )}
       {formStep === "add-coin" && (
-        <AddOrEditCoinsForm
+        <AddOrEditCoinForm
           marketCoins={marketCoins}
           onCloseForm={onCloseForm}
           addNewCoinToPortfolio={addNewCoinToPortfolio}
@@ -132,52 +129,7 @@ const PortfolioForm: React.FC<Props> = ({
         />
       )}
       {formStep === "edit-portfolio" && (
-        <AddDetailsForm>
-          <FormTitle>Edit Portfolio</FormTitle>
-          <Table cellSpacing="0" cellPadding="0">
-            <TableHead>
-              <tr>
-                <TableHeadData align="left">Crypto Currency</TableHeadData>
-                <TableHeadData align="right">Quantity</TableHeadData>
-                <TableHeadData align="right">
-                  Cost Basis <span>(USD/BTC)</span>
-                </TableHeadData>
-                <TableHeadData align="center">Actions</TableHeadData>
-              </tr>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableBodyData align="left">Bitcoin (BTC)</TableBodyData>
-                <TableBodyData align="right">2</TableBodyData>
-                <TableBodyData align="right">$100,000</TableBodyData>
-                <TableBodyData align="center">
-                  <EditCoinIconButton />
-                  <RemoveCoinIconButton onClick={onClickRemoveCoin} />
-                </TableBodyData>
-              </TableRow>
-              <TableRow>
-                <TableBodyData align="left">Dogecoin (DOGE)</TableBodyData>
-                <TableBodyData align="right">200</TableBodyData>
-                <TableBodyData align="right">$120</TableBodyData>
-                <TableBodyData align="center">
-                  <EditCoinIconButton />
-                  <RemoveCoinIconButton onClick={onClickRemoveCoin} />
-                </TableBodyData>
-              </TableRow>
-            </TableBody>
-          </Table>
-
-          <BottomContainer>
-            <Button onClick={() => setFormStep("start")}>BACK</Button>
-            <Button
-              onClick={() => console.log("save")}
-              style={{ marginLeft: "10px" }}
-              primary="true"
-            >
-              SAVE
-            </Button>
-          </BottomContainer>
-        </AddDetailsForm>
+        <EditPortfolioForm setFormStep={setFormStep} />
       )}
     </FormContainer>
   );
