@@ -7,8 +7,10 @@ import { Container, Loading, PageTitle } from '../../styles/globalStyles';
 const Home = () => {
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
   useEffect(() => {
-    fetchMarketCoins();
-  }, [fetchMarketCoins]);
+    if (marketCoins.length === 0) {
+      fetchMarketCoins();
+    }
+  }, []);
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
 
