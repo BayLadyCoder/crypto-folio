@@ -1,42 +1,40 @@
-import { useState, useEffect } from "react";
-import { MarketCoin } from "../../../types/coins";
+import { useState, useEffect } from 'react';
+import { MarketCoin } from '../../../types/coins';
 import {
   DetailsContainer,
   BottomContainer,
   AddDetailsForm,
   FormTitle,
-} from "./AddOrEditCoinsForm.styled";
-import { Button } from "../../../styles/globalStyles";
-import { PortfolioCoinBasic } from "../../../types/coins";
+} from './AddOrEditCoinsForm.styled';
+import { Button } from '../../../styles/globalStyles';
+import { PortfolioCoinBasic } from '../../../types/coins';
 import {
   TextFieldWithLabel,
   SearchCoinTextField,
   CurrencyRadioButtons,
-} from "../../form_components";
+} from '../../form_components';
+import { usePortfolio } from '../../../context/Portfolio/PortfolioContext';
 
 interface Props {
   marketCoins: MarketCoin[];
   onCloseForm: () => void;
-  addNewCoinToPortfolio: (
-    newData: PortfolioCoinBasic,
-    marketCoins: MarketCoin[]
-  ) => void;
-  portfolioCoinOptions: MarketCoin[];
-  createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
   setFormStep: any;
 }
 const AddOrEditCoinsForm: React.FC<Props> = ({
   marketCoins,
   onCloseForm,
-  addNewCoinToPortfolio,
-  portfolioCoinOptions,
-  createPortfolioCoinOptions,
   setFormStep,
 }) => {
-  const [currency, setCurrency] = useState("");
+  const {
+    addNewCoinToPortfolio,
+    portfolioCoinOptions,
+    createPortfolioCoinOptions,
+  } = usePortfolio();
+
+  const [currency, setCurrency] = useState('');
   const [estimate, setEstimate] = useState(0);
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>({
-    name_with_symbol: "",
+    name_with_symbol: '',
     bought_quantity: 0,
     bought_price_per_coin: 0,
     cost_basis: 0,
@@ -98,66 +96,66 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
         <FormTitle>Add New Coin</FormTitle>
         <SearchCoinTextField
           value={portfolioData.name_with_symbol}
-          name="name_with_symbol"
+          name='name_with_symbol'
           handleChange={updatePortfolioData}
           coins={portfolioCoinOptions}
           hasLabel
         />
         <TextFieldWithLabel
-          label="Quantity"
-          name="bought_quantity"
-          placeholder="How many coins do you have?"
+          label='Quantity'
+          name='bought_quantity'
+          placeholder='How many coins do you have?'
           value={portfolioData.bought_quantity}
           handleChange={updatePortfolioData}
         />
 
-        {portfolioData.name_with_symbol === "Bitcoin (BTC)" && (
+        {portfolioData.name_with_symbol === 'Bitcoin (BTC)' && (
           <TextFieldWithLabel
-            label="Total Cost ($)"
-            name="cost_basis"
-            placeholder="Price you paid for this transaction"
+            label='Total Cost ($)'
+            name='cost_basis'
+            placeholder='Price you paid for this transaction'
             value={portfolioData.cost_basis}
             handleChange={updatePortfolioData}
           />
         )}
 
         {portfolioData.name_with_symbol &&
-          portfolioData.name_with_symbol !== "Bitcoin (BTC)" && (
+          portfolioData.name_with_symbol !== 'Bitcoin (BTC)' && (
             <CurrencyRadioButtons onChooseCurrency={onChooseCurrency} />
           )}
 
-        {portfolioData.name_with_symbol !== "Bitcoin (BTC)" &&
+        {portfolioData.name_with_symbol !== 'Bitcoin (BTC)' &&
         currency &&
-        currency === "USD" ? (
+        currency === 'USD' ? (
           <TextFieldWithLabel
-            label="Total Cost ($)"
-            name="cost_basis"
-            placeholder="Price you paid for this transaction"
+            label='Total Cost ($)'
+            name='cost_basis'
+            placeholder='Price you paid for this transaction'
             value={portfolioData.cost_basis}
             handleChange={updatePortfolioData}
           />
-        ) : currency === "BTC" ? (
+        ) : currency === 'BTC' ? (
           <>
             <TextFieldWithLabel
-              label="Bitcoin Price ($)"
-              name="btc_price_at_bought"
-              placeholder="BTC price when bought this coin"
+              label='Bitcoin Price ($)'
+              name='btc_price_at_bought'
+              placeholder='BTC price when bought this coin'
               value={boughtWithBitcoin.btc_price_at_bought}
               handleChange={updateBoughtWithBitcoin}
             />
             <TextFieldWithLabel
-              label="Total Bitcoin Paid (₿)"
-              name="btc_paid_quantity"
-              placeholder="BTC quantity spent on this transaction"
+              label='Total Bitcoin Paid (₿)'
+              name='btc_paid_quantity'
+              placeholder='BTC quantity spent on this transaction'
               value={boughtWithBitcoin.btc_paid_quantity}
               handleChange={updateBoughtWithBitcoin}
             />
             {estimate > 0 && (
               <p
                 style={{
-                  width: "250px",
-                  alignSelf: "start",
-                  fontSize: "13px",
+                  width: '250px',
+                  alignSelf: 'start',
+                  fontSize: '13px',
                 }}
               >
                 estimate total cost basis ~ ${estimate}
@@ -167,8 +165,8 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
         ) : null}
       </AddDetailsForm>
       <BottomContainer>
-        <Button onClick={() => setFormStep("start")}>BACK</Button>
-        <Button onClick={onSave} style={{ marginLeft: "10px" }} primary="true">
+        <Button onClick={() => setFormStep('start')}>BACK</Button>
+        <Button onClick={onSave} style={{ marginLeft: '10px' }} primary='true'>
           SAVE
         </Button>
       </BottomContainer>

@@ -1,45 +1,31 @@
-import { useState } from "react";
-import { MarketCoin } from "../../types/coins";
-import { PortfolioContainer } from "./EachPortfolio.styled";
-import { HeaderWrapper, Button, TableName } from "../../styles/globalStyles";
-import PortfolioForm from "../PortfolioForm";
-import { PortfolioCoinBasic, PortfolioCoin } from "../../types/coins";
-import PortfolioTable from "../PortfolioTable";
+import { useState } from 'react';
+import { MarketCoin } from '../../types/coins';
+import { PortfolioContainer } from './EachPortfolio.styled';
+import { HeaderWrapper, Button, TableName } from '../../styles/globalStyles';
+import PortfolioForm from '../PortfolioForm';
+import PortfolioTable from '../PortfolioTable';
+import { usePortfolio } from '../../context/Portfolio/PortfolioContext';
+
 interface Props {
   marketCoins: MarketCoin[];
-  portfolioFormOpen: boolean;
-  onClickOpenPortfolioForm: () => void;
-  onClickClosePortfolioForm: () => void;
-  portfolioName: string;
-  updatePortfolioName: (newName: string) => void;
-  portfolioCoins: PortfolioCoin[];
-  addNewCoinToPortfolio: (
-    newCoin: PortfolioCoinBasic,
-    marketCoins: MarketCoin[]
-  ) => void;
-  portfolioCoinOptions: MarketCoin[];
-  createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
 }
 
-const EachPortfolio: React.FC<Props> = ({
-  marketCoins,
-  portfolioName,
-  updatePortfolioName,
-  portfolioCoins,
-  addNewCoinToPortfolio,
-  portfolioFormOpen,
-  onClickOpenPortfolioForm,
-  onClickClosePortfolioForm,
-  portfolioCoinOptions,
-  createPortfolioCoinOptions,
-}) => {
-  const [formStep, setFormStep] = useState("start");
+const EachPortfolio: React.FC<Props> = ({ marketCoins }) => {
+  const {
+    portfolioName,
+    portfolioFormOpen,
+    onClickOpenPortfolioForm,
+    onClickClosePortfolioForm,
+    portfolioCoins,
+  } = usePortfolio();
+
+  const [formStep, setFormStep] = useState('start');
   const onClickEditPortfolio = () => {
-    setFormStep("start");
+    setFormStep('start');
     onClickOpenPortfolioForm();
   };
   const onClickAddCoins = () => {
-    setFormStep("add-coin");
+    setFormStep('add-coin');
     onClickOpenPortfolioForm();
   };
   return (
@@ -58,12 +44,6 @@ const EachPortfolio: React.FC<Props> = ({
         <PortfolioForm
           marketCoins={marketCoins}
           onCloseForm={onClickClosePortfolioForm}
-          portfolioName={portfolioName}
-          updatePortfolioName={updatePortfolioName}
-          addNewCoinToPortfolio={addNewCoinToPortfolio}
-          portfolioCoinOptions={portfolioCoinOptions}
-          createPortfolioCoinOptions={createPortfolioCoinOptions}
-          portfolioCoins={portfolioCoins}
           formStep={formStep}
           setFormStep={setFormStep}
         />

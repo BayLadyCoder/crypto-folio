@@ -1,51 +1,23 @@
-import { useState, useEffect } from "react";
-import { MarketCoin } from "../../types/coins";
+import { useState } from 'react';
+import { MarketCoin } from '../../types/coins';
 import {
   FormContainer,
   TopContainer,
   PortfolioNameContainer,
   PortfolioName,
   EditIconButton,
-  DetailsContainer,
-  BottomContainer,
   CloseFormButton,
-  AddDetailsForm,
   SelectPortfolioActionsContainer,
-  FormTitle,
-  Table,
-  TableHead,
-  TableHeadData,
-  TableBody,
-  TableBodyData,
-  RemoveButton,
-  TableRow,
-  RemoveCoinIconButton,
-  EditCoinIconButton,
-} from "./PortfolioForm.styled";
-
-import { Button } from "../../styles/globalStyles";
-import { PortfolioCoinBasic, PortfolioCoin } from "../../types/coins";
-import {
-  TextFieldWithLabel,
-  SearchCoinTextField,
-  CurrencyRadioButtons,
-} from "../form_components";
-import { RiAddFill } from "react-icons/ri";
-import { MdModeEdit } from "react-icons/md";
-import AddOrEditCoinForm from "./AddOrEditCoinForm";
-import EditPortfolioForm from "./EditPortfolioForm";
+} from './PortfolioForm.styled';
+import { Button } from '../../styles/globalStyles';
+import { usePortfolio } from '../../context/Portfolio/PortfolioContext';
+import { RiAddFill } from 'react-icons/ri';
+import { MdModeEdit } from 'react-icons/md';
+import AddOrEditCoinForm from './AddOrEditCoinForm';
+import EditPortfolioForm from './EditPortfolioForm';
 interface Props {
   marketCoins: MarketCoin[];
   onCloseForm: () => void;
-  portfolioName: string;
-  updatePortfolioName: (newName: string) => void;
-  addNewCoinToPortfolio: (
-    newData: PortfolioCoinBasic,
-    marketCoins: MarketCoin[]
-  ) => void;
-  portfolioCoinOptions: MarketCoin[];
-  createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
-  portfolioCoins: PortfolioCoin[];
   formStep: string;
   setFormStep: any;
 }
@@ -53,15 +25,11 @@ interface Props {
 const PortfolioForm: React.FC<Props> = ({
   marketCoins,
   onCloseForm,
-  portfolioName,
-  updatePortfolioName,
-  addNewCoinToPortfolio,
-  portfolioCoinOptions,
-  createPortfolioCoinOptions,
-  portfolioCoins,
   formStep,
   setFormStep,
 }) => {
+  const { portfolioName, updatePortfolioName } = usePortfolio();
+
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
 
@@ -85,7 +53,7 @@ const PortfolioForm: React.FC<Props> = ({
           {portfolioNameFormOpen ? (
             <>
               <input
-                type="text"
+                type='text'
                 value={newPortfolioName}
                 onChange={onChangePortfolioName}
               />
@@ -102,33 +70,30 @@ const PortfolioForm: React.FC<Props> = ({
         </PortfolioNameContainer>
         <CloseFormButton onClick={onCloseForm} />
       </TopContainer>
-      {formStep === "start" && (
+      {formStep === 'start' && (
         <SelectPortfolioActionsContainer>
           <Button
-            onClick={() => onClickPortfolioActionButton("add-coin")}
-            primary="true"
+            onClick={() => onClickPortfolioActionButton('add-coin')}
+            primary='true'
           >
-            <RiAddFill style={{ marginRight: "5px" }} /> ADD NEW COIN
+            <RiAddFill style={{ marginRight: '5px' }} /> ADD NEW COIN
           </Button>
           <Button
-            onClick={() => onClickPortfolioActionButton("edit-portfolio")}
-            style={{ marginLeft: "5px" }}
+            onClick={() => onClickPortfolioActionButton('edit-portfolio')}
+            style={{ marginLeft: '5px' }}
           >
-            <MdModeEdit style={{ marginRight: "5px" }} /> EDIT PORTFOLIO
+            <MdModeEdit style={{ marginRight: '5px' }} /> EDIT PORTFOLIO
           </Button>
         </SelectPortfolioActionsContainer>
       )}
-      {formStep === "add-coin" && (
+      {formStep === 'add-coin' && (
         <AddOrEditCoinForm
           marketCoins={marketCoins}
           onCloseForm={onCloseForm}
-          addNewCoinToPortfolio={addNewCoinToPortfolio}
-          portfolioCoinOptions={portfolioCoinOptions}
-          createPortfolioCoinOptions={createPortfolioCoinOptions}
           setFormStep={setFormStep}
         />
       )}
-      {formStep === "edit-portfolio" && (
+      {formStep === 'edit-portfolio' && (
         <EditPortfolioForm setFormStep={setFormStep} />
       )}
     </FormContainer>
