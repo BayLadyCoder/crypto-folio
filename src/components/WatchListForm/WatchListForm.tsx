@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { MarketCoinsContext } from "../../context/MarketCoins/MarketCoinsContext";
-import { Container, Loading } from "../../styles/globalStyles";
+import { useContext, useEffect, useState } from 'react';
+import { MarketCoinsContext } from '../../context/MarketCoins/MarketCoinsContext';
+import { Container, Loading } from '../../styles/globalStyles';
 import {
   Form,
   FormLeftContainer,
@@ -16,12 +16,12 @@ import {
   FormHeaderContainer,
   WatchListNameWrapper,
   EditWatchListNameButton,
-} from "./WatchListForm.styled";
-import { Button } from "../../styles/globalStyles";
-import { MarketCoin } from "../../types/coins";
-import { useWatchList } from "../../context/WatchList/WatchListContext";
-import { AiOutlineRight } from "react-icons/ai";
-import { SearchCoinTextField } from "../form_components";
+} from './WatchListForm.styled';
+import { Button } from '../../styles/globalStyles';
+import { MarketCoin } from '../../types/coins';
+import { useWatchList } from '../../context/WatchList/WatchListContext';
+import { AiOutlineRight } from 'react-icons/ai';
+import { SearchCoinTextField } from '../form_components';
 interface Props {
   watchListName: string;
   updateWatchListName: (newName: string) => void;
@@ -39,14 +39,12 @@ const WatchListForm: React.FC<Props> = ({
     createCoinOptions,
   } = useWatchList();
 
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>('');
 
-  const [thisWatchListName, setThisWatchListName] = useState<string>(
-    watchListName
-  );
-  const [watchListNameInputOpen, setWatchListNameInputOpen] = useState<boolean>(
-    false
-  );
+  const [thisWatchListName, setThisWatchListName] =
+    useState<string>(watchListName);
+  const [watchListNameInputOpen, setWatchListNameInputOpen] =
+    useState<boolean>(false);
   const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ const WatchListForm: React.FC<Props> = ({
     };
 
     if (marketCoins.length === 0) getCoins();
-  }, [fetchMarketCoins, marketCoins.length, createCoinOptions]);
+  }, []);
 
   useEffect(() => {
     if (marketCoins.length > 0 && coinOptions.length === 0)
@@ -100,8 +98,8 @@ const WatchListForm: React.FC<Props> = ({
           <FormHeaderContainer>
             <FormTitle>Add Coins</FormTitle>
             <CloseFormButtonLeft
-              type="button"
-              aria-label="Close Form"
+              type='button'
+              aria-label='Close Form'
               onClick={onCloseForm}
             >
               X
@@ -109,14 +107,14 @@ const WatchListForm: React.FC<Props> = ({
           </FormHeaderContainer>
           <SearchCoinTextField
             value={inputValue}
-            name="coins"
+            name='coins'
             handleChange={onChangeInput}
             coins={coinOptions}
           />
 
-          <Button primary="true" onClick={onAddCoin}>
-            ADD TO WATCHLIST{" "}
-            <AiOutlineRight style={{ marginLeft: "5px", fontSize: "20px" }} />
+          <Button primary='true' onClick={onAddCoin}>
+            ADD TO WATCHLIST{' '}
+            <AiOutlineRight style={{ marginLeft: '5px', fontSize: '20px' }} />
           </Button>
         </FormLeftContainer>
         <FormRightContainer>
@@ -125,28 +123,28 @@ const WatchListForm: React.FC<Props> = ({
               {watchListNameInputOpen ? (
                 <>
                   <input
-                    type="text"
+                    type='text'
                     value={thisWatchListName}
                     onChange={onChangeWatchListName}
                   />
                   <button onClick={(e) => onClickSaveWatchListName(e)}>
                     save
-                  </button>{" "}
+                  </button>{' '}
                 </>
               ) : (
                 <>
                   <FormTitle>{thisWatchListName}</FormTitle>
                   <EditWatchListNameButton
-                    type="button"
-                    aria-label="Edit Watchlist Name"
+                    type='button'
+                    aria-label='Edit Watchlist Name'
                     onClick={() => setWatchListNameInputOpen(true)}
                   />
                 </>
               )}
             </WatchListNameWrapper>
             <CloseFormButton
-              type="button"
-              aria-label="Close Form"
+              type='button'
+              aria-label='Close Form'
               onClick={onCloseForm}
             />
           </FormHeaderContainer>
