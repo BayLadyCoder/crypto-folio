@@ -1,8 +1,8 @@
-import { useEffect, useContext } from "react";
-import { Container, PageTitle } from "../../styles/globalStyles";
-import { useWatchList } from "../../context/WatchList/WatchListContext";
-import EachWatchList from "../../components/EachWatchList/";
-import { MarketCoinsContext } from "../../context/MarketCoins/MarketCoinsContext";
+import { useEffect, useContext } from 'react';
+import { Container, PageTitle } from '../../styles/globalStyles';
+import { useWatchList } from '../../context/WatchList/WatchListContext';
+import EachWatchList from '../../components/EachWatchList';
+import { MarketCoinsContext } from '../../context/MarketCoins/MarketCoinsContext';
 
 const WatchListPage = () => {
   const {
@@ -22,7 +22,7 @@ const WatchListPage = () => {
     };
     getMarketCoins();
   }, []);
-  console.log("watchList", watchList);
+
   return (
     <Container>
       <PageTitle>Watchlist</PageTitle>
