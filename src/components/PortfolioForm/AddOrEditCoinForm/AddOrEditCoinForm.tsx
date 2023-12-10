@@ -63,7 +63,7 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
   };
 
   return (
-    <DetailsContainer>
+    <>
       <AddDetailsForm>
         <FormTitle>Add New Coin</FormTitle>
         <SearchCoinTextField
@@ -89,12 +89,12 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
         />
       </AddDetailsForm>
       <BottomContainer>
-        <Button onClick={() => setFormStep('start')}>BACK</Button>
+        <Button onClick={() => setFormStep('edit-portfolio')}>BACK</Button>
         <Button onClick={onSave} style={{ marginLeft: '10px' }} primary='true'>
           SAVE
         </Button>
       </BottomContainer>
-    </DetailsContainer>
+    </>
   );
 };
 

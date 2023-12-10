@@ -21,7 +21,7 @@ const EachPortfolio: React.FC<Props> = ({ marketCoins }) => {
 
   const [formStep, setFormStep] = useState('start');
   const onClickEditPortfolio = () => {
-    setFormStep('start');
+    setFormStep('edit-portfolio');
     onClickOpenPortfolioForm();
   };
   const onClickAddCoins = () => {
