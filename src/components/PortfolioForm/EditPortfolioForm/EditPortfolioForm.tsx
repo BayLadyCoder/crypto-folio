@@ -1,5 +1,5 @@
+import React, { useContext } from 'react';
 import {
-  BottomContainer,
   AddDetailsForm,
   FormTitle,
   Table,
@@ -10,22 +10,23 @@ import {
   TableRow,
   RemoveCoinIconButton,
 } from '../PortfolioForm.styled';
-import { Button } from '../../../styles/globalStyles';
 import { usePortfolio } from '../../../context/Portfolio/PortfolioContext';
 import { TextField } from '../../../styles/globalStyles';
+import { MarketCoinsContext } from '../../../context/MarketCoins/MarketCoinsContext';
 
 interface Props {
   setFormStep: any;
 }
 
 const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
-  const { portfolioCoins } = usePortfolio();
+  const { portfolioCoins, deletePortfolioCoin } = usePortfolio();
+  const { marketCoins } = useContext(MarketCoinsContext);
 
-  const onClickRemoveCoin = (e: React.MouseEvent) => {
+  const onClickRemoveCoin = (e: React.MouseEvent, coinSymbol: string) => {
     e.preventDefault();
+    deletePortfolioCoin(coinSymbol, marketCoins);
   };
 
-  console.log({ portfolioCoins });
   return (
     <AddDetailsForm>
       <FormTitle>Edit Portfolio</FormTitle>
@@ -63,23 +64,16 @@ const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
                 />
               </TableBodyData>
               <TableBodyData align='center'>
-                <RemoveCoinIconButton onClick={onClickRemoveCoin} />
+                <RemoveCoinIconButton
+                  onClick={(e: React.MouseEvent) =>
+                    onClickRemoveCoin(e, coin.symbol)
+                  }
+                />
               </TableBodyData>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-
-      <BottomContainer>
-        <Button onClick={() => setFormStep('start')}>BACK</Button>
-        <Button
-          onClick={() => console.log('save')}
-          style={{ marginLeft: '10px' }}
-          primary='true'
-        >
-          SAVE
-        </Button>
-      </BottomContainer>
     </AddDetailsForm>
   );
 };

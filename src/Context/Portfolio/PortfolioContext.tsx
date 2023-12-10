@@ -1,27 +1,28 @@
-import { useState, useContext, createContext } from "react";
+import { useState, useContext, createContext } from 'react';
 import {
   MarketCoin,
   PortfolioCoin,
   PortfolioCoinBasic,
-} from "../../types/coins";
-import { PortfolioContextData } from "../../types/context";
-import { getCoinSymbol } from "../../utils/helpers";
+} from '../../types/coins';
+import { PortfolioContextData } from '../../types/context';
+import { getCoinSymbol } from '../../utils/helpers';
 import {
   addCoinToCoinOptions,
   removeCoinFromCoinOptions,
   isValidatedValue,
-} from "../contextHelpers";
+} from '../contextHelpers';
 
 const portfolioDefaultValues = {
   portfolioFormOpen: false,
   onClickOpenPortfolioForm: () => null,
   onClickClosePortfolioForm: () => null,
-  portfolioName: "",
+  portfolioName: '',
   updatePortfolioName: () => null,
   portfolioCoins: [],
   addNewCoinToPortfolio: () => null,
   portfolioCoinOptions: [],
   createPortfolioCoinOptions: () => null,
+  deletePortfolioCoin: () => null,
 };
 
 export const PortfolioContext = createContext<PortfolioContextData>(
@@ -38,7 +39,7 @@ interface Props {
 
 export const PortfolioProvider: React.FC<Props> = ({ children }) => {
   const [portfolioFormOpen, setPortfolioFormOpen] = useState(false);
-  const [portfolioName, setPortfolioName] = useState("My Portfolio");
+  const [portfolioName, setPortfolioName] = useState('My Portfolio');
   const [portfolioCoins, setPortfolioCoins] = useState<PortfolioCoin[]>([]);
   const [portfolioCoinOptions, setPortfolioCoinOptions] = useState<
     MarketCoin[]
@@ -53,6 +54,15 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
 
   const updatePortfolioName = (newName: string) => {
     setPortfolioName(newName);
+  };
+  const deletePortfolioCoin = (
+    coinSymbol: string,
+    marketCoins: MarketCoin[]
+  ) => {
+    addCoinToCoinOptions(marketCoins, setPortfolioCoinOptions, coinSymbol);
+    setPortfolioCoins(
+      portfolioCoins.filter((coin) => coin.symbol !== coinSymbol)
+    );
   };
 
   const addNewCoinToPortfolio = (
@@ -87,7 +97,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
           }
         }
       } else {
-        alert("This coin is not available");
+        alert('This coin is not available');
       }
     }
   };
@@ -107,6 +117,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
         addNewCoinToPortfolio,
         portfolioCoinOptions,
         createPortfolioCoinOptions,
+        deletePortfolioCoin,
       }}
     >
       {children}

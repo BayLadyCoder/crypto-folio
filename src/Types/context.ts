@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-import { MarketCoin, PortfolioCoin, PortfolioCoinBasic } from "./coins";
+import { Dispatch, SetStateAction } from 'react';
+import { MarketCoin, PortfolioCoin, PortfolioCoinBasic } from './coins';
 export interface MarketCoinsContextData {
   marketCoins: MarketCoin[];
   setMarketCoins: (coins: MarketCoin[]) => void;
@@ -40,4 +40,5 @@ export interface PortfolioContextData {
   ) => void;
   portfolioCoinOptions: MarketCoin[];
   createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
+  deletePortfolioCoin: (coinSymbol: string, marketCoins: MarketCoin[]) => void;
 }
