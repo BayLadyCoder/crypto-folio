@@ -25,6 +25,8 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
     addNewCoinToPortfolio,
     portfolioCoinOptions,
     createPortfolioCoinOptions,
+    onClickClosePortfolioForm,
+    portfolioCoins,
   } = usePortfolio();
 
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>({
@@ -89,7 +91,15 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
         />
       </AddDetailsForm>
       <BottomContainer>
-        <Button onClick={() => setFormStep('edit-portfolio')}>BACK</Button>
+        <Button
+          onClick={() =>
+            portfolioCoins.length
+              ? setFormStep('edit-portfolio')
+              : onClickClosePortfolioForm()
+          }
+        >
+          {portfolioCoins.length ? 'BACK' : 'CLOSE'}
+        </Button>
         <Button onClick={onSave} style={{ marginLeft: '10px' }} primary='true'>
           SAVE
         </Button>

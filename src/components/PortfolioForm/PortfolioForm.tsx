@@ -46,6 +46,18 @@ const PortfolioForm: React.FC<Props> = ({
     setFormStep(value);
   };
 
+  if (formStep === 'add-coin') {
+    return (
+      <FormContainer>
+        <AddOrEditCoinForm
+          marketCoins={marketCoins}
+          onCloseForm={onCloseForm}
+          setFormStep={setFormStep}
+        />
+      </FormContainer>
+    );
+  }
+
   return (
     <FormContainer>
       <TopContainer>
@@ -86,13 +98,7 @@ const PortfolioForm: React.FC<Props> = ({
           </Button>
         </SelectPortfolioActionsContainer>
       )}
-      {formStep === 'add-coin' && (
-        <AddOrEditCoinForm
-          marketCoins={marketCoins}
-          onCloseForm={onCloseForm}
-          setFormStep={setFormStep}
-        />
-      )}
+
       {formStep === 'edit-portfolio' && (
         <EditPortfolioForm setFormStep={setFormStep} />
       )}
