@@ -13,7 +13,8 @@ import {
 import { usePortfolio } from '../../../context/Portfolio/PortfolioContext';
 import { TextField } from '../../../styles/globalStyles';
 import { MarketCoinsContext } from '../../../context/MarketCoins/MarketCoinsContext';
-
+import { Button } from '../../../styles/globalStyles';
+import { RiAddFill } from 'react-icons/ri';
 interface Props {
   setFormStep: any;
 }
@@ -29,7 +30,20 @@ const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
 
   return (
     <AddDetailsForm>
-      <FormTitle>Edit Portfolio</FormTitle>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          alignItems: 'center',
+          marginBottom: '10px',
+        }}
+      >
+        <FormTitle>Edit Portfolio</FormTitle>
+        <Button onClick={() => setFormStep('add-coin')} primary='true' small>
+          <RiAddFill /> NEW COIN
+        </Button>
+      </div>
       <Table cellSpacing='0' cellPadding='0'>
         <TableHead>
           <tr>
@@ -48,7 +62,6 @@ const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
                 {coin.name_with_symbol}
               </TableBodyData>
               <TableBodyData align='right'>
-                {/* {coin.bought_quantity} */}
                 <TextField
                   style={{ width: '60px' }}
                   type='text'

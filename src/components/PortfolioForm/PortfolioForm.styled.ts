@@ -98,9 +98,7 @@ export const SelectPortfolioActionsContainer = styled.div`
 
 export const FormTitle = styled.h3`
   font-size: 20px;
-  margin-bottom: 10px;
   font-weight: 500;
-  align-self: start;
 `;
 
 export const Table = styled.table`

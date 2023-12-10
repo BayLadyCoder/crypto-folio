@@ -1,6 +1,6 @@
-import React from "react";
-import { InputContainer, Label, TextField } from "../../../styles/globalStyles";
-import { MarketCoin } from "../../../types/coins";
+import React from 'react';
+import { InputContainer, Label, TextField } from '../../../styles/globalStyles';
+import { MarketCoin } from '../../../types/coins';
 
 interface Props {
   width?: string;
@@ -19,16 +19,16 @@ const SearchCoinInputTextField: React.FC<Props> = ({
 }) => {
   return (
     <InputContainer>
-      {hasLabel && <Label htmlFor="coins">Crypto Currencies</Label>}
+      {hasLabel && <Label htmlFor='coins'>Crypto Currencies</Label>}
       <TextField
-        type="search"
-        list="coins"
-        placeholder="Search"
+        type='search'
+        list='coins'
+        placeholder='Search'
         name={name}
         value={value}
         onChange={handleChange}
       />
-      <datalist id="coins">
+      <datalist id='coins'>
         {coins.map((coin) => (
           <option
             key={coin.id}

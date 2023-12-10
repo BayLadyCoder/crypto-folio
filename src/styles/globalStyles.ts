@@ -1,6 +1,6 @@
-import styled, { createGlobalStyle } from "styled-components";
-import theme from "./theme";
-import { Link } from "react-router-dom";
+import styled, { createGlobalStyle } from 'styled-components';
+import theme from './theme';
+import { Link } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -25,7 +25,7 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
   align-items: center;
   justify-content: ${({ alignCenter }) =>
-    alignCenter ? "center" : "flex-start"};
+    alignCenter ? 'center' : 'flex-start'};
 
   @media screen and (max-width: 1200px) {
     width: 90%;
@@ -46,17 +46,17 @@ interface ButtonProps {
 export const ButtonLink = styled(Link)<ButtonProps>`
   border-radius: 4px;
   background: ${({ primary }) =>
-    primary === "true" ? theme.color.secondary : "transparent"};
-  padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
+    primary === 'true' ? theme.color.secondary : 'transparent'};
+  padding: ${({ big }) => (big ? '12px 64px' : '10px 20px')};
   color: ${({ primary }) =>
-    primary === "true" ? "#fff" : theme.color.primary};
-  font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
+    primary === 'true' ? '#fff' : theme.color.primary};
+  font-size: ${({ fontBig }) => (fontBig ? '20px' : '16px')};
   white-space: nowrap;
   cursor: pointer;
   font-weight: 500;
   border: 1px solid transparent;
   border-color: ${({ primary }) =>
-    primary === "true" ? theme.color.secondary : "transparent"};
+    primary === 'true' ? theme.color.secondary : 'transparent'};
 
   text-decoration: none;
   text-transform: uppercase;
@@ -65,12 +65,12 @@ export const ButtonLink = styled(Link)<ButtonProps>`
   &:hover {
     transition: all 0.3s ease-out;
     color: ${({ primary }) =>
-      primary === "true" ? "#fff" : theme.color.primary_bright};
+      primary === 'true' ? '#fff' : theme.color.primary_bright};
     background: ${({ primary }) =>
-      primary === "true" ? "#cc00ff" : "transparent"};
+      primary === 'true' ? '#cc00ff' : 'transparent'};
 
     border-color: ${({ primary }) =>
-      primary === "true" ? "#444" : theme.color.primary_bright};
+      primary === 'true' ? '#444' : theme.color.primary_bright};
   }
 
   @media screen and (max-width: 960px) {
@@ -93,7 +93,7 @@ interface PageTitleProps {
 export const PageTitle = styled.h1<PageTitleProps>`
   font-size: 30px;
   margin-top: 30px;
-  margin-bottom: ${({ marginBottom }) => (marginBottom ? "20px" : "0px")};
+  margin-bottom: ${({ marginBottom }) => (marginBottom ? '20px' : '0px')};
   color: #fff;
   @media screen and (max-width: 960px) {
     font-size: 25px;
@@ -102,6 +102,8 @@ export const PageTitle = styled.h1<PageTitleProps>`
 
 interface ButtonProps {
   primary?: string;
+  small?: boolean;
+  big?: boolean;
 }
 export const Button = styled.button<ButtonProps>`
   display: flex;
@@ -109,11 +111,13 @@ export const Button = styled.button<ButtonProps>`
   align-items: center;
   border-radius: 4px;
   background: ${({ primary }) =>
-    primary === "true" ? theme.color.primary_bright : "transparent"};
-  padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
+    primary === 'true' ? theme.color.primary_bright : 'transparent'};
+  padding: ${({ big, small }) =>
+    big ? '12px 64px' : small ? '8px 8px' : '10px 20px'};
   color: ${({ primary }) =>
-    primary === "true" ? "#000" : theme.color.primary};
-  font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
+    primary === 'true' ? '#000' : theme.color.primary};
+  font-size: ${({ fontBig, small }) =>
+    fontBig ? '20px' : small ? '14px' : '16px'};
   border: 1px solid transparent;
   white-space: nowrap;
   cursor: pointer;
@@ -124,20 +128,20 @@ export const Button = styled.button<ButtonProps>`
   &:hover {
     transition: all 0.2s linear;
     color: ${({ primary }) =>
-      primary === "true" ? "#000" : theme.color.primary_bright};
+      primary === 'true' ? '#000' : theme.color.primary_bright};
     border-color: ${({ primary }) =>
-      primary === "true" ? "#21b598" : theme.color.primary_bright};
+      primary === 'true' ? '#21b598' : theme.color.primary_bright};
     background: ${({ primary }) =>
-      primary === "true" ? theme.color.primary : "transparent"};
+      primary === 'true' ? theme.color.primary : 'transparent'};
   }
 
   @media screen and (max-width: 960px) {
-    padding: ${({ big }) => (big ? "10px 50px" : "7px 14px")};
-    font-size: ${({ fontBig }) => (fontBig ? "18px" : "16px")};
+    padding: ${({ big }) => (big ? '10px 50px' : '7px 14px')};
+    font-size: ${({ fontBig }) => (fontBig ? '18px' : '16px')};
   }
 
   @media screen and (max-width: 550px) {
-    padding: ${({ big }) => (big ? "8px 40px" : "5px 10px")};
+    padding: ${({ big }) => (big ? '8px 40px' : '5px 10px')};
   }
 `;
 
@@ -151,6 +155,7 @@ export const InputContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
 
 export const Label = styled.label`
@@ -162,7 +167,6 @@ export const Label = styled.label`
 export const TextField = styled.input`
   padding: 10px;
   width: 100%;
-  margin-bottom: 10px;
   border: none;
 `;
 
