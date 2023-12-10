@@ -9,10 +9,10 @@ import {
   TableBodyData,
   TableRow,
   RemoveCoinIconButton,
-  EditCoinIconButton,
 } from '../PortfolioForm.styled';
 import { Button } from '../../../styles/globalStyles';
 import { usePortfolio } from '../../../context/Portfolio/PortfolioContext';
+import { TextField } from '../../../styles/globalStyles';
 
 interface Props {
   setFormStep: any;
@@ -47,11 +47,22 @@ const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
                 {coin.name_with_symbol}
               </TableBodyData>
               <TableBodyData align='right'>
-                {coin.bought_quantity}
+                {/* {coin.bought_quantity} */}
+                <TextField
+                  style={{ width: '60px' }}
+                  type='text'
+                  value={coin.bought_quantity}
+                />
               </TableBodyData>
-              <TableBodyData align='right'>${coin.cost_basis}</TableBodyData>
+              <TableBodyData align='right'>
+                ${' '}
+                <TextField
+                  style={{ width: '80px' }}
+                  type='text'
+                  value={coin.cost_basis}
+                />
+              </TableBodyData>
               <TableBodyData align='center'>
-                <EditCoinIconButton />
                 <RemoveCoinIconButton onClick={onClickRemoveCoin} />
               </TableBodyData>
             </TableRow>

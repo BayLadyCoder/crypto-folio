@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { AiFillEdit } from "react-icons/ai";
-import { VscChromeClose } from "react-icons/vsc";
-import { RiEditLine, RiDeleteBin5Line } from "react-icons/ri";
-import theme from "../../styles/theme";
+import styled from 'styled-components';
+import { AiFillEdit } from 'react-icons/ai';
+import { VscChromeClose } from 'react-icons/vsc';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
 export const FormContainer = styled.div`
   min-width: 350px;
@@ -171,27 +170,6 @@ export const RemoveCoinIconButton = styled(RiDeleteBin5Line)`
     background: #f25038;
     color: #000;
     border: 1px solid #f25038;
-  }
-`;
-
-export const EditCoinIconButton = styled(RiEditLine)`
-  cursor: pointer;
-  background: #111;
-  color: #d7b738;
-  padding: 8px;
-  border-radius: 4px;
-  border: none;
-  font-size: 42px;
-  font-weight: 500;
-  border: 1px solid #d7b738;
-  border-radius: 50%;
-  margin-right: 10px;
-
-  &:hover {
-    transition: all 0.2s linear;
-    background: #d7b738;
-    color: #000;
-    border: 1px solid #d7b738;
   }
 `;
 
