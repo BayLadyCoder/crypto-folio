@@ -7,7 +7,7 @@ const marketCoinsDefaultValues = {
   marketCoins: [],
   setMarketCoins: () => null,
   fetchMarketCoins: () => {
-    throw new Error('GithubContext not avaliable');
+    throw new Error('Context is not available');
   },
   isLoading: false,
 };
