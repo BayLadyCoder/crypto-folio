@@ -5,7 +5,7 @@ import {
   BottomContainer,
   AddDetailsForm,
   FormTitle,
-} from './AddOrEditCoinsForm.styled';
+} from './AddNewCoinForm.styled';
 import { Button } from '../../../styles/globalStyles';
 import { PortfolioCoinBasic } from '../../../types/coins';
 import { TextFieldWithLabel, SearchCoinTextField } from '../../form_components';
@@ -16,7 +16,7 @@ interface Props {
   onCloseForm: () => void;
   setFormStep: any;
 }
-const AddOrEditCoinsForm: React.FC<Props> = ({
+const AddNewCoinForm: React.FC<Props> = ({
   marketCoins,
   onCloseForm,
   setFormStep,
@@ -113,4 +113,4 @@ const AddOrEditCoinsForm: React.FC<Props> = ({
   );
 };
 
-export default AddOrEditCoinsForm;
+export default AddNewCoinForm;

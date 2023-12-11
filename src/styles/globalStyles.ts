@@ -104,6 +104,7 @@ interface ButtonProps {
   primary?: string;
   small?: boolean;
   big?: boolean;
+  fontBig?: boolean;
 }
 export const Button = styled.button<ButtonProps>`
   display: flex;

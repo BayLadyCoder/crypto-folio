@@ -20,6 +20,7 @@ export const BottomContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  /* padding-top: 10px; */
   padding: 10px 20px 20px 20px;
 `;
 

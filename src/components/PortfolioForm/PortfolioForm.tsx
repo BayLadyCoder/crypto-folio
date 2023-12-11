@@ -7,13 +7,9 @@ import {
   PortfolioName,
   EditIconButton,
   CloseFormButton,
-  SelectPortfolioActionsContainer,
 } from './PortfolioForm.styled';
-import { Button } from '../../styles/globalStyles';
 import { usePortfolio } from '../../context/Portfolio/PortfolioContext';
-import { RiAddFill } from 'react-icons/ri';
-import { MdModeEdit } from 'react-icons/md';
-import AddOrEditCoinForm from './AddOrEditCoinForm';
+import AddNewCoinForm from './AddNewCoinForm';
 import EditPortfolioForm from './EditPortfolioForm';
 interface Props {
   marketCoins: MarketCoin[];
@@ -42,14 +38,10 @@ const PortfolioForm: React.FC<Props> = ({
     setPortfolioNameFormOpen(false);
   };
 
-  const onClickPortfolioActionButton = (value: string) => {
-    setFormStep(value);
-  };
-
   if (formStep === 'add-coin') {
     return (
       <FormContainer>
-        <AddOrEditCoinForm
+        <AddNewCoinForm
           marketCoins={marketCoins}
           onCloseForm={onCloseForm}
           setFormStep={setFormStep}
@@ -82,26 +74,7 @@ const PortfolioForm: React.FC<Props> = ({
         </PortfolioNameContainer>
         <CloseFormButton onClick={onCloseForm} />
       </TopContainer>
-      {formStep === 'start' && (
-        <SelectPortfolioActionsContainer>
-          <Button
-            onClick={() => onClickPortfolioActionButton('add-coin')}
-            primary='true'
-          >
-            <RiAddFill style={{ marginRight: '5px' }} /> ADD NEW COIN
-          </Button>
-          <Button
-            onClick={() => onClickPortfolioActionButton('edit-portfolio')}
-            style={{ marginLeft: '5px' }}
-          >
-            <MdModeEdit style={{ marginRight: '5px' }} /> EDIT PORTFOLIO
-          </Button>
-        </SelectPortfolioActionsContainer>
-      )}
-
-      {formStep === 'edit-portfolio' && (
-        <EditPortfolioForm setFormStep={setFormStep} />
-      )}
+      <EditPortfolioForm setFormStep={setFormStep} />
     </FormContainer>
   );
 };

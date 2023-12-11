@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Wrapper,
   Table,
@@ -11,12 +10,11 @@ import {
   CoinImg,
   CoinNameWrapper,
 } from '../CryptoTable/CryptoTable.styled';
-import { PortfolioCoin } from '../../types/coins';
-interface Props {
-  coins: PortfolioCoin[];
-}
+import { usePortfolio } from '../../context/Portfolio/PortfolioContext';
 
-const PortfolioTable: React.FC<Props> = ({ coins }) => {
+const PortfolioTable: React.FC = () => {
+  const { portfolioCoins } = usePortfolio();
+
   return (
     <Wrapper>
       <Table cellSpacing='0' cellPadding='0'>
@@ -34,7 +32,7 @@ const PortfolioTable: React.FC<Props> = ({ coins }) => {
           </TableHeadRow>
         </thead>
         <tbody>
-          {coins.map((coin) => (
+          {portfolioCoins.map((coin) => (
             <TableBodyRow key={coin.id}>
               <TableBodyData align='left'>
                 <CoinNameWrapper>

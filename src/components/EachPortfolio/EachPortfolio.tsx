@@ -28,16 +28,20 @@ const EachPortfolio: React.FC<Props> = ({ marketCoins }) => {
     setFormStep('add-coin');
     onClickOpenPortfolioForm();
   };
+
+  const hasCoinInPortfolio = portfolioCoins.length > 0;
   return (
     <PortfolioContainer>
       <HeaderWrapper>
         <TableName>{portfolioName}</TableName>
-        {!portfolioFormOpen && portfolioCoins.length > 0 ? (
-          <Button onClick={onClickEditPortfolio}>EDIT PORTFOLIO</Button>
-        ) : (
-          !portfolioFormOpen && (
-            <Button onClick={onClickAddCoins}>+ADD COINS</Button>
-          )
+        {!portfolioFormOpen && (
+          <Button
+            onClick={
+              hasCoinInPortfolio ? onClickEditPortfolio : onClickAddCoins
+            }
+          >
+            {hasCoinInPortfolio ? 'EDIT PORTFOLIO' : '+ADD COINS'}
+          </Button>
         )}
       </HeaderWrapper>
       {portfolioFormOpen && (
@@ -49,9 +53,7 @@ const EachPortfolio: React.FC<Props> = ({ marketCoins }) => {
         />
       )}
 
-      {portfolioCoins.length > 0 && !portfolioFormOpen && (
-        <PortfolioTable coins={portfolioCoins} />
-      )}
+      {hasCoinInPortfolio && !portfolioFormOpen && <PortfolioTable />}
     </PortfolioContainer>
   );
 };
