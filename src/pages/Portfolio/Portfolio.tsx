@@ -14,7 +14,7 @@ const Portfolio = () => {
   return (
     <Container>
       <PageTitle>Portfolio</PageTitle>
-      <EachPortfolio marketCoins={marketCoins} />
+      <EachPortfolio />
     </Container>
   );
 };

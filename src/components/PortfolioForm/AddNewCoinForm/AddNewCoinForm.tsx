@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { MarketCoin } from '../../../types/coins';
 import {
   DetailsContainer,
@@ -10,17 +10,12 @@ import { Button } from '../../../styles/globalStyles';
 import { PortfolioCoinBasic } from '../../../types/coins';
 import { TextFieldWithLabel, SearchCoinTextField } from '../../form_components';
 import { usePortfolio } from '../../../context/Portfolio/PortfolioContext';
+import { MarketCoinsContext } from '../../../context/MarketCoins/MarketCoinsContext';
 
 interface Props {
-  marketCoins: MarketCoin[];
-  onCloseForm: () => void;
   setFormStep: any;
 }
-const AddNewCoinForm: React.FC<Props> = ({
-  marketCoins,
-  onCloseForm,
-  setFormStep,
-}) => {
+const AddNewCoinForm: React.FC<Props> = ({ setFormStep }) => {
   const {
     addNewCoinToPortfolio,
     portfolioCoinOptions,
@@ -28,6 +23,7 @@ const AddNewCoinForm: React.FC<Props> = ({
     onClickClosePortfolioForm,
     portfolioCoins,
   } = usePortfolio();
+  const { marketCoins } = useContext(MarketCoinsContext);
 
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>({
     name_with_symbol: '',

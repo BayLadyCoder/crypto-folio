@@ -12,19 +12,13 @@ import { usePortfolio } from '../../context/Portfolio/PortfolioContext';
 import AddNewCoinForm from './AddNewCoinForm';
 import EditPortfolioForm from './EditPortfolioForm';
 interface Props {
-  marketCoins: MarketCoin[];
-  onCloseForm: () => void;
   formStep: string;
   setFormStep: any;
 }
 
-const PortfolioForm: React.FC<Props> = ({
-  marketCoins,
-  onCloseForm,
-  formStep,
-  setFormStep,
-}) => {
-  const { portfolioName, updatePortfolioName } = usePortfolio();
+const PortfolioForm: React.FC<Props> = ({ formStep, setFormStep }) => {
+  const { portfolioName, updatePortfolioName, onClickClosePortfolioForm } =
+    usePortfolio();
 
   const [newPortfolioName, setNewPortfolioName] = useState(portfolioName);
   const [portfolioNameFormOpen, setPortfolioNameFormOpen] = useState(false);
@@ -41,11 +35,7 @@ const PortfolioForm: React.FC<Props> = ({
   if (formStep === 'add-coin') {
     return (
       <FormContainer>
-        <AddNewCoinForm
-          marketCoins={marketCoins}
-          onCloseForm={onCloseForm}
-          setFormStep={setFormStep}
-        />
+        <AddNewCoinForm setFormStep={setFormStep} />
       </FormContainer>
     );
   }
@@ -72,7 +62,7 @@ const PortfolioForm: React.FC<Props> = ({
             </>
           )}
         </PortfolioNameContainer>
-        <CloseFormButton onClick={onCloseForm} />
+        <CloseFormButton onClick={onClickClosePortfolioForm} />
       </TopContainer>
       <EditPortfolioForm setFormStep={setFormStep} />
     </FormContainer>

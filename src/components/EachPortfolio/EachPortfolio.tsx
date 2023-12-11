@@ -6,16 +6,11 @@ import PortfolioForm from '../PortfolioForm';
 import PortfolioTable from '../PortfolioTable';
 import { usePortfolio } from '../../context/Portfolio/PortfolioContext';
 
-interface Props {
-  marketCoins: MarketCoin[];
-}
-
-const EachPortfolio: React.FC<Props> = ({ marketCoins }) => {
+const EachPortfolio: React.FC = () => {
   const {
     portfolioName,
     portfolioFormOpen,
     onClickOpenPortfolioForm,
-    onClickClosePortfolioForm,
     portfolioCoins,
   } = usePortfolio();
 
@@ -45,12 +40,7 @@ const EachPortfolio: React.FC<Props> = ({ marketCoins }) => {
         )}
       </HeaderWrapper>
       {portfolioFormOpen && (
-        <PortfolioForm
-          marketCoins={marketCoins}
-          onCloseForm={onClickClosePortfolioForm}
-          formStep={formStep}
-          setFormStep={setFormStep}
-        />
+        <PortfolioForm formStep={formStep} setFormStep={setFormStep} />
       )}
 
       {hasCoinInPortfolio && !portfolioFormOpen && <PortfolioTable />}
