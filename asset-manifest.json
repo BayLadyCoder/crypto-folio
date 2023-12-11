@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/crypto-folio/static/css/main.82078840.chunk.css",
-    "main.js": "/crypto-folio/static/js/main.8827e680.chunk.js",
-    "main.js.map": "/crypto-folio/static/js/main.8827e680.chunk.js.map",
-    "runtime-main.js": "/crypto-folio/static/js/runtime-main.466c4b1a.js",
-    "runtime-main.js.map": "/crypto-folio/static/js/runtime-main.466c4b1a.js.map",
-    "static/js/2.cd72dd80.chunk.js": "/crypto-folio/static/js/2.cd72dd80.chunk.js",
-    "static/js/2.cd72dd80.chunk.js.map": "/crypto-folio/static/js/2.cd72dd80.chunk.js.map",
-    "static/js/3.2ce329c8.chunk.js": "/crypto-folio/static/js/3.2ce329c8.chunk.js",
-    "static/js/3.2ce329c8.chunk.js.map": "/crypto-folio/static/js/3.2ce329c8.chunk.js.map",
+    "main.js": "/crypto-folio/static/js/main.318eb8d8.chunk.js",
+    "main.js.map": "/crypto-folio/static/js/main.318eb8d8.chunk.js.map",
+    "runtime-main.js": "/crypto-folio/static/js/runtime-main.7c19d6ff.js",
+    "runtime-main.js.map": "/crypto-folio/static/js/runtime-main.7c19d6ff.js.map",
+    "static/js/2.f3c78087.chunk.js": "/crypto-folio/static/js/2.f3c78087.chunk.js",
+    "static/js/2.f3c78087.chunk.js.map": "/crypto-folio/static/js/2.f3c78087.chunk.js.map",
+    "static/js/3.2123c620.chunk.js": "/crypto-folio/static/js/3.2123c620.chunk.js",
+    "static/js/3.2123c620.chunk.js.map": "/crypto-folio/static/js/3.2123c620.chunk.js.map",
     "index.html": "/crypto-folio/index.html",
     "static/css/main.82078840.chunk.css.map": "/crypto-folio/static/css/main.82078840.chunk.css.map",
-    "static/js/2.cd72dd80.chunk.js.LICENSE.txt": "/crypto-folio/static/js/2.cd72dd80.chunk.js.LICENSE.txt",
+    "static/js/2.f3c78087.chunk.js.LICENSE.txt": "/crypto-folio/static/js/2.f3c78087.chunk.js.LICENSE.txt",
     "static/media/logo.8eb4d0f4.png": "/crypto-folio/static/media/logo.8eb4d0f4.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.466c4b1a.js",
-    "static/js/2.cd72dd80.chunk.js",
+    "static/js/runtime-main.7c19d6ff.js",
+    "static/js/2.f3c78087.chunk.js",
     "static/css/main.82078840.chunk.css",
-    "static/js/main.8827e680.chunk.js"
+    "static/js/main.318eb8d8.chunk.js"
   ]
 }
