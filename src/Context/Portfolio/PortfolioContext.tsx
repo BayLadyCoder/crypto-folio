@@ -22,7 +22,7 @@ const portfolioDefaultValues = {
   addNewCoinToPortfolio: () => null,
   portfolioCoinOptions: [],
   createPortfolioCoinOptions: () => null,
-  deletePortfolioCoin: () => null,
+  updatePortfolioCoins: () => null,
 };
 
 export const PortfolioContext = createContext<PortfolioContextData>(
@@ -63,6 +63,10 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
     setPortfolioCoins(
       portfolioCoins.filter((coin) => coin.symbol !== coinSymbol)
     );
+  };
+
+  const updatePortfolioCoins = (updatedCoins: PortfolioCoin[]) => {
+    setPortfolioCoins(updatedCoins);
   };
 
   const addNewCoinToPortfolio = (
@@ -117,7 +121,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
         addNewCoinToPortfolio,
         portfolioCoinOptions,
         createPortfolioCoinOptions,
-        deletePortfolioCoin,
+        updatePortfolioCoins,
       }}
     >
       {children}

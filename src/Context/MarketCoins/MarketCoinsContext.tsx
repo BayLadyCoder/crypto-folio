@@ -43,7 +43,7 @@ export const MarketCoinsProvider: React.FC<Props> = ({ children }) => {
       console.error(error);
       setIsLoading(false);
     }
-  }, [setMarketCoins, marketCoins.length]);
+  }, [marketCoins.length]);
 
   return (
     <MarketCoinsContext.Provider

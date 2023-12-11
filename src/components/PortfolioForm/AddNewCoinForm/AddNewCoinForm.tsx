@@ -58,11 +58,7 @@ const AddNewCoinForm: React.FC<Props> = ({ setFormStep }) => {
       marketCoins
     );
 
-    if (portfolioCoins.length > 0) {
-      setFormStep('edit-portfolio');
-    } else {
-      onClickClosePortfolioForm();
-    }
+    onClickClosePortfolioForm();
   };
 
   return (
