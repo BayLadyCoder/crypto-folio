@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { MarketCoin, PortfolioCoin, PortfolioCoinBasic } from './coins';
 export interface MarketCoinsContextData {
   marketCoins: MarketCoin[];
