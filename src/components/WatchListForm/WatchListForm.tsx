@@ -45,21 +45,11 @@ const WatchListForm: React.FC<Props> = ({
     useState<string>(watchListName);
   const [watchListNameInputOpen, setWatchListNameInputOpen] =
     useState<boolean>(false);
-  const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
+  const { marketCoins } = useContext(MarketCoinsContext);
 
   useEffect(() => {
-    const getCoins = async () => {
-      const coins = await fetchMarketCoins();
-      createCoinOptions(coins);
-    };
-
-    if (marketCoins.length === 0) getCoins();
-  }, []);
-
-  useEffect(() => {
-    if (marketCoins.length > 0 && coinOptions.length === 0)
-      createCoinOptions(marketCoins);
-  }, [marketCoins, coinOptions.length, createCoinOptions]);
+    createCoinOptions(marketCoins);
+  }, [marketCoins]);
 
   const onAddCoin = (e: React.MouseEvent) => {
     e.preventDefault();

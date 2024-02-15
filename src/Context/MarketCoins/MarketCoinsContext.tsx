@@ -1,7 +1,14 @@
-import { useState, useCallback, createContext, useContext } from 'react';
+import {
+  useState,
+  useCallback,
+  createContext,
+  useContext,
+  useEffect,
+} from 'react';
 import { MarketCoin } from '../../types/coins';
 import axios from 'axios';
 import { MarketCoinsContextData } from '../../types/context';
+import { marketCoins as marketCoinsStatic } from '../../staticData/marketCoins';
 
 const marketCoinsDefaultValues = {
   marketCoins: [],
@@ -23,8 +30,14 @@ interface Props {
 }
 
 export const MarketCoinsProvider: React.FC<Props> = ({ children }) => {
-  const [marketCoins, setMarketCoins] = useState<MarketCoin[]>([]);
+  //  !this is used for development
+  const [marketCoins, setMarketCoins] = useState<MarketCoin[]>(
+    (marketCoinsStatic as MarketCoin[]) || []
+  );
+  // ! this is used for production
+  // const [marketCoins, setMarketCoins] = useState<MarketCoin[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const fetchMarketCoins = useCallback(async () => {
     if (marketCoins.length > 0) {
       return marketCoins;
@@ -44,6 +57,12 @@ export const MarketCoinsProvider: React.FC<Props> = ({ children }) => {
       setIsLoading(false);
     }
   }, [marketCoins.length]);
+
+  useEffect(() => {
+    if (marketCoins.length === 0) {
+      fetchMarketCoins();
+    }
+  }, []);
 
   return (
     <MarketCoinsContext.Provider

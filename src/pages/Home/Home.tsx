@@ -1,16 +1,11 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { MarketCoinsContext } from '../../context/MarketCoins/MarketCoinsContext';
-import SearchBar from '../../components/SearchBar';
+// import SearchBar from '../../components/SearchBar';
 import { CryptoTable, CryptoTableName } from '../../components/CryptoTable';
 
 import { Container, Loading, PageTitle } from '../../styles/globalStyles';
 const Home = () => {
-  const { marketCoins, fetchMarketCoins } = useContext(MarketCoinsContext);
-  useEffect(() => {
-    if (marketCoins.length === 0) {
-      fetchMarketCoins();
-    }
-  }, []);
+  const { marketCoins } = useContext(MarketCoinsContext);
 
   if (marketCoins.length === 0) return <Loading>Loading...</Loading>;
 
