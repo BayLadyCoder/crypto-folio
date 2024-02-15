@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { MarketCoin } from '../../types/coins';
 import { PortfolioContainer } from './EachPortfolio.styled';
 import { HeaderWrapper, Button, TableName } from '../../styles/globalStyles';
 import PortfolioForm from '../PortfolioForm';

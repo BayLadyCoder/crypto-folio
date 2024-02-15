@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { MarketCoin } from '../../../types/coins';
 import {
-  DetailsContainer,
   BottomContainer,
   AddDetailsForm,
   FormTitle,

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { MarketCoin } from '../../types/coins';
 import {
   FormContainer,
   TopContainer,
