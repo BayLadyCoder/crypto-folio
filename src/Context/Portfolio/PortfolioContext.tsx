@@ -23,6 +23,7 @@ const portfolioDefaultValues = {
   portfolioCoinOptions: [],
   createPortfolioCoinOptions: () => null,
   updatePortfolioCoins: () => null,
+  deletePortfolioCoin: () => null,
 };
 
 export const PortfolioContext = createContext<PortfolioContextData>(
@@ -122,6 +123,7 @@ export const PortfolioProvider: React.FC<Props> = ({ children }) => {
         portfolioCoinOptions,
         createPortfolioCoinOptions,
         updatePortfolioCoins,
+        deletePortfolioCoin,
       }}
     >
       {children}

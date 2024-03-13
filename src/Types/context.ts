@@ -40,4 +40,5 @@ export interface PortfolioContextData {
   portfolioCoinOptions: MarketCoin[];
   createPortfolioCoinOptions: (marketCoins: MarketCoin[]) => void;
   updatePortfolioCoins: (updatedCoins: PortfolioCoin[]) => void;
+  deletePortfolioCoin: (coinSymbol: string, marketCoins: MarketCoin[]) => void;
 }

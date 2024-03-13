@@ -15,15 +15,20 @@ import { TextField } from '../../../styles/globalStyles';
 import { Button } from '../../../styles/globalStyles';
 import { RiAddFill } from 'react-icons/ri';
 import { BottomContainer } from '../AddNewCoinForm/AddNewCoinForm.styled';
-import { PortfolioCoin } from '../../../types/coins';
+import { PortfolioCoin, MarketCoin } from '../../../types/coins';
+import { marketCoins } from '../../../staticData/marketCoins';
 
 interface Props {
   setFormStep: any;
 }
 
 const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
-  const { portfolioCoins, onClickClosePortfolioForm, updatePortfolioCoins } =
-    usePortfolio();
+  const {
+    portfolioCoins,
+    onClickClosePortfolioForm,
+    updatePortfolioCoins,
+    deletePortfolioCoin,
+  } = usePortfolio();
   const [isFormValid, setIsFormValid] = useState<Record<string, boolean>>({
     bought_quantity: true,
     cost_basis: true,
@@ -31,6 +36,7 @@ const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
   const [formData, setFormData] = useState<PortfolioCoin[]>(portfolioCoins);
 
   const onClickRemoveCoin = (coinSymbol: string) => {
+    deletePortfolioCoin(coinSymbol, marketCoins as MarketCoin[]);
     setFormData((prevFormData) => {
       return prevFormData.filter((coin) => coin.symbol !== coinSymbol);
     });
