@@ -63,8 +63,22 @@ const EditPortfolioForm: React.FC<Props> = ({ setFormStep }) => {
           return coin;
         }
 
+        const marketCoin = marketCoins.find((c) => c.id === coinId)!;
         const updatedCoin = { ...coin };
         updatedCoin[name] = value;
+
+        const { cost_basis, bought_quantity } = updatedCoin;
+
+        // re-calculate other data
+        updatedCoin.bought_price_per_coin = cost_basis / bought_quantity;
+        updatedCoin.total_gain_usd =
+          marketCoin.current_price * bought_quantity - cost_basis;
+        updatedCoin.total_gain_percentage =
+          ((marketCoin.current_price - updatedCoin.bought_price_per_coin) /
+            updatedCoin.bought_price_per_coin) *
+          100;
+        updatedCoin.current_value = bought_quantity * marketCoin.current_price;
+
         return updatedCoin;
       });
     });
