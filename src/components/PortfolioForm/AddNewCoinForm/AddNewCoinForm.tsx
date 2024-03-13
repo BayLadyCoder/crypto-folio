@@ -9,6 +9,8 @@ import { PortfolioCoinBasic } from '../../../types/coins';
 import { TextFieldWithLabel, SearchCoinTextField } from '../../form_components';
 import { usePortfolio } from '../../../context/Portfolio/PortfolioContext';
 import { MarketCoinsContext } from '../../../context/MarketCoins/MarketCoinsContext';
+import { marketCoins } from '../../../staticData/marketCoins';
+import { MarketCoin } from '../../../types/coins';
 
 interface Props {
   setFormStep: any;
@@ -21,7 +23,7 @@ const AddNewCoinForm: React.FC<Props> = ({ setFormStep }) => {
     onClickClosePortfolioForm,
     portfolioCoins,
   } = usePortfolio();
-  const { marketCoins } = useContext(MarketCoinsContext);
+  // const { marketCoins } = useContext(MarketCoinsContext);
 
   const [portfolioData, setPortfolioData] = useState<PortfolioCoinBasic>({
     name_with_symbol: '',
@@ -35,8 +37,8 @@ const AddNewCoinForm: React.FC<Props> = ({ setFormStep }) => {
 
   useEffect(() => {
     if (marketCoins.length > 0 && portfolioCoinOptions.length === 0)
-      createPortfolioCoinOptions(marketCoins);
-  }, [marketCoins, portfolioCoinOptions.length, createPortfolioCoinOptions]);
+      createPortfolioCoinOptions(marketCoins as MarketCoin[]);
+  }, [portfolioCoinOptions.length, createPortfolioCoinOptions]);
 
   const updatePortfolioData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPortfolioData({ ...portfolioData, [e.target.name]: e.target.value });
@@ -53,7 +55,7 @@ const AddNewCoinForm: React.FC<Props> = ({ setFormStep }) => {
         cost_basis: Number(cost_basis),
         bought_price_per_coin: cost_basis / bought_quantity,
       },
-      marketCoins
+      marketCoins as MarketCoin[]
     );
 
     onClickClosePortfolioForm();
